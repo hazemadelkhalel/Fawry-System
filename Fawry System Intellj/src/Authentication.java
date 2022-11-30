@@ -5,29 +5,12 @@ public class Authentication {
     Authentication(){
         database = new Database();
     }
-    boolean checkAccountLogin(Account client1, Client client2){
-        if(client1.getUsername().equals(client2.getUsername()) &&
-                client1.getEmail().equals(client2.getEmail()) &&
-                client1.getPassword().equals(client2.getPassword())) {
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    boolean checkAccountSignUp(Account client1, Client client2){
-        if(client1.getUsername().equals(client2.getUsername()) ||
-                client1.getEmail().equals(client2.getEmail())) {
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
+
     String validateLogin(Client client) {
+        AccountController accountController = new AccountController();
         for(Map.Entry <Account, String> entry : database.accounts.entrySet()){
             Account account = entry.getKey();
-            if(checkAccountLogin(account, client)){
+            if(accountController.checkAccountLogin(account, client)){
                 // Can Login and return the type of account
                 // admin or clinet
                 return entry.getValue();
@@ -37,9 +20,10 @@ public class Authentication {
         return "-1";
     }
     String validateSignUp(Client client) {
+        AccountController accountController = new AccountController();
         for(Map.Entry <Account, String> entry : database.accounts.entrySet()){
             Account account = entry.getKey();
-            if(checkAccountSignUp(account, client)){
+            if(accountController.checkAccountSignUp(account, client)){
                 // -1 represent there is matching with other client's username or email in system
                 // Can Login and return the type of account
                 // admin or clinet
