@@ -44,8 +44,9 @@ public class FawryScreen {
 //        ServiceController serviceController = new ServiceController();
 //        serviceController.listCategories();
 //    }
-    void addServiceButton(String categoryService, HashMap<String, ArrayList<String>> service) {
-        
+    String addServiceButton(String categoryService, HashMap<String, ArrayList<String>> service) {
+        ServiceController serviceController = new ServiceController();
+        return serviceController.addService(categoryService, service);
     }
     String addDiscountButton(String categoryDiscount, Database.Pair<String, Integer> valueDiscount) {
         DiscountController discountController = new DiscountController();
