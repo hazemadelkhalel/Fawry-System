@@ -14,17 +14,16 @@ public class CreditCardController extends FawryController{
                 if(database.creditCards.get(i).getAmount() >= amount){
                     double currentAmount = database.creditCards.get(i).getAmount();
                     database.creditCards.get(i).setAmount(currentAmount - amount);
-                    // payment with wallet
-//                    for(int j = 0; j < database.accounts.size(); j++){
-//                        if(database.accounts.get(j) instanceof Client){
-//                            if(database.accounts.get(j).getUsername().equals(client.getUsername())){
-//                                Client client1 = (Client) database.accounts.get(j);
-//                                client1.setWallet(client.getWallet() - amount);
-//                                database.accounts.set(j, client1);
-//                                return true;
-//                            }
-//                        }
-//                    }
+                    for(int j = 0; j < database.accounts.size(); j++){
+                        if(database.accounts.get(j) instanceof Client){
+                            if(database.accounts.get(j).getUsername().equals(client.getUsername())){
+                                Client client1 = (Client) database.accounts.get(j);
+                                client1.setWallet(client.getWallet() + amount);
+                                database.accounts.set(j, client1);
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
         }
