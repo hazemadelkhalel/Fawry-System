@@ -12,18 +12,19 @@ public class SearchController extends FawryController{
         }
         return true;
     }
-    Map<String, HashMap<String, ArrayList<String>>> search(String context){
-        Map<String, HashMap<String, ArrayList<String>>> result = new HashMap<>();
-        for(Map.Entry<String, HashMap<String, ArrayList<String>>> entry: database.services.entrySet()){
-            HashMap<String, ArrayList<String>> matchServices = new HashMap<>();
-            for(Map.Entry<String, ArrayList<String>> entry1: database.services.get(entry.getKey()).entrySet()){
-                String service = entry1.getKey();
-                if(match(context, service)){
-                    matchServices.put(entry1.getKey(), entry1.getValue());
+    ArrayList<Service> search(String context){
+        ArrayList<Service> result = new ArrayList<>();
+        for(int i = 0; i < database.services.size(); i++){
+            Service service = database.services.get(i);
+            Service tempService = new Service();
+            for(int j = 0; j < service.providers.size(); j++){
+                Provider provider = service.providers.get(j);
+                if(match(context, provider.getProviderName())){
+                    tempService.providers.add(provider);
                 }
             }
-            if(matchServices.size() > 0){
-                result.put(entry.getKey(), matchServices);
+            if(tempService.providers.size() > 0){
+                result.add(tempService);
             }
         }
         return result;

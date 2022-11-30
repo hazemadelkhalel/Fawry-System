@@ -26,4 +26,18 @@ public class AccountController extends FawryController{
             return true;
         }
     }
+    String addFunds(String creditCardNumber, double amount){
+        CreditCardController creditCardController = new CreditCardController();
+        if(creditCardController.checkValidCreditCard(creditCardNumber)){
+            if(creditCardController.addFunds(creditCardNumber, amount)){
+                return "Added Successfully";
+            }
+            else{
+                return "There is no enough money to complete payment";
+            }
+        }
+        else{
+            return "There is no credit card with this number";
+        }
+    }
 }

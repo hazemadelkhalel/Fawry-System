@@ -32,7 +32,7 @@ public class Authentication {
         }
         return "OK";
     }
-    void validateCreditCard(CreditCard creditCard) {
+    void validateCreditCard(CreditCardController creditCard) {
         // check if it was correct or not
     }
 }

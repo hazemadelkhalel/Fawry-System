@@ -31,7 +31,10 @@ public class FawryScreen {
         AccountController accountController = new AccountController();
         return accountController.addAccount(admin);
     }
-
+    String addFunds(String creditCardNumber, double amount){
+        AccountController accountController = new AccountController();
+        return accountController.addFunds(creditCardNumber, amount);
+    }
     String addClientAccountButton(Client client) {
         AccountController accountController = new AccountController();
         return accountController.addAccount(client);
@@ -40,14 +43,12 @@ public class FawryScreen {
         SearchController searchController = new SearchController();
         display(searchController.search(context));
     }
-    void display(Map<String, HashMap<String, ArrayList<String>>> result){
-        for(Map.Entry<String, HashMap<String, ArrayList<String>>> entry: result.entrySet()){
-            System.out.println("-" + entry.getKey());
-            HashMap<String, ArrayList<String>> servicesInCategory = entry.getValue();
-            int numOfService = 1;
-            for(Map.Entry<String, ArrayList<String>> entry1 : servicesInCategory.entrySet()){
-                System.out.println(numOfService + ") " + entry1.getKey());
-                numOfService++;
+    void display(ArrayList<Service> result){
+        for(int i = 0; i < result.size(); i++){
+            System.out.println("-" + result.get(i).getServiceName());
+            Service service = result.get(i);
+            for(int j = 0; j < service.providers.size(); j++){
+                System.out.println((j + 1) + ") " + service.providers.get(j).getProviderName());
             }
         }
     }
@@ -56,13 +57,17 @@ public class FawryScreen {
 //        ServiceController serviceController = new ServiceController();
 //        serviceController.listCategories();
 //    }
-    String addServiceButton(String categoryService, HashMap<String, ArrayList<String>> service) {
+    String addServiceButton(Service service) {
         ServiceController serviceController = new ServiceController();
-        return serviceController.addService(categoryService, service);
+        return serviceController.addService(service);
     }
-    String addDiscountButton(String categoryDiscount, Database.Pair<String, Integer> valueDiscount) {
+    String addDiscountButton(OverallDiscount discount) {
         DiscountController discountController = new DiscountController();
-        return discountController.addDiscount(categoryDiscount, valueDiscount);
+        return discountController.addDiscount(discount);
+    }
+    String addDiscountButton(SpecificDiscount discount) {
+        DiscountController discountController = new DiscountController();
+        return discountController.addDiscount(discount);
     }
 //    void payButton(Client client, MobileService service, double amount) {
 //        // payment process

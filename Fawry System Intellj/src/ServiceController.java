@@ -7,40 +7,49 @@ public class ServiceController extends FawryController{
     boolean checkSimilarity(String first, String second){
         return first.toLowerCase().contains(second.toLowerCase());
     }
-    String addService(String categoryService, HashMap<String, ArrayList<String>> service){
-        HashMap<String, ArrayList<String>> newServices = new HashMap<>();
-        for(Map.Entry<String, HashMap<String, ArrayList<String>>> entry: database.services.entrySet()){
-            if(checkSimilarity(entry.getKey(), categoryService)){
-                categoryService = entry.getKey();
-                for(Map.Entry<String, ArrayList<String>> entry1 : service.entrySet()){
+    String addService(Service service){
+        int counter = 0;
+        boolean existService = false;
+        for(int i = 0; i < database.services.size(); i++){
+            Service tempService = database.services.get(i);
+            if(checkSimilarity(service.getServiceName(), tempService.getServiceName())){
+                existService = true;
+                for(int j = 0; j < service.providers.size(); j++){
                     boolean exist = false;
-                    for(Map.Entry<String, ArrayList<String>> entry2 : entry.getValue().entrySet()){
-                        if(checkSimilarity(entry1.getKey(), entry2.getKey())){
+                    Provider provider = service.providers.get(j);
+                    for(int k = 0; k < tempService.providers.size(); k++){
+                        Provider existProvider = tempService.providers.get(k);
+                        if(checkSimilarity(provider.getProviderName(), existProvider.getProviderName())){
                             exist = true;
                             break;
                         }
                     }
                     if(!exist){
-                        newServices.put(entry1.getKey(), entry1.getValue());
+                        database.services.get(i).providers.add(provider);
+                        counter++;
                     }
                 }
-
+                break;
             }
         }
-        if(newServices.size() > 0) {
-            database.services.put(categoryService, newServices);
+        if(!existService){
+            database.services.add(service);
             return "Successfully Added";
         }
-        else{
-            return "All services are already exist";
+        else {
+            if (counter > 0) {
+                return "Successfully Added";
+            } else {
+                return "All services are already exist";
+            }
         }
     }
-    void listCategories() {
-        int numOfCategory= 1;
-        for(Map.Entry<String, HashMap<String, ArrayList<String>>> entry: database.services.entrySet()){
-            System.out.println(numOfCategory + ") " + entry.getKey());
-            numOfCategory++;
-        }
-    }
+//    void listCategories() {
+//        int numOfCategory= 1;
+//        for(Map.Entry<String, HashMap<String, ArrayList<String>>> entry: database.services.entrySet()){
+//            System.out.println(numOfCategory + ") " + entry.getKey());
+//            numOfCategory++;
+//        }
+//    }
 
 }

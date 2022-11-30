@@ -3,11 +3,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Database {
+    Account account;
     HashMap<Account, String> accounts = new HashMap();
-    HashMap<String, HashMap<String, ArrayList<String>>> services = new HashMap();
-    HashMap<String, ArrayList<Pair<String, Integer>>> discounts = new HashMap();
+    ArrayList<Service> services = new ArrayList<>();
+    ArrayList<Discount> discounts = new ArrayList<>();
 
+    ArrayList<CreditCard> creditCards;
     Database() {
+
     }
 
     public static class Pair<F, S> {
