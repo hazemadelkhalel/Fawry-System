@@ -8,12 +8,8 @@ public class FawryScreen {
     Database database;
     FawryScreen(){
         Admin admin = new Admin("admin", "admin@gmail.com", "admin");
-<<<<<<< Updated upstream
-        AccountController accountController = new AccountController();
-=======
         database = new Database();
         AccountController accountController = new AccountController(database);
->>>>>>> Stashed changes
         accountController.addAccount(admin);
     }
     void displayUserMenu(){
@@ -36,9 +32,6 @@ public class FawryScreen {
         AccountController accountController = new AccountController(database);
         return accountController.addAccount(admin);
     }
-<<<<<<< Updated upstream
-
-=======
     String addFunds(Client client, double amount){
         AccountController accountController = new AccountController(database);
         return accountController.addFunds(client, amount);
@@ -47,29 +40,11 @@ public class FawryScreen {
         AccountController accountController = new AccountController(database);
         return accountController.addCreditCard(client, creditCard);
     }
->>>>>>> Stashed changes
     String addClientAccountButton(Client client) {
         AccountController accountController = new AccountController(database);
         return accountController.addAccount(client);
     }
     void searchButton(String context) {
-<<<<<<< Updated upstream
-        SearchController searchController = new SearchController();
-        searchController.listSearchResult(searchController.search(context));
-    }
-
-//    void listCategories() {
-//        ServiceController serviceController = new ServiceController();
-//        serviceController.listCategories();
-//    }
-    String addServiceButton(String categoryService, HashMap<String, ArrayList<String>> service) {
-        ServiceController serviceController = new ServiceController();
-        return serviceController.addService(categoryService, service);
-    }
-    String addDiscountButton(String categoryDiscount, Database.Pair<String, Integer> valueDiscount) {
-        DiscountController discountController = new DiscountController();
-        return discountController.addDiscount(categoryDiscount, valueDiscount);
-=======
         SearchController searchController = new SearchController(database);
         display(searchController.search(context));
     }
@@ -95,7 +70,6 @@ public class FawryScreen {
     String addDiscountButton(SpecificDiscount discount) {
         DiscountController discountController = new DiscountController(database);
         return discountController.addDiscount(discount);
->>>>>>> Stashed changes
     }
     String payButton(Client client, int indexService, int indexProvider, double amount, int wayIndex) {
         PaymentController paymentController = new PaymentController(database);

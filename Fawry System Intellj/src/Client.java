@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Client extends Account{
     CreditCard creditCard;
     double wallet = 0;
-//    ArrayList<Transaction> listOverallDiscounts = new ArrayList<OverallDiscount>();
+    //    ArrayList<Transaction> listOverallDiscounts = new ArrayList<OverallDiscount>();
     Client(String username, String email, String password, double wallet){
         this.username = username;
         this.email = email;
@@ -12,9 +12,6 @@ public class Client extends Account{
         this.wallet = wallet;
         transactions = new ArrayList<>();
     }
-<<<<<<< Updated upstream
-
-=======
     public void setWallet(double wallet) {
         this.wallet = wallet;
     }
@@ -30,5 +27,4 @@ public class Client extends Account{
     public CreditCard getCreditCard() {
         return creditCard;
     }
->>>>>>> Stashed changes
 }

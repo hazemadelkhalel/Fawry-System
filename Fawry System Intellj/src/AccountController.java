@@ -3,15 +3,6 @@ public class AccountController extends FawryController{
         this.database = database;
     }
     String addAccount(Admin admin){
-<<<<<<< Updated upstream
-        database.accounts.put(admin, "Admin");
-        return "Account added successfully";
-    }
-    String addAccount(Client client) {
-        database.accounts.put(client, "Client");
-        return "Account added successfully";
-    }
-=======
         admin.setAccountID(database.accounts.size());
         database.accounts.add(admin);
         return "Account added successfully";
@@ -48,5 +39,4 @@ public class AccountController extends FawryController{
         CreditCardMethod creditCardMethod = new CreditCardMethod(database);
         return creditCardMethod.addFunds(client, amount);
     }
->>>>>>> Stashed changes
 }
