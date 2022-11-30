@@ -46,8 +46,9 @@ public class FawryScreen {
     void addServiceButton(String categoryService, HashMap<String, ArrayList<String>> service) {
         
     }
-    void addDiscountButton(String categoryDiscount, Database.Pair<String, Integer> valueDiscount) {
-        
+    String addDiscountButton(String categoryDiscount, Database.Pair<String, Integer> valueDiscount) {
+        DiscountController discountController = new DiscountController();
+        return discountController.addDiscount(categoryDiscount, valueDiscount);
     }
 //    void payButton(Client client, MobileService service, double amount) {
 //        // payment process
