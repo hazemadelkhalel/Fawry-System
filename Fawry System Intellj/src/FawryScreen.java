@@ -36,7 +36,8 @@ public class FawryScreen {
         return accountController.addAccount(client);
     }
     void searchButton(String context) {
-        
+        SearchController searchController = new SearchController();
+        searchController.listSearchResult(searchController.search(context));
     }
 
 //    void listCategories() {
