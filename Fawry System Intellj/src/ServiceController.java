@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class ServiceController extends FawryController{
 
+    ServiceController(Database database){
+        this.database = database;
+    }
     boolean checkSimilarity(String first, String second){
         return first.toLowerCase().contains(second.toLowerCase());
     }

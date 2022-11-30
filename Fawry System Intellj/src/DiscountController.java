@@ -7,11 +7,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
+<<<<<<< Updated upstream
 public class DiscountController extends FawryController {
     public DiscountController() {
     }
 
     boolean checkSimilarity(String first, String second) {
+=======
+public class DiscountController extends FawryController{
+    DiscountController(Database database){
+        this.database = database;
+    }
+    boolean checkSimilarity(String first, String second){
+>>>>>>> Stashed changes
         return first.toLowerCase().contains(second.toLowerCase());
     }
 

@@ -12,9 +12,18 @@ public class SearchController extends FawryController {
     public SearchController() {
     }
 
+<<<<<<< Updated upstream
     boolean match(String first, String second) {
         for(int i = 0; i < first.length(); ++i) {
             if (first.charAt(i) != second.charAt(i)) {
+=======
+    SearchController(Database database){
+        this.database = database;
+    }
+    boolean match(String first, String second){
+        for(int i = 0; i < first.length(); i++){
+            if(first.charAt(i) != second.charAt(i)){
+>>>>>>> Stashed changes
                 return false;
             }
         }
