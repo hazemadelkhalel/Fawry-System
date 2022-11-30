@@ -28,15 +28,4 @@ public class SearchController extends FawryController{
         }
         return result;
     }
-    void listSearchResult(Map<String, HashMap<String, ArrayList<String>>> result) {
-        for(Map.Entry<String, HashMap<String, ArrayList<String>>> entry: result.entrySet()){
-            System.out.println("-" + entry.getKey());
-            HashMap<String, ArrayList<String>> servicesInCategory = entry.getValue();
-            int numOfService = 1;
-            for(Map.Entry<String, ArrayList<String>> entry1 : servicesInCategory.entrySet()){
-                System.out.println(numOfService + ") " + entry1.getKey());
-                numOfService++;
-            }
-        }
-    }
 }
