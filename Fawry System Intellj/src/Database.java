@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Database {
     Account account;
-    HashMap<Account, String> accounts = new HashMap();
+    ArrayList<Account> accounts = new ArrayList<>();
     ArrayList<Service> services = new ArrayList<>();
     ArrayList<Discount> discounts = new ArrayList<>();
 

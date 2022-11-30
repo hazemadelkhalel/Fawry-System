@@ -1,10 +1,10 @@
 public class AccountController extends FawryController{
     String addAccount(Admin admin){
-        database.accounts.put(admin, "Admin");
+        database.accounts.add(admin);
         return "Account added successfully";
     }
     String addAccount(Client client) {
-        database.accounts.put(client, "Client");
+        database.accounts.add(client);
         return "Account added successfully";
     }
     boolean checkAccountLogin(Account client1, Client client2){
@@ -26,10 +26,10 @@ public class AccountController extends FawryController{
             return true;
         }
     }
-    String addFunds(String creditCardNumber, double amount){
+    String addFunds(Client client, String creditCardNumber, double amount){
         CreditCardController creditCardController = new CreditCardController();
         if(creditCardController.checkValidCreditCard(creditCardNumber)){
-            if(creditCardController.addFunds(creditCardNumber, amount)){
+            if(creditCardController.addFunds(client, creditCardNumber, amount)){
                 return "Added Successfully";
             }
             else{

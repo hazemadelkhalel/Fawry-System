@@ -13,4 +13,11 @@ public class Client extends Account{
         transactions = new ArrayList<>();
     }
 
+    public void setWallet(double wallet) {
+        this.wallet = wallet;
+    }
+
+    public double getWallet() {
+        return wallet;
+    }
 }

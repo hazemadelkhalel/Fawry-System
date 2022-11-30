@@ -31,9 +31,9 @@ public class FawryScreen {
         AccountController accountController = new AccountController();
         return accountController.addAccount(admin);
     }
-    String addFunds(String creditCardNumber, double amount){
+    String addFunds(Client client, String creditCardNumber, double amount){
         AccountController accountController = new AccountController();
-        return accountController.addFunds(creditCardNumber, amount);
+        return accountController.addFunds(client, creditCardNumber, amount);
     }
     String addClientAccountButton(Client client) {
         AccountController accountController = new AccountController();
