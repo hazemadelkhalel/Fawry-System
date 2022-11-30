@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class FawryScreen {
     FawryScreen(){
         Admin admin = new Admin("admin", "admin@gmail.com", "admin");
+
         AccountController accountController = new AccountController();
         accountController.addAccount(admin);
     }
