@@ -1,7 +1,10 @@
 public class AccountController extends FawryController{
-    void addAccount(Admin admin){
+    String addAccount(Admin admin){
+        database.accounts.put(admin, "Admin");
+        return "Account added successfully";
     }
-    void addAccount(Client client){
-
+    String addAccount(Client client) {
+        database.accounts.put(client, "Client");
+        return "Account added successfully";
     }
 }

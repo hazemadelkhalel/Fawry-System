@@ -16,14 +16,25 @@ public class FawryScreen {
     void displayAdminMenu(){
 
     }
-    void loginButton(Client client) {
-        
+    String loginButton(Client client) {
+        Authentication authentication = new Authentication();
+        return authentication.validateLogin(client);
     }
 
-    void signUpButton(Client client) {
-        
+    String signUpButton(Client client) {
+        Authentication authentication = new Authentication();
+        return authentication.validateSignUp(client);
     }
 
+    String addAdminAccountButton(Admin admin) {
+        AccountController accountController = new AccountController();
+        return accountController.addAccount(admin);
+    }
+
+    String addClientAccountButton(Client client) {
+        AccountController accountController = new AccountController();
+        return accountController.addAccount(client);
+    }
     void searchButton(String context) {
         
     }
