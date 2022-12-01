@@ -6,6 +6,11 @@ public class Database {
     Account account;
     ArrayList<Account> accounts;
     ArrayList<Service> services;
+    ArrayList<Service> mobileServices;
+    ArrayList<Service> InternetServices;
+    ArrayList<Service> landlineServices;
+    ArrayList<Service> donationServices;
+
     ArrayList<Discount> discounts;
 
     ArrayList<CreditCard> creditCards;
