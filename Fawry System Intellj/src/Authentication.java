@@ -1,13 +1,12 @@
 import java.util.Map;
 
-public class Authentication {
-    Database database;
-    Authentication(){
-        database = new Database();
+public class Authentication extends FawryController{
+    Authentication(Database database){
+        this.database = database;
     }
 
     String validateLogin(Client client) {
-        AccountController accountController = new AccountController();
+        AccountController accountController = new AccountController(database);
         for(int i = 0; i < database.accounts.size(); i++){
             if(database.accounts.get(i) instanceof Client){
                 if(accountController.checkAccountLogin(database.accounts.get(i), client)){
@@ -19,7 +18,7 @@ public class Authentication {
         return "-1";
     }
     String validateSignUp(Client client) {
-        AccountController accountController = new AccountController();
+        AccountController accountController = new AccountController(database);
         for(int i = 0; i < database.accounts.size(); i++){
             if(accountController.checkAccountLogin(database.accounts.get(i), client)){
                 return "-1";

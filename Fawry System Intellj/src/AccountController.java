@@ -1,9 +1,14 @@
 public class AccountController extends FawryController{
+    AccountController(Database database){
+        this.database = database;
+    }
     String addAccount(Admin admin){
+        admin.setAccountID(database.accounts.size());
         database.accounts.add(admin);
         return "Account added successfully";
     }
     String addAccount(Client client) {
+        client.setAccountID(database.accounts.size());
         database.accounts.add(client);
         return "Account added successfully";
     }
@@ -41,18 +46,8 @@ public class AccountController extends FawryController{
             return true;
         }
     }
-    String addFunds(Client client, String creditCardNumber, double amount){
-        CreditCardController creditCardController = new CreditCardController();
-        if(creditCardController.checkValidCreditCard(creditCardNumber)){
-            if(creditCardController.addFunds(client, creditCardNumber, amount)){
-                return "Added Successfully";
-            }
-            else{
-                return "There is no enough money to complete payment";
-            }
-        }
-        else{
-            return "There is no credit card with this number";
-        }
+    String addFunds(Client client, double amount){
+        CreditCardMethod creditCardMethod = new CreditCardMethod(database);
+        return creditCardMethod.addFunds(client, amount);
     }
 }

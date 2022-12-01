@@ -4,6 +4,9 @@ import java.util.Map;
 
 public class SearchController extends FawryController{
 
+    SearchController(Database database){
+        this.database = database;
+    }
     boolean match(String first, String second){
         for(int i = 0; i < first.length(); i++){
             if(Character.toLowerCase(first.charAt(i)) != Character.toLowerCase(second.charAt(i))){

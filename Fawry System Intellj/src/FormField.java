@@ -1,6 +1,6 @@
 public class FormField {
     String field;
-}
+
     public void setField(String field) {
         this.field = field;
     }

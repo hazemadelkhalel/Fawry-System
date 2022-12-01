@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class DiscountController extends FawryController{
+    DiscountController(Database database){
+        this.database = database;
+    }
     boolean checkSimilarity(String first, String second){
         return first.toLowerCase().contains(second.toLowerCase());
     }
