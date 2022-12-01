@@ -4,13 +4,16 @@ import java.util.HashMap;
 
 public class Database {
     Account account;
-    ArrayList<Account> accounts = new ArrayList<>();
-    ArrayList<Service> services = new ArrayList<>();
-    ArrayList<Discount> discounts = new ArrayList<>();
+    ArrayList<Account> accounts;
+    ArrayList<Service> services;
+    ArrayList<Discount> discounts;
 
     ArrayList<CreditCard> creditCards;
     Database() {
-
+        accounts = new ArrayList<>();
+        services = new ArrayList<>();
+        discounts = new ArrayList<>();
+        creditCards = new ArrayList<>();
     }
 
     public static class Pair<F, S> {

@@ -7,6 +7,21 @@ public class AccountController extends FawryController{
         database.accounts.add(client);
         return "Account added successfully";
     }
+    String addCreditCard(Client client, CreditCard creditCard){
+        client.setCreditCard(creditCard);
+        CreditCardController creditCardController = new CreditCardController(database);
+        int indexCreditCard = creditCardController.checkExistenceCreditCard(creditCard);
+        if(indexCreditCard == -2){
+            return "Please Enter a valid Credit Card";
+        }
+        else if(indexCreditCard == -1){
+            database.creditCards.add(creditCard);
+        }
+        else{
+            database.creditCards.set(indexCreditCard, creditCard);
+        }
+        return "Credit Card added successfully";
+    }
     boolean checkAccountLogin(Account client1, Client client2){
         if(client1.getUsername().equals(client2.getUsername()) &&
                 client1.getEmail().equals(client2.getEmail()) &&

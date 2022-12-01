@@ -25,6 +25,7 @@ public class Authentication {
                 return "-1";
             }
         }
+        database.accounts.add(client);
         // -1 represent there is no user with this information in system
         return "SignUP";
     }

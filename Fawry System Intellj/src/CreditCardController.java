@@ -29,4 +29,16 @@ public class CreditCardController extends FawryController{
         }
         return false;
     }
+    int checkExistenceCreditCard(CreditCard creditCard){
+        if(creditCard == null){
+            return -2;
+        }
+        for(int i = 0; i < database.creditCards.size(); i++){
+            if(database.creditCards.get(i).getCardNumber().equals(creditCard.getCardNumber())){
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
