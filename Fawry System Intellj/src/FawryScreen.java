@@ -111,15 +111,6 @@ public class FawryScreen {
         }
         System.out.println("-------------------------------------");
     }
-
-    String addDiscountButton(OverallDiscount discount) {
-        DiscountController discountController = new DiscountController(database);
-        return discountController.addDiscount(discount);
-    }
-    String addDiscountButton(SpecificDiscount discount) {
-        DiscountController discountController = new DiscountController(database);
-        return discountController.addDiscount(discount);
-    }
     String payButtonMobileService(Client client, Service service, double amount, int wayIndex) {
         PaymentController paymentController = new PaymentController(database);
         return paymentController.payMobileService(client, service, amount, wayIndex);
@@ -151,6 +142,10 @@ public class FawryScreen {
     double applyDiscountDonationServiceButton(Service service, Client client, double amount){
         DiscountController discountController = new DiscountController(database);
         return discountController.applyDiscountDonationService(service, client, amount);
+    }
+    String addMobileServiceDiscount(SpecificDiscount specificDiscount){
+        DiscountController discountController = new DiscountController(database);
+        return discountController.addMobileServiceDiscount(specificDiscount);
     }
 
 //        void listCategories() {

@@ -9,36 +9,9 @@ public class DiscountController extends FawryController{
         return first.toLowerCase().contains(second.toLowerCase());
     }
 
-    String addDiscount(OverallDiscount discount){
-        boolean existDiscount = false;
-        for(int i = 0; i < database.discounts.size();i++){
-            if(database.discounts.get(i) instanceof OverallDiscount){
-                database.discounts.set(i, discount);
-                existDiscount = true;
-                break;
-            }
-        }
-        if(!existDiscount){
-            database.discounts.add(discount);
-        }
+    String addMobileServiceDiscount(SpecificDiscount specificDiscount){
+        database.mobileServiceDiscount = specificDiscount;
         return "Added Successfully";
-    }
-    String addDiscount(SpecificDiscount discount){
-        boolean existDiscount = false;
-        for(int i = 0; i < database.discounts.size();i++){
-            if(database.discounts.get(i) instanceof SpecificDiscount){
-                if(checkSimilarity(database.discounts.get(i).getDiscountName(), discount.getDiscountName())) {
-                    database.discounts.set(i, discount);
-                    existDiscount = true;
-                    break;
-                }
-            }
-        }
-        if(!existDiscount){
-            database.discounts.add(discount);
-        }
-        return "Added Successfully";
-
     }
     double applyOverAllDiscount(Client client, double amount){
         if(client.getTransactions().size() > 0 || database.overallDiscount == null){

@@ -49,18 +49,18 @@ public class Main {
 //        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
 //        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 0));
 
-//        fawryScreen.displayUserMenu();
-//        fawryScreen.display(vodafone);
-//        fawryScreen.display(client);
-//        SpecificDiscount discount = new SpecificDiscount(vodafone, 20);
-//        OverallDiscount discount1 = new OverallDiscount(vodafone, 10);
-//        database.mobileServiceDiscount = discount;
-//        database.overallDiscount = discount1;
-//        System.out.println(client.getWallet());
-//        double amount = fawryScreen.applyDiscountMobileServiceButton(vodafone, client, 100);
-//        System.out.println(amount);
-//        fawryScreen.payButtonMobileService(client, vodafone, amount, 1);
-//        System.out.println(client.getWallet());
+        fawryScreen.displayUserMenu();
+        fawryScreen.display(vodafone);
+        fawryScreen.display(client);
+        SpecificDiscount discount = new SpecificDiscount(vodafone, 20);
+        OverallDiscount discount1 = new OverallDiscount(vodafone, 10);
+        fawryScreen.addMobileServiceDiscount(discount);
+        database.overallDiscount = discount1;
+        System.out.println(client.getWallet());
+        double amount = fawryScreen.applyDiscountMobileServiceButton(vodafone, client, 100);
+        System.out.println(amount);
+        fawryScreen.payButtonMobileService(client, vodafone, amount, 1);
+        System.out.println(client.getWallet());
 
 //
 //        double ans = discount.applyDiscount(100);
