@@ -1,7 +1,7 @@
 public class CreditCardMethod extends PaymentMethod{
-    String MethodName = "Credit Card";
     CreditCardMethod(Database database){
         this.database = database;
+        MethodName = "Credit Card";
     }
     @Override
     String pay(Client client, double amount) {

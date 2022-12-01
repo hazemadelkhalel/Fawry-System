@@ -7,10 +7,14 @@ import java.util.Scanner;
 public class FawryScreen {
     Database database;
     FawryScreen(Database database){
-        Admin admin = new Admin("admin", "admin@gmail.com", "admin");
         this.database = database;
-        AccountController accountController = new AccountController(database);
-        accountController.addAccount(admin);
+
+        // do it in main and add all services (Initialize the database)
+
+//        Admin admin = new Admin("admin", "admin@gmail.com", "admin");
+//        this.database = database;
+//        AccountController accountController = new AccountController(database);
+//        accountController.addAccount(admin);
     }
     void displayUserMenu(){
         for(int i = 0; i < database.accounts.size(); i++){
@@ -56,25 +60,39 @@ public class FawryScreen {
         return accountController.addCreditCard(client, creditCard);
     }
 
-    void searchButton(String context) {
-        SearchController searchController = new SearchController(database);
-        display(searchController.search(context));
+    void searchMobileServiceButton(String context) {
+        MobileServiceController mobileServiceController = new MobileServiceController(database);
+        display("Mobile Services", mobileServiceController.searchMobileService( context));
     }
-    void display(ArrayList<Service> result){
+    void searchInternetServiceButton(String context) {
+        InternetServiceController internetServiceController = new InternetServiceController(database);
+        display("Internet Services", internetServiceController.searchInternetService(context));
+    }
+    void searchLandlineServiceButton(String context) {
+        LandlineServiceController landlineServiceController = new LandlineServiceController(database);
+        display("Landline Services", landlineServiceController.searchLandlineService(context));
+    }
+    void searchDonationServiceButton(String context) {
+        DonationServiceController donationServiceController = new DonationServiceController(database);
+        display("Donation Services", donationServiceController.searchDonationService(context));
+    }
+    void display(String category, ArrayList<Service> result){
+        if(result.size() == 0){
+            System.out.println("No result found");
+            return;
+        }
+        System.out.println("Category " + category + ":");
         for(int i = 0; i < result.size(); i++){
-            System.out.println("Category " + result.get(i).getServiceName() + ":");
-            Service service = result.get(i);
-            for(int j = 0; j < service.providers.size(); j++){
-                System.out.println((j + 1) + ") " + service.providers.get(j).getProviderName());
-            }
+            System.out.println((i + 1) + ") " + result.get(i).getServiceName());
+        }
+    }
+    void display(Service service){
+        System.out.println(service.getServiceName());
+        for(int i = 0; i < service.getWaysOfPayment().size(); i++){
+            System.out.println((i + 1) + ") " + service.getWaysOfPayment().get(i).getMethodName());
         }
     }
 
-
-    String addServiceButton(Service service) {
-        ServiceController serviceController = new ServiceController(database);
-        return serviceController.addService(service);
-    }
     String addDiscountButton(OverallDiscount discount) {
         DiscountController discountController = new DiscountController(database);
         return discountController.addDiscount(discount);
@@ -83,10 +101,23 @@ public class FawryScreen {
         DiscountController discountController = new DiscountController(database);
         return discountController.addDiscount(discount);
     }
-    String payButton(Client client, int indexService, int indexProvider, double amount, int wayIndex) {
+    String payButtonMobileService(Client client, Service service, double amount, int wayIndex) {
         PaymentController paymentController = new PaymentController(database);
-        return paymentController.pay(client, indexService, indexProvider, amount, wayIndex);
+        return paymentController.payMobileService(client, service, amount, wayIndex);
     }
+    String payButtonInternetService(Client client, Service service, double amount, int wayIndex) {
+        PaymentController paymentController = new PaymentController(database);
+        return paymentController.payInternetService(client, service, amount, wayIndex);
+    }
+    String payButtonLandlineService(Client client, Service service, double amount, int wayIndex) {
+        PaymentController paymentController = new PaymentController(database);
+        return paymentController.payLandlineService(client, service, amount, wayIndex);
+    }
+    String payButtonDonationService(Client client, Service service, double amount, int wayIndex) {
+        PaymentController paymentController = new PaymentController(database);
+        return paymentController.payDonationService(client, service, amount, wayIndex);
+    }
+
 
 //        void listCategories() {
 //        ServiceController serviceController = new ServiceController();

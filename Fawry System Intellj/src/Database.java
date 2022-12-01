@@ -19,6 +19,10 @@ public class Database {
         services = new ArrayList<>();
         discounts = new ArrayList<>();
         creditCards = new ArrayList<>();
+        mobileServices = new ArrayList<>();
+        landlineServices = new ArrayList<>();
+        InternetServices = new ArrayList<>();
+        donationServices = new ArrayList<>();
     }
 
     public static class Pair<F, S> {

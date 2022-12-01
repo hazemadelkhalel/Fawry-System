@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 
-public class Vodafone implements Service{
+public class We implements Service{
     String serviceName;
     ArrayList<PaymentMethod> waysOfPayment;
-    Vodafone(String serviceName){
+    We(String serviceName){
         this.serviceName = serviceName;
         waysOfPayment = new ArrayList<>();
+
     }
 
     @Override
@@ -23,10 +24,19 @@ public class Vodafone implements Service{
     @Override
     public String payDonationService(Client client, double amount, int wayIndex) {return "Not Supported";}
 
+    @Override
     public String getServiceName() {
         return serviceName;
     }
 
+
+    @Override
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+    public void addPaymentMethod(PaymentMethod paymentMethod){
+        waysOfPayment.add(paymentMethod);
+    }
     public void setWaysOfPayment(ArrayList<PaymentMethod> waysOfPayment) {
         this.waysOfPayment = waysOfPayment;
     }
@@ -35,10 +45,4 @@ public class Vodafone implements Service{
         return waysOfPayment;
     }
 
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-    public void addPaymentMethod(PaymentMethod paymentMethod){
-        waysOfPayment.add(paymentMethod);
-    }
 }
