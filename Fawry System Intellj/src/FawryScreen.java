@@ -92,6 +92,25 @@ public class FawryScreen {
             System.out.println((i + 1) + ") " + service.getWaysOfPayment().get(i).getMethodName());
         }
     }
+    void display(Client client){
+        System.out.println("Username: " + client.getUsername());
+        System.out.println("Email: " + client.getEmail());
+        System.out.println("Wallet: " + client.getWallet());
+        System.out.println("Transactions");
+        if(client.getTransactions().size() > 0) {
+            for (int i = 0; i < client.getTransactions().size(); i++) {
+                System.out.println("-------------------------------------");
+                System.out.println((i + 1) + "# Transaction");
+                System.out.println("Service Name: " + client.getTransactions().get(i).getService().getServiceName());
+                System.out.println("Amount: " + client.getTransactions().get(i).getAmount());
+                System.out.println("Way of Payment: " + client.getTransactions().get(i).getService().getWaysOfPayment().get(client.getTransactions().get(i).getWayIndex()).getMethodName());
+            }
+        }
+        else{
+            System.out.println("There is no transaction yet");
+        }
+        System.out.println("-------------------------------------");
+    }
 
     String addDiscountButton(OverallDiscount discount) {
         DiscountController discountController = new DiscountController(database);
@@ -117,7 +136,22 @@ public class FawryScreen {
         PaymentController paymentController = new PaymentController(database);
         return paymentController.payDonationService(client, service, amount, wayIndex);
     }
-
+    double applyDiscountMobileServiceButton(Service service, Client client, double amount){
+        DiscountController discountController = new DiscountController(database);
+        return discountController.applyDiscountMobileService(service, client, amount);
+    }
+    double applyDiscountInternetServiceButton(Service service, Client client, double amount){
+        DiscountController discountController = new DiscountController(database);
+        return discountController.applyDiscountInternetService(service, client, amount);
+    }
+    double applyDiscountLandlineServiceButton(Service service, Client client, double amount){
+        DiscountController discountController = new DiscountController(database);
+        return discountController.applyDiscountLandlineService(service, client, amount);
+    }
+    double applyDiscountDonationServiceButton(Service service, Client client, double amount){
+        DiscountController discountController = new DiscountController(database);
+        return discountController.applyDiscountDonationService(service, client, amount);
+    }
 
 //        void listCategories() {
 //        ServiceController serviceController = new ServiceController();

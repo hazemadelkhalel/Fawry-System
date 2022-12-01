@@ -11,4 +11,12 @@ public class LandlineServiceController extends FawryController{
         SearchController searchController = new SearchController(database);
         return searchController.searchLandlineService(context);
     }
+    boolean checkDiscountLandlineService(Service service){
+        for(int i = 0; i < database.landlineServices.size(); i++){
+            if(database.landlineServices.get(i).getServiceName().equals(service.getServiceName())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

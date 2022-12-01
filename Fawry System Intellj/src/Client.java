@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Client extends Account{
     CreditCard creditCard;
     double wallet = 0;
-    //    ArrayList<Transaction> listOverallDiscounts = new ArrayList<OverallDiscount>();
+    ArrayList<Transaction> transactions;
     Client(String username, String email, String password, double wallet){
         this.username = username;
         this.email = email;
@@ -27,4 +27,8 @@ public class Client extends Account{
     public CreditCard getCreditCard() {
         return creditCard;
     }
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+
 }

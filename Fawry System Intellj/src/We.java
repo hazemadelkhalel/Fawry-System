@@ -10,6 +10,10 @@ public class We implements Service{
     }
 
     @Override
+    public double applyDiscount(double amount) {
+        return amount;
+    }
+    @Override
     public String payMobileService(Client client, double amount, int wayIndex) {
         return waysOfPayment.get(wayIndex).pay(client, amount);
     }

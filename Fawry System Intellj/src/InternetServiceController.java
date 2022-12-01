@@ -11,4 +11,12 @@ public class InternetServiceController extends FawryController{
         SearchController searchController = new SearchController(database);
         return searchController.searchInternetService(context);
     }
+    boolean checkDiscountInternetService(Service service){
+        for(int i = 0; i < database.InternetServices.size(); i++){
+            if(database.mobileServices.get(i).getServiceName().equals(service.getServiceName())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

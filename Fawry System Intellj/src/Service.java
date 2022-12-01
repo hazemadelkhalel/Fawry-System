@@ -9,6 +9,7 @@ public interface Service {
     public String getServiceName();
     public void setWaysOfPayment(ArrayList<PaymentMethod> waysOfPayment);
     public ArrayList<PaymentMethod> getWaysOfPayment();
+    double applyDiscount(double amount);
 
 
     public void setServiceName(String serviceName);

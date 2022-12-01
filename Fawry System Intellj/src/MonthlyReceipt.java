@@ -39,5 +39,8 @@ public class MonthlyReceipt implements Service{
     public ArrayList<PaymentMethod> getWaysOfPayment() {
         return waysOfPayment;
     }
-
+    @Override
+    public double applyDiscount(double amount) {
+        return amount;
+    }
 }

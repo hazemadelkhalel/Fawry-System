@@ -11,4 +11,12 @@ public class DonationServiceController extends FawryController{
         SearchController searchController = new SearchController(database);
         return searchController.searchDonationService(context);
     }
+    boolean checkDiscountDonationService(Service service){
+        for(int i = 0; i < database.donationServices.size(); i++){
+            if(database.donationServices.get(i).getServiceName().equals(service.getServiceName())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

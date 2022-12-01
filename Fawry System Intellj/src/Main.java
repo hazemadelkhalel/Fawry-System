@@ -34,7 +34,7 @@ public class Main {
         Admin admin = new Admin("admin", "admin@gmail.com", "admin");
         AccountController accountController = new AccountController(database);
         accountController.addAccount(admin);
-        Client client = new Client("Medhat", "Medhat@gmail.com", "LoveMedhat", 120.5);
+        Client client = new Client("Medhat", "Medhat@gmail.com", "LoveMedhat", 100);
         CreditCard creditCard = new CreditCard("123456", 100);
         fawryScreen.addCreditCard(client, creditCard);
         fawryScreen.addClientAccountButton(client);
@@ -44,15 +44,30 @@ public class Main {
         fawryScreen.searchMobileServiceButton("a");
         fawryScreen.searchDonationServiceButton("Vod");
 //        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 0));
-        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
-        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
-        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
-        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 0));
-        fawryScreen.displayUserMenu();
-        fawryScreen.display(vodafone);
+//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
+//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
+//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
+//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 0));
 
+//        fawryScreen.displayUserMenu();
+//        fawryScreen.display(vodafone);
+//        fawryScreen.display(client);
+//        SpecificDiscount discount = new SpecificDiscount(vodafone, 20);
+//        OverallDiscount discount1 = new OverallDiscount(vodafone, 10);
+//        database.mobileServiceDiscount = discount;
+//        database.overallDiscount = discount1;
+//        System.out.println(client.getWallet());
+//        double amount = fawryScreen.applyDiscountMobileServiceButton(vodafone, client, 100);
+//        System.out.println(amount);
+//        fawryScreen.payButtonMobileService(client, vodafone, amount, 1);
+//        System.out.println(client.getWallet());
 
-
+//
+//        double ans = discount.applyDiscount(100);
+//        OverallDiscount discount1 = new OverallDiscount(vodafone);
+//        System.out.println(ans);
+//        double ans1 = discount1.applyDiscount(ans, 10);
+//        System.out.println(ans1);
 
 
 

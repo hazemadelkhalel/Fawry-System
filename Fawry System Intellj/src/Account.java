@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Account {
     String username, email, password;
     int AccountID;
-    ArrayList<Transaction> transactions;
 
     public String getEmail() {
         return email;
@@ -17,9 +16,6 @@ public class Account {
         return AccountID;
     }
 
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
 
     public String getPassword() {
         return password;

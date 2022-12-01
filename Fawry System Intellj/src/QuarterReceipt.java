@@ -40,5 +40,8 @@ public class QuarterReceipt implements Service{
     public ArrayList<PaymentMethod> getWaysOfPayment() {
         return waysOfPayment;
     }
-
+    @Override
+    public double applyDiscount(double amount) {
+        return amount;
+    }
 }

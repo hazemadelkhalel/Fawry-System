@@ -11,4 +11,12 @@ public class MobileServiceController extends FawryController{
         SearchController searchController = new SearchController(database);
         return searchController.searchMobileService(context);
     }
+    boolean checkDiscountMobileService(Service service){
+        for(int i = 0; i < database.mobileServices.size(); i++){
+            if(database.mobileServices.get(i).getServiceName().equals(service.getServiceName())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

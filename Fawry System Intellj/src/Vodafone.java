@@ -35,6 +35,11 @@ public class Vodafone implements Service{
         return waysOfPayment;
     }
 
+    @Override
+    public double applyDiscount(double amount) {
+        return amount;
+    }
+
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }

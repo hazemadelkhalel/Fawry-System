@@ -1,8 +1,15 @@
-public class Discount {
+import java.util.ArrayList;
+
+public class Discount implements Service{
     String discountName;
-    int percentage;
-    double applyDiscount(double amount) {
-        return amount - (amount * percentage / 100);
+    double percentage;
+    Service wrappee;
+    Discount(Service wrappee){
+        this.wrappee = wrappee;
+    }
+    @Override
+    public double applyDiscount(double amount) {
+        return wrappee.applyDiscount(amount);
     }
 
     public void setDiscountName(String discountName) {
@@ -13,11 +20,51 @@ public class Discount {
         this.percentage = percentage;
     }
 
-    public int getPercentage() {
+    public double getPercentage() {
         return percentage;
     }
 
     public String getDiscountName() {
         return discountName;
+    }
+
+    @Override
+    public String payMobileService(Client client, double amount, int wayIndex) {
+        return null;
+    }
+
+    @Override
+    public String payInternetService(Client client, double amount, int wayIndex) {
+        return null;
+    }
+
+    @Override
+    public String payLandlineService(Client client, double amount, int wayIndex) {
+        return null;
+    }
+
+    @Override
+    public String payDonationService(Client client, double amount, int wayIndex) {
+        return null;
+    }
+
+    @Override
+    public String getServiceName() {
+        return null;
+    }
+
+    @Override
+    public void setWaysOfPayment(ArrayList<PaymentMethod> waysOfPayment) {
+
+    }
+
+    @Override
+    public ArrayList<PaymentMethod> getWaysOfPayment() {
+        return null;
+    }
+
+    @Override
+    public void setServiceName(String serviceName) {
+
     }
 }

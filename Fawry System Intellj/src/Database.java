@@ -10,8 +10,14 @@ public class Database {
     ArrayList<Service> InternetServices;
     ArrayList<Service> landlineServices;
     ArrayList<Service> donationServices;
+    ArrayList<Transaction> refunds;
 
     ArrayList<Discount> discounts;
+    SpecificDiscount mobileServiceDiscount;
+    SpecificDiscount internetServiceDiscount;
+    SpecificDiscount landlineServiceDiscount;
+    SpecificDiscount donationServiceDiscount;
+    OverallDiscount overallDiscount;
 
     ArrayList<CreditCard> creditCards;
     Database() {
@@ -23,6 +29,11 @@ public class Database {
         landlineServices = new ArrayList<>();
         InternetServices = new ArrayList<>();
         donationServices = new ArrayList<>();
+        mobileServiceDiscount = null;
+        internetServiceDiscount = null;
+        landlineServiceDiscount = null;
+        donationServiceDiscount = null;
+        overallDiscount = null;
     }
 
     public static class Pair<F, S> {

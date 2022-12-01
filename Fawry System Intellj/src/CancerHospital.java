@@ -42,4 +42,9 @@ public class CancerHospital implements Service{
         return waysOfPayment;
     }
 
+    @Override
+    public double applyDiscount(double amount) {
+        return amount;
+    }
+
 }
