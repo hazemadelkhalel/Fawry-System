@@ -156,6 +156,10 @@ public class FawryScreen {
         DiscountController discountController = new DiscountController(database);
         return discountController.addDonationServiceDiscount(specificDiscount);
     }
+    String addLandLineServiceDiscount(SpecificDiscount specificDiscount){
+        DiscountController discountController = new DiscountController(database);
+        return discountController.addLandLineServiceDiscount(specificDiscount);
+    }
 
 //        void listCategories() {
 //        ServiceController serviceController = new ServiceController();

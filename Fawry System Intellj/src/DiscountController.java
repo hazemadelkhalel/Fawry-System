@@ -22,6 +22,10 @@ public class DiscountController extends FawryController{
         database.donationServiceDiscount = specificDiscount;
         return "Added Successfully";
     }
+    String addLandLineServiceDiscount(SpecificDiscount specificDiscount){
+        database.landlineServiceDiscount = specificDiscount;
+        return "Added Successfully";
+    }
 
     double applyOverAllDiscount(Client client, double amount){
         if(client.getTransactions().size() > 0 || database.overallDiscount == null){
