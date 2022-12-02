@@ -148,6 +148,11 @@ public class FawryScreen {
         return discountController.addMobileServiceDiscount(specificDiscount);
     }
 
+    String addInternetServiceDiscount(SpecificDiscount specificDiscount){
+        DiscountController discountController = new DiscountController(database);
+        return discountController.addInternetServiceDiscount(specificDiscount);
+    }
+
 //        void listCategories() {
 //        ServiceController serviceController = new ServiceController();
 //        serviceController.listCategories();

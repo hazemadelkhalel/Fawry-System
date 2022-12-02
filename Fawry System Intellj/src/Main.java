@@ -62,6 +62,17 @@ public class Main {
         fawryScreen.payButtonMobileService(client, vodafone, amount, 1);
         System.out.println(client.getWallet());
 
+
+//        SpecificDiscount discount = new SpecificDiscount(vodafone, 20);
+//        OverallDiscount discount1 = new OverallDiscount(vodafone, 10);
+//        fawryScreen.addInternetServiceDiscount(discount);
+//        database.overallDiscount = discount1;
+//        System.out.println(client.getWallet());
+//        double amount = fawryScreen.applyDiscountInternetServiceButton(vodafone, client, 100);
+//        System.out.println(amount);
+//        fawryScreen.payButtonMobileService(client, vodafone, amount, 1);
+//        System.out.println(client.getWallet());
+
 //
 //        double ans = discount.applyDiscount(100);
 //        OverallDiscount discount1 = new OverallDiscount(vodafone);

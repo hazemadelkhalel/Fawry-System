@@ -13,6 +13,12 @@ public class DiscountController extends FawryController{
         database.mobileServiceDiscount = specificDiscount;
         return "Added Successfully";
     }
+
+    String addInternetServiceDiscount(SpecificDiscount specificDiscount){
+        database.internetServiceDiscount = specificDiscount;
+        return "Added Successfully";
+    }
+
     double applyOverAllDiscount(Client client, double amount){
         if(client.getTransactions().size() > 0 || database.overallDiscount == null){
             return amount;
