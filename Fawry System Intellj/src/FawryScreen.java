@@ -160,6 +160,10 @@ public class FawryScreen {
         DiscountController discountController = new DiscountController(database);
         return discountController.addLandLineServiceDiscount(specificDiscount);
     }
+    String addOverallDiscount(OverallDiscount overallDiscount) {
+        DiscountController discountController = new DiscountController(database);
+        return discountController.addOverallDiscount(overallDiscount);
+    }
 
 //        void listCategories() {
 //        ServiceController serviceController = new ServiceController();

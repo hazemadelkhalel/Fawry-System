@@ -26,6 +26,10 @@ public class DiscountController extends FawryController{
         database.landlineServiceDiscount = specificDiscount;
         return "Added Successfully";
     }
+    String addOverallDiscount(OverallDiscount overallDiscount){
+        database.overallDiscount = overallDiscount;
+        return "Added Successfully";
+    }
 
     double applyOverAllDiscount(Client client, double amount){
         if(client.getTransactions().size() > 0 || database.overallDiscount == null){
