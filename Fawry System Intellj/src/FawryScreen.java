@@ -8,13 +8,6 @@ public class FawryScreen {
     Database database;
     FawryScreen(Database database){
         this.database = database;
-
-        // do it in main and add all services (Initialize the database)
-
-//        Admin admin = new Admin("admin", "admin@gmail.com", "admin");
-//        this.database = database;
-//        AccountController accountController = new AccountController(database);
-//        accountController.addAccount(admin);
     }
     void displayUserMenu(){
         for(int i = 0; i < database.accounts.size(); i++){
@@ -96,8 +89,8 @@ public class FawryScreen {
         System.out.println("Username: " + client.getUsername());
         System.out.println("Email: " + client.getEmail());
         System.out.println("Wallet: " + client.getWallet());
-        System.out.println("Transactions");
         if(client.getTransactions().size() > 0) {
+            System.out.println("Transactions");
             for (int i = 0; i < client.getTransactions().size(); i++) {
                 System.out.println("-------------------------------------");
                 System.out.println((i + 1) + "# Transaction");
@@ -105,9 +98,6 @@ public class FawryScreen {
                 System.out.println("Amount: " + client.getTransactions().get(i).getAmount());
                 System.out.println("Way of Payment: " + client.getTransactions().get(i).getService().getWaysOfPayment().get(client.getTransactions().get(i).getWayIndex()).getMethodName());
             }
-        }
-        else{
-            System.out.println("There is no transaction yet");
         }
         System.out.println("-------------------------------------");
     }
@@ -165,15 +155,45 @@ public class FawryScreen {
         return discountController.addOverallDiscount(overallDiscount);
     }
 
-//        void listCategories() {
-//        ServiceController serviceController = new ServiceController();
-//        serviceController.listCategories();
-//    }
-//    void listAllTransactionButton() {
-//        // calling list all transaction from controller
-//    }
-//    // change boolean
-//    void acceptTransactionButton() {
-//        // return acceptance of check approval
-//    }
+    void listAllRefundRequest() {
+        System.out.println("Refund Requests");
+        for (int i = 0; i < database.refunds.size(); i++){
+            System.out.println("-------------------------------------");
+            System.out.println((i + 1) + "# Refund Request");
+            System.out.println("Service Name: " + database.refunds.get(i).transaction.getService().getServiceName());
+            System.out.println("Amount: " + database.refunds.get(i).transaction.getAmount());
+            System.out.println("Username Account: " + database.refunds.get(i).transaction.getClient().getUsername());
+        }
+    }
+    void listAllTransactionButton(Client client, Service service) {
+        RefundController refundController = new RefundController(database);
+        ArrayList<Transaction> transactions = refundController.listAllTransaction(client, service);
+        System.out.println("History of Transaction of " + service.getServiceName());
+        if(transactions.size() == 0){
+            System.out.println("There is no result");
+        }
+        else {
+            for (int i = 0; i < client.getTransactions().size(); i++) {
+                System.out.println("-------------------------------------");
+                System.out.println((i + 1) + "# Transaction");
+                System.out.println("Clinet Name: " + client.getUsername());
+                System.out.println("Service Name: " + client.getTransactions().get(i).getService().getServiceName());
+                System.out.println("Amount: " + client.getTransactions().get(i).getAmount());
+                System.out.println("Way of Payment: " + client.getTransactions().get(i).getService().getWaysOfPayment().get(client.getTransactions().get(i).getWayIndex()).getMethodName());
+            }
+            System.out.println("-------------------------------------");
+        }
+    }
+    boolean acceptRefundRequestButton(boolean acceptance, RefundRequest refundRequest) {
+        RefundController refundController = new RefundController(database);
+        return refundController.applyApproval(acceptance, refundRequest);
+    }
+    String addRefundRequest(Transaction transaction){
+        RefundController refundController = new RefundController(database);
+        return refundController.addRefundRequest(transaction);
+    }
+    boolean checkDiscountAvailable(Service service){
+        DiscountController discountController = new DiscountController(database);
+        return discountController.checkDiscountAvailable(service);
+    }
 }

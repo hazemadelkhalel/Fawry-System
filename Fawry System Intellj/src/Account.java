@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Account {
+abstract public class Account {
     String username, email, password;
     int AccountID;
 
@@ -35,5 +35,6 @@ public class Account {
     public void setUsername(String username) {
         this.username = username;
     }
+    abstract public void update(boolean acceptance, Transaction transaction);
 
 }

@@ -5,9 +5,6 @@ public class DiscountController extends FawryController{
     DiscountController(Database database){
         this.database = database;
     }
-    boolean checkSimilarity(String first, String second){
-        return first.toLowerCase().contains(second.toLowerCase());
-    }
 
     String addMobileServiceDiscount(SpecificDiscount specificDiscount){
         database.mobileServiceDiscount = specificDiscount;
@@ -78,5 +75,13 @@ public class DiscountController extends FawryController{
         else{
             return amount;
         }
+    }
+    boolean checkDiscountAvailable(Service service){
+        for(int i = 0; i < database.discounts.size(); i++){
+            if(database.discounts.get(i).wrappee.getServiceName().equals(service.getServiceName())){
+                return true;
+            }
+        }
+        return false;
     }
 }

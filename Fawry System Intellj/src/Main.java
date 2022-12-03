@@ -41,26 +41,30 @@ public class Main {
         fawryScreen.displayUserMenu();
         fawryScreen.displayAdminMenu();
         fawryScreen.searchInternetServiceButton("Vod");
-        fawryScreen.searchMobileServiceButton("a");
-        fawryScreen.searchDonationServiceButton("Vod");
-//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 0));
+        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
 //        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
 //        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
 //        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
 //        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 0));
 
         fawryScreen.displayUserMenu();
-        fawryScreen.display(vodafone);
-        fawryScreen.display(client);
-        SpecificDiscount discount = new SpecificDiscount(vodafone, 20);
-        OverallDiscount discount1 = new OverallDiscount(vodafone, 10);
-        fawryScreen.addMobileServiceDiscount(discount);
-        database.overallDiscount = discount1;
-        System.out.println(client.getWallet());
-        double amount = fawryScreen.applyDiscountMobileServiceButton(vodafone, client, 100);
-        System.out.println(amount);
-        fawryScreen.payButtonMobileService(client, vodafone, amount, 1);
-        System.out.println(client.getWallet());
+//        fawryScreen.display(client);
+        fawryScreen.addRefundRequest(client.getTransactions().get(0));
+        RefundRequest refundRequest = database.refunds.get(0);
+        fawryScreen.listAllRefundRequest();
+//        System.out.println(fawryScreen.acceptRefundRequestButton(true, refundRequest));
+//        fawryScreen.display(client);
+//        fawryScreen.display(vodafone);
+//        fawryScreen.display(client);
+//        SpecificDiscount discount = new SpecificDiscount(vodafone, 20);
+//        OverallDiscount discount1 = new OverallDiscount(vodafone, 10);
+//        fawryScreen.addMobileServiceDiscount(discount);
+//        database.overallDiscount = discount1;
+//        System.out.println(client.getWallet());
+//        double amount = fawryScreen.applyDiscountMobileServiceButton(vodafone, client, 100);
+//        System.out.println(amount);
+//        fawryScreen.payButtonMobileService(client, vodafone, amount, 1);
+//        System.out.println(client.getWallet());
 
 //
 //        double ans = discount.applyDiscount(100);
