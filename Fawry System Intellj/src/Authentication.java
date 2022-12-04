@@ -20,7 +20,7 @@ public class Authentication extends FawryController{
     String validateSignUp(Client client) {
         AccountController accountController = new AccountController(database);
         for(int i = 0; i < database.accounts.size(); i++){
-            if(accountController.checkAccountLogin(database.accounts.get(i), client)){
+            if(accountController.checkAccountSignUp(database.accounts.get(i), client)){
                 return "-1";
             }
         }
