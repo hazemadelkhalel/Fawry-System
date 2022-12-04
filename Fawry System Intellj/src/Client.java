@@ -1,7 +1,9 @@
+import javax.management.Notification;
 import java.util.ArrayList;
 
 public class Client extends Account{
     CreditCard creditCard;
+    ArrayList<String> notifications;
     double wallet = 0;
     ArrayList<Transaction> transactions;
     Client(String username, String email, String password, double wallet){
@@ -11,6 +13,7 @@ public class Client extends Account{
         this.creditCard = null;
         this.wallet = wallet;
         transactions = new ArrayList<>();
+        notifications = new ArrayList<>();
     }
     public void setWallet(double wallet) {
         this.wallet = wallet;
@@ -30,5 +33,14 @@ public class Client extends Account{
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
-
+    public void update(boolean acceptance, Transaction transaction){
+        transactions.remove(transaction);
+        if(acceptance){
+            transaction.getClient().setWallet(transaction.getClient().getWallet() + transaction.getAmount());
+            notifications.add("Accepted Refund Request of"  + transaction.getService().getServiceName());
+        }
+        else{
+            notifications.add("Refused Refund Request");
+        }
+    }
 }

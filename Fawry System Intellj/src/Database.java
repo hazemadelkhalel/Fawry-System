@@ -10,7 +10,7 @@ public class Database {
     ArrayList<Service> InternetServices;
     ArrayList<Service> landlineServices;
     ArrayList<Service> donationServices;
-    ArrayList<Transaction> refunds;
+    ArrayList<RefundRequest> refunds;
 
     ArrayList<Discount> discounts;
     SpecificDiscount mobileServiceDiscount;
@@ -29,6 +29,7 @@ public class Database {
         landlineServices = new ArrayList<>();
         InternetServices = new ArrayList<>();
         donationServices = new ArrayList<>();
+        refunds = new ArrayList<>();
         mobileServiceDiscount = null;
         internetServiceDiscount = null;
         landlineServiceDiscount = null;
