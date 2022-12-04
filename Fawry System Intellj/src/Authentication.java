@@ -10,7 +10,7 @@ public class Authentication extends FawryController{
         for(int i = 0; i < database.accounts.size(); i++){
             if(database.accounts.get(i) instanceof Client){
                 if(accountController.checkAccountLogin(database.accounts.get(i), client)){
-                    return "Login";
+                    return "Logged in successfully";
                 }
             }
         }
@@ -26,7 +26,7 @@ public class Authentication extends FawryController{
         }
         database.accounts.add(client);
         // -1 represent there is no user with this information in system
-        return "SignUP";
+        return "Signed up successfully";
     }
     void validateCreditCard(CreditCardController creditCard) {
         // check if it was correct or not
