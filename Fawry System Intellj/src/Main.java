@@ -62,7 +62,7 @@ public class Main {
 //                    Database database = new Database();
 //                    FawryScreen fawryScreen = new FawryScreen(database);
                     if (fawryScreen.loginButton(client) == "-1") {
-                        System.out.println("hhhhhh");
+//                        System.out.println("hhhhhh");
                         //New to the system or wrong info
 
                     }
@@ -255,8 +255,201 @@ public class Main {
                                 System.out.print("Enter the amount: ");
                                 double amount= sc.nextDouble();
                                 CreditCard creditCard = new CreditCard(CardNumber,amount);
-                                fawryScreen.addCreditCard(client,creditCard);
+//                                fawryScreen.addCreditCard(client,creditCard);
+                                client.setCreditCard(creditCard);
+                                System.out.println(fawryScreen.addCreditCard(client,creditCard) );
+                                System.out.println( client.creditCard.getAmount() );
+
                             }
+
+                            //Add Funds
+                            else if(choice == 4){
+                                System.out.print("Enter the desired amount: ");
+                                double amount= sc.nextDouble();
+//                                fawryScreen.addFunds(client,amount);
+                                System.out.println( fawryScreen.addFunds(client,amount) );
+                                System.out.println( "Wallet : " + client.getWallet() );
+                                System.out.println("Amount in cc : " + client.creditCard.getAmount());
+
+                            }
+
+                            //Send Refund Request
+                            else if(choice == 5){
+                                Transaction transaction;
+                                Service service = null;
+                                System.out.println("1-Vodafone");
+                                System.out.println("2-Etisalat");
+                                System.out.println("3-We");
+                                System.out.println("4-Orange");
+                                System.out.println("5-Monthly Receipt");
+                                System.out.println("6-Quarter Receipt");
+                                System.out.println("7-NGOs");
+                                System.out.println("8-Cancer Hospitals");
+                                System.out.println("9-Schools");
+                                choice = sc.nextInt();
+                                if (choice == 1) {
+                                    System.out.println("1-Send Refund Request for Mobile Service");
+                                    System.out.println("2-Send Refund Request for Internet Service");
+                                    choice = sc.nextInt();
+                                    if (choice == 1) {
+                                        
+                                    } else if (choice == 2) {
+                                        
+                                    }
+                                    service = new Vodafone("Vodafone");
+                                    
+                                    
+                                } else if (choice == 2) {
+                                    System.out.println("1-Send Refund Request for Mobile Service");
+                                    System.out.println("2-Send Refund Request for Internet Service");
+                                    choice = sc.nextInt();
+                                    if (choice == 1) {
+
+                                    } else if (choice == 2) {
+
+                                    }
+                                    service = new Etisalat("Etisalat");
+                                } else if (choice == 3) {
+                                    System.out.println("1-Send Refund Request for Mobile Service");
+                                    System.out.println("2-Send Refund Request for Internet Service");
+                                    choice = sc.nextInt();
+                                    if (choice == 1) {
+
+                                    } else if (choice == 2) {
+
+                                    }
+                                    service = new We("We");
+                                } else if (choice == 4) {
+                                    System.out.println("1-Send Refund Request for Mobile Service");
+                                    System.out.println("2-Send Refund Request for Internet Service");
+                                    choice = sc.nextInt();
+                                    if (choice == 1) {
+
+                                    } else if (choice == 2) {
+
+                                    }
+                                    service = new Orange("Orange");
+                                }
+                                // Monthly Receipt
+                                else if (choice == 5) {
+                                    System.out.println("1-You are currently paying for Landline Service");
+                                    service = new MonthlyReceipt("Landline Service");
+
+                                }
+                                // Quarter Receipt
+                                else if (choice == 6) {
+                                    System.out.println("1-You are currently paying for Landline Service");
+                                    service = new QuarterReceipt("Landline Service");
+                                }
+                                // NGOs
+                                else if (choice == 7) {
+                                    System.out.println("1-You are currently paying for Donation Service");
+                                    service = new NGO("Donation Service");
+                                }
+                                // Cancer Hospital
+                                else if (choice == 8) {
+                                    System.out.println("1-You are currently paying for Donation Service");
+                                    service = new CancerHospital("Donation Service");
+                                }
+                                // Schools
+                                else if (choice == 9) {
+                                    System.out.println("1-You are currently paying for Donation Service");
+                                    service = new School("Donation Service");
+                                }
+                                System.out.print("Enter the amount you will pay:");
+                                double amount = sc.nextDouble();
+                                System.out.print("Enter the way you will pay by:");
+                                int way = sc.nextInt();
+                                transaction = new Transaction(client , service , amount , way );
+                                fawryScreen.addRefundRequest(transaction);
+                            }
+
+                            //Check Discounts
+                            else if(choice == 6)
+                            {
+                                Service service = null;
+                                System.out.println("1-Vodafone");
+                                System.out.println("2-Etisalat");
+                                System.out.println("3-We");
+                                System.out.println("4-Orange");
+                                System.out.println("5-Monthly Receipt");
+                                System.out.println("6-Quarter Receipt");
+                                System.out.println("7-NGOs");
+                                System.out.println("8-Cancer Hospitals");
+                                System.out.println("9-Schools");
+                                choice = sc.nextInt();
+                                if (choice == 1) {
+                                    System.out.println("1-Check Discounts for Mobile Service");
+                                    System.out.println("2-Check Discounts for Internet Service");
+                                    choice = sc.nextInt();
+                                    if (choice == 1) {
+
+                                    } else if (choice == 2) {
+
+                                    }
+                                    service = new Vodafone("Vodafone");
+
+
+                                } else if (choice == 2) {
+                                    System.out.println("1-Check Discounts for Mobile Service");
+                                    System.out.println("2-Check Discounts for Internet Service");
+                                    choice = sc.nextInt();
+                                    if (choice == 1) {
+
+                                    } else if (choice == 2) {
+
+                                    }
+                                    service = new Etisalat("Etisalat");
+                                } else if (choice == 3) {
+                                    System.out.println("1-Check Discounts for Mobile Service");
+                                    System.out.println("2-Check Discounts for Internet Service");
+                                    choice = sc.nextInt();
+                                    if (choice == 1) {
+
+                                    } else if (choice == 2) {
+
+                                    }
+                                    service = new We("We");
+                                } else if (choice == 4) {
+                                    System.out.println("1-Check Discounts for Mobile Service");
+                                    System.out.println("2-Check Discounts for Internet Service");
+                                    choice = sc.nextInt();
+                                    if (choice == 1) {
+
+                                    } else if (choice == 2) {
+
+                                    }
+                                    service = new Orange("Orange");
+                                }
+                                // Monthly Receipt
+                                else if (choice == 5) {
+                                    System.out.println("1-You are checking discounts for Landline Service");
+                                    service = new MonthlyReceipt("Landline Service");
+
+                                }
+                                // Quarter Receipt
+                                else if (choice == 6) {
+                                    System.out.println("1-You are checking discounts for Landline Service");
+                                    service = new QuarterReceipt("Landline Service");
+                                }
+                                // NGOs
+                                else if (choice == 7) {
+                                    System.out.println("1-You are checking discounts for Donation Service");
+                                    service = new NGO("Donation Service");
+                                }
+                                // Cancer Hospital
+                                else if (choice == 8) {
+                                    System.out.println("1-You are checking discounts for Donation Service");
+                                    service = new CancerHospital("Donation Service");
+                                }
+                                // Schools
+                                else if (choice == 9) {
+                                    System.out.println("1-You are checking discounts for Donation Service");
+                                    service = new School("Donation Service");
+                                }
+                                fawryScreen.checkDiscountAvailable(service);
+                            }
+
 
                         }
 
