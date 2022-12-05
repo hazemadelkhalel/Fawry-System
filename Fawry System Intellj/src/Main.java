@@ -133,12 +133,6 @@ public class Main {
 
                             // Pay
                             while (clientChoice == 2) {
-                                int payChoice = menuDisplay.ServiceMenu();
-                                if(payChoice == 10){
-                                    clientChoice = -1;
-                                    break;
-                                }
-                                while (payChoice == 1) {
                                     System.out.println("Which Category:");
                                     int category = menuDisplay.ServiceCategoyMenu();
                                     Service service = null;
@@ -212,8 +206,6 @@ public class Main {
                                         System.out.println(fawryScreen.payButtonDonationService(client, service, amount, way));
                                     }
                                 }
-                            }
-
                             // Add Credit Card
                             if (clientChoice == 3){
                                 System.out.println("Enter your credit card number: ");
