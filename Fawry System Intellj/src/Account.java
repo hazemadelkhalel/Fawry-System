@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 abstract public class Account {
     String username, email, password;
+    ArrayList<String> notifications;
     int AccountID;
 
     public String getEmail() {

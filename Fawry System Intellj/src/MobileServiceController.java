@@ -13,10 +13,14 @@ public class MobileServiceController extends FawryController{
     }
     boolean checkDiscountMobileService(Service service){
         for(int i = 0; i < database.mobileServices.size(); i++){
-            if(database.mobileServices.get(i).getServiceName().equals(service.getServiceName())){
+            if(service != null &&database.mobileServices.get(i).getServiceName().equals(service.getServiceName())){
                 return true;
             }
         }
+        return false;
+    }
+    boolean checkDiscountMobileServiceExistance(){
+        if(database.mobileServiceDiscount != null)return true;
         return false;
     }
 }

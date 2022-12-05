@@ -13,10 +13,18 @@ public class LandlineServiceController extends FawryController{
     }
     boolean checkDiscountLandlineService(Service service){
         for(int i = 0; i < database.landlineServices.size(); i++){
-            if(database.landlineServices.get(i).getServiceName().equals(service.getServiceName())){
+            if(service != null && database.landlineServices.get(i).getServiceName().equals(service.getServiceName())){
                 return true;
             }
         }
         return false;
+    }
+    boolean checkDiscountLandlineServiceExistance(){
+        if(database.landlineServiceDiscount != null){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

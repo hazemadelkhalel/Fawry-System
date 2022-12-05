@@ -43,6 +43,8 @@ public class Vodafone implements Service{
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
+
+
     public void addPaymentMethod(PaymentMethod paymentMethod){
         waysOfPayment.add(paymentMethod);
     }

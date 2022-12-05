@@ -19,4 +19,12 @@ public class DonationServiceController extends FawryController{
         }
         return false;
     }
+    boolean checkDiscountDonationServiceExistance(){
+        if(database.donationServiceDiscount != null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

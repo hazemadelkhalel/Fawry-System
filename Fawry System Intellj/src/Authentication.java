@@ -5,30 +5,25 @@ public class Authentication extends FawryController{
         this.database = database;
     }
 
-    String validateLogin(Client client) {
+    Account validateLogin(String usernameOrEmail, String password) {
         AccountController accountController = new AccountController(database);
         for(int i = 0; i < database.accounts.size(); i++){
-            if(database.accounts.get(i) instanceof Client){
-                if(accountController.checkAccountLogin(database.accounts.get(i), client)){
-                    return "Logged in successfully";
-                }
+            if(accountController.checkAccountLogin(database.accounts.get(i), usernameOrEmail, password)){
+                return database.accounts.get(i);
             }
         }
         // -1 represent there is no user with this information in system
-        return "-1";
+        return null;
     }
-    String validateSignUp(Client client) {
+    String validateSignUp(Account account) {
         AccountController accountController = new AccountController(database);
         for(int i = 0; i < database.accounts.size(); i++){
-            if(accountController.checkAccountSignUp(database.accounts.get(i), client)){
+            if(accountController.checkAccountSignUp(database.accounts.get(i), account)){
                 return "-1";
             }
         }
-        database.accounts.add(client);
+        database.accounts.add(account);
         // -1 represent there is no user with this information in system
-        return "Signed up successfully";
-    }
-    void validateCreditCard(CreditCardController creditCard) {
-        // check if it was correct or not
+        return "OK";
     }
 }

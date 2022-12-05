@@ -13,10 +13,18 @@ public class InternetServiceController extends FawryController{
     }
     boolean checkDiscountInternetService(Service service){
         for(int i = 0; i < database.InternetServices.size(); i++){
-            if(database.mobileServices.get(i).getServiceName().equals(service.getServiceName())){
+            if(service != null && database.mobileServices.get(i).getServiceName().equals(service.getServiceName())){
                 return true;
             }
         }
         return false;
+    }
+    boolean checkDiscountInternetServiceExistance(){
+        if(database.internetServiceDiscount != null){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

@@ -11,4 +11,5 @@ public class SpecificDiscount extends Discount{
         result -= (amount * percentage) / 100;
         return result;
     }
+
 }

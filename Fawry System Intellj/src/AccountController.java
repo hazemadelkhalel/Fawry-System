@@ -27,23 +27,23 @@ public class AccountController extends FawryController{
         }
         return "Credit Card added successfully";
     }
-    boolean checkAccountLogin(Account client1, Client client2){
-        if(client1.getUsername().equals(client2.getUsername()) &&
-                client1.getEmail().equals(client2.getEmail()) &&
-                client1.getPassword().equals(client2.getPassword())) {
+    boolean checkAccountLogin(Account account1, String usernameOrEmail, String password){
+        if((account1.getUsername().equals(usernameOrEmail) || account1.getEmail().equals(usernameOrEmail)) &&
+            account1.getPassword().equals(password)
+        ) {
             return true;
         }
         else{
             return false;
         }
     }
-    boolean checkAccountSignUp(Account client1, Client client2){
-        if(client1.getUsername().equals(client2.getUsername()) ||
-                client1.getEmail().equals(client2.getEmail())) {
-            return false;
+    boolean checkAccountSignUp(Account account1, Account account2){
+        if(account1.getUsername().equals(account2.getUsername()) ||
+                account1.getEmail().equals(account2.getEmail())) {
+            return true;
         }
         else{
-            return true;
+            return false;
         }
     }
     String addFunds(Client client, double amount){

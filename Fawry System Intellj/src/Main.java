@@ -1,561 +1,617 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Main {
+
+
+
+
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Database database = new Database();
         FawryScreen fawryScreen = new FawryScreen(database);
-        Client client ;
+        MenuDisplay menuDisplay = new MenuDisplay();
+        CreditCardMethod creditCardMethod = new CreditCardMethod(database);
+        WalletMethod walletMethod = new WalletMethod(database);
+        CashMethod cashMethod = new CashMethod(database);
+        Vodafone vodafone = new Vodafone("Vodafone");
+        We we = new We("We");
+        Orange orange = new Orange("Orange");
+        Etisalat etisalat = new Etisalat("Etisalat");
+        MonthlyReceipt monthlyReceipt = new MonthlyReceipt("Monthly Receipt");
+        QuarterReceipt quarterReceipt = new QuarterReceipt("Quarter Receipt");
+        CancerHospital cancerHospital = new CancerHospital("Cancer Hospital");
+        School school = new School("School");
+        NGO ngo = new NGO("NGO");
+        vodafone.addPaymentMethod(creditCardMethod);
+        we.addPaymentMethod(creditCardMethod);
+        orange.addPaymentMethod(creditCardMethod);
+        etisalat.addPaymentMethod(creditCardMethod);
+        monthlyReceipt.addPaymentMethod(creditCardMethod);
+        quarterReceipt.addPaymentMethod(creditCardMethod);
+        cancerHospital.addPaymentMethod(creditCardMethod);
+        school.addPaymentMethod(creditCardMethod);
+        ngo.addPaymentMethod(creditCardMethod);
+
+        vodafone.addPaymentMethod(walletMethod);
+        we.addPaymentMethod(walletMethod);
+        orange.addPaymentMethod(walletMethod);
+        etisalat.addPaymentMethod(walletMethod);
+        monthlyReceipt.addPaymentMethod(walletMethod);
+        quarterReceipt.addPaymentMethod(walletMethod);
+        cancerHospital.addPaymentMethod(walletMethod);
+        school.addPaymentMethod(walletMethod);
+        ngo.addPaymentMethod(walletMethod);
+
+        vodafone.addPaymentMethod(cashMethod);
+        cancerHospital.addPaymentMethod(cashMethod);
+        school.addPaymentMethod(cashMethod);
+
+        database.services.add(vodafone);
+        database.mobileServices.add(vodafone);
+        database.InternetServices.add(vodafone);
+
+        database.services.add(we);
+        database.mobileServices.add(we);
+        database.InternetServices.add(we)
+        ;
+        database.services.add(orange);
+        database.mobileServices.add(orange);
+        database.InternetServices.add(orange);
+
+        database.services.add(etisalat);
+        database.mobileServices.add(etisalat);
+        database.InternetServices.add(etisalat);
+
+        database.services.add(monthlyReceipt);
+        database.landlineServices.add(monthlyReceipt);
+
+        database.services.add(quarterReceipt);
+        database.landlineServices.add(quarterReceipt)
+        ;
+        database.services.add(cancerHospital);
+        database.donationServices.add(cancerHospital);
+
+        database.services.add(school);
+        database.donationServices.add(school);
+
+        database.services.add(ngo);
+        database.donationServices.add(ngo);
+
+        Admin admin = new Admin("admin", "Admin@gmail.com", "admin");
+        Client c = new Client("a", "a@gmail.com", "a", 120);
+        database.accounts.add(admin);
+        database.accounts.add(c);
+
+
+        // intitialize all services
+//        Client client ;
         while(true) {
-            System.out.println("1-Admin");
-            System.out.println("2-User");
-
-
-
-            int choice;
-            Scanner sc = new Scanner(System.in);
-            choice = sc.nextInt();
-
-
-            if (choice == 1) {
-
-
-            }
-            // User
-            else if (choice == 2) {
-                System.out.println("1-Login");
-                System.out.println("2-Signup");
-                System.out.println("3-Exit");
-                choice = sc.nextInt();
-                if(choice == 3){
+            int choice = menuDisplay.MainMenu();
+            boolean exit = true;
+            while (choice == 1) {
+                if(!exit){
                     break;
                 }
-                // Sign Up
-                else if (choice == 2) {
-                    System.out.print("Enter a Username: ");
-                    String username = sc.next();
-                    System.out.print("Enter an Email: ");
-                    String email = sc.next();
-                    System.out.print("Enter a Password: ");
-                    String password = sc.next();
-                    System.out.print("Enter a wallet balance: ");
-                    double wallet = sc.nextDouble();
-                     client = new Client(username, email, password, wallet);
-//                    Database database = new Database();
-//                    FawryScreen fawryScreen = new FawryScreen(database);
-                    fawryScreen.signUpButton(client);
-                    System.out.println(fawryScreen.signUpButton(client));
-
-
-                }
-                // Login
-               // else if (choice == 1) {
-                    System.out.print("Enter your Username: ");
-                    String username = sc.next();
-                    System.out.print("Enter your Email: ");
-                    String email = sc.next();
-                    System.out.print("Enter your Password: ");
-                    String password = sc.next();
-                    System.out.print("Enter your current wallet balance: ");
-                    double wallet = sc.nextDouble();
-                    client = new Client(username, email, password, wallet);
-//                    Database database = new Database();
-//                    FawryScreen fawryScreen = new FawryScreen(database);
-                    if (fawryScreen.loginButton(client) == "-1") {
-//                        System.out.println("hhhhhh");
-                        //New to the system or wrong info
-
+                System.out.print("Enter your Username/Email: ");
+                String usernameOrEmail = sc.next();
+                System.out.print("Enter your Password: ");
+                String password = sc.next();
+                Account account = fawryScreen.loginButton(usernameOrEmail, password);
+                if(account != null){
+                    while (account.notifications.size() > 0){
+                        System.out.println(account.notifications.get(0));
+                        account.notifications.remove(0);
                     }
-                    // If logged in as a normal user
-                    else {
-                        System.out.println(fawryScreen.loginButton(client));
-                        while (true) {
-                            System.out.println("1-Search");
-                            System.out.println("2-Pay");
-                            System.out.println("3-Add Credit Card");
-                            System.out.println("4-Add Funds");
-                            System.out.println("5-Send Refund Request");
-                            System.out.println("6-Check Discounts");
-                            System.out.println("7-Sign Out");
-                            choice = sc.nextInt();
-                            if (choice == 7) {
-                                break;
-                            }
+                    while (choice == 1){
+                        boolean sign = true;
+                        if(account instanceof Client){
+                            Client client = (Client) account;
+                            int clientChoice = menuDisplay.ClientMenu();
                             // Search
-                            if (choice == 1) {
-                                System.out.println("1-Mobile Service");
-                                System.out.println("2-Internet Service");
-                                System.out.println("3-Landline Service");
-                                System.out.println("4-Donation Service");
-                                choice = sc.nextInt();
-                                if (choice == 1) {
-                                    System.out.print("Enter your desired category in Mobile Service:");
+                            if (clientChoice == 1) {
+                                int searchChoice = menuDisplay.searchMenu();
+                                if (searchChoice == 1) {
+                                    System.out.print("Enter your desired category in Mobile Service: ");
                                     String word = sc.next();
                                     fawryScreen.searchMobileServiceButton(word);
-                                } else if (choice == 2) {
-                                    System.out.print("Enter your desired category in Internet Service:");
+                                } else if (searchChoice == 2) {
+                                    System.out.print("Enter your desired category in Internet Service: ");
                                     String word = sc.next();
                                     fawryScreen.searchInternetServiceButton(word);
-                                } else if (choice == 3) {
-                                    System.out.print("Enter your desired category in Landline Service:");
+                                } else if (searchChoice == 3) {
+                                    System.out.print("Enter your desired category in Landline Service: ");
                                     String word = sc.next();
                                     fawryScreen.searchLandlineServiceButton(word);
-                                } else if (choice == 4) {
-                                    System.out.print("Enter your desired category in Donation Service:");
+                                } else if (searchChoice == 4) {
+                                    System.out.print("Enter your desired category in Donation Service: ");
                                     String word = sc.next();
                                     fawryScreen.searchDonationServiceButton(word);
                                 }
-
                             }
+
                             // Pay
-                            else if (choice == 2) {
-                                System.out.println("1-Vodafone");
-                                System.out.println("2-Etisalat");
-                                System.out.println("3-We");
-                                System.out.println("4-Orange");
-                                System.out.println("5-Monthly Receipt");
-                                System.out.println("6-Quarter Receipt");
-                                System.out.println("7-NGOs");
-                                System.out.println("8-Cancer Hospitals");
-                                System.out.println("9-Schools");
-                                choice = sc.nextInt();
-                                if (choice == 1) {
-                                    System.out.println("1-Pay for Mobile Service");
-                                    System.out.println("2-Pay for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-                                        Service service = new Vodafone("Mobile Service");
+                            while (clientChoice == 2) {
+                                int payChoice = menuDisplay.ServiceMenu();
+                                if(payChoice == 10){
+                                    clientChoice = -1;
+                                    break;
+                                }
+                                while (payChoice == 1) {
+                                    int payChoiceService = menuDisplay.payServiceMenu();
+                                    if (payChoiceService == 1) {
                                         System.out.print("Enter the amount you will pay:");
-                                        double amount = sc.nextDouble();
+                                        double amount = menuDisplay.checkAmount();
                                         System.out.print("Enter the way you will pay by:");
-                                        int way = sc.nextInt();
-                                        fawryScreen.payButtonMobileService(client, service, amount, way);
-                                    } else if (choice == 2) {
-                                        Service service = new Vodafone("Internet Service");
+                                        int way = menuDisplay.displayWayPayment(fawryScreen, vodafone);
+                                        way--;
+                                        if(way == vodafone.getWaysOfPayment().size()){
+                                            break;
+                                        }
+                                        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, amount, way));
+                                    } else if (payChoiceService == 2) {
                                         System.out.print("Enter the amount you will pay:");
-                                        double amount = sc.nextDouble();
+                                        double amount = menuDisplay.checkAmount();
                                         System.out.print("Enter the way you will pay by:");
-                                        int way = sc.nextInt();
-                                        fawryScreen.payButtonInternetService(client, service, amount, way);
+                                        int way = menuDisplay.displayWayPayment(fawryScreen, vodafone);
+                                        way--;
+                                        if(way == vodafone.getWaysOfPayment().size()){
+                                            break;
+                                        }
+                                        System.out.println(fawryScreen.payButtonInternetService(client, vodafone, amount, way));
                                     }
-                                } else if (choice == 2) {
-                                    System.out.println("1-Pay for Mobile Service");
-                                    System.out.println("2-Pay for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-                                        Service service = new Etisalat("Mobile Service");
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = sc.nextDouble();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = sc.nextInt();
-                                        fawryScreen.payButtonMobileService(client, service, amount, way);
-                                    } else if (choice == 2) {
-                                        Service service = new Etisalat("Internet Service");
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = sc.nextDouble();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = sc.nextInt();
-                                        fawryScreen.payButtonInternetService(client, service, amount, way);
+                                    else{
+                                        break;
                                     }
-                                } else if (choice == 3) {
-                                    System.out.println("1-Pay for Mobile Service");
-                                    System.out.println("2-Pay for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-                                        Service service = new We("Mobile Service");
+                                }
+                                while (payChoice == 2) {
+                                    int payChoiceService = menuDisplay.payServiceMenu();
+                                    if (payChoiceService == 1) {
                                         System.out.print("Enter the amount you will pay:");
-                                        double amount = sc.nextDouble();
+                                        double amount = menuDisplay.checkAmount();
                                         System.out.print("Enter the way you will pay by:");
-                                        int way = sc.nextInt();
-                                        fawryScreen.payButtonMobileService(client, service, amount, way);
-                                    } else if (choice == 2) {
-                                        Service service = new We("Internet Service");
+                                        int way = menuDisplay.displayWayPayment(fawryScreen, etisalat);
+                                        way--;
+                                        if(way == etisalat.getWaysOfPayment().size()){
+                                            break;
+                                        }
+                                        System.out.println(fawryScreen.payButtonMobileService(client, etisalat, amount, way));
+                                    } else if (payChoiceService == 2) {
                                         System.out.print("Enter the amount you will pay:");
-                                        double amount = sc.nextDouble();
+                                        double amount = menuDisplay.checkAmount();
                                         System.out.print("Enter the way you will pay by:");
-                                        int way = sc.nextInt();
-                                        fawryScreen.payButtonInternetService(client, service, amount, way);
+                                        int way = menuDisplay.displayWayPayment(fawryScreen, etisalat);
+                                        way--;
+                                        if(way == etisalat.getWaysOfPayment().size()){
+                                            break;
+                                        }
+                                        System.out.println(fawryScreen.payButtonInternetService(client, etisalat, amount, way));
                                     }
-                                } else if (choice == 4) {
-                                    System.out.println("1-Pay for Mobile Service");
-                                    System.out.println("2-Pay for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-                                        Service service = new Orange("Mobile Service");
+                                    else{
+                                        break;
+                                    }
+                                }
+                                while (payChoice == 3) {
+                                    int payChoiceService = menuDisplay.payServiceMenu();
+                                    if (payChoiceService == 1) {
                                         System.out.print("Enter the amount you will pay:");
-                                        double amount = sc.nextDouble();
+                                        double amount = menuDisplay.checkAmount();
                                         System.out.print("Enter the way you will pay by:");
-                                        int way = sc.nextInt();
-                                        fawryScreen.payButtonMobileService(client, service, amount, way);
-                                    } else if (choice == 2) {
-                                        Service service = new Orange("Internet Service");
+                                        int way = menuDisplay.displayWayPayment(fawryScreen, we);
+                                        way--;
+                                        if(way == we.getWaysOfPayment().size()){
+                                            break;
+                                        }
+                                        System.out.println(fawryScreen.payButtonMobileService(client, we, amount, way));
+                                    } else if (payChoiceService == 2) {
                                         System.out.print("Enter the amount you will pay:");
-                                        double amount = sc.nextDouble();
+                                        double amount = menuDisplay.checkAmount();
                                         System.out.print("Enter the way you will pay by:");
-                                        int way = sc.nextInt();
-                                        fawryScreen.payButtonInternetService(client, service, amount, way);
+                                        int way = menuDisplay.displayWayPayment(fawryScreen, we);
+                                        way--;
+                                        if(way == we.getWaysOfPayment().size()){
+                                            break;
+                                        }
+                                        System.out.println(fawryScreen.payButtonInternetService(client, we, amount, way));
+                                    }
+                                    else{
+                                        break;
+                                    }
+                                }
+                                while (payChoice == 4) {
+                                    int payChoiceService = menuDisplay.payServiceMenu();
+                                    if (payChoiceService == 1) {
+                                        System.out.print("Enter the amount you will pay:");
+                                        double amount = menuDisplay.checkAmount();
+                                        System.out.print("Enter the way you will pay by:");
+                                        int way = menuDisplay.displayWayPayment(fawryScreen, orange);
+                                        way--;
+                                        if(way == orange.getWaysOfPayment().size()){
+                                            break;
+                                        }
+                                        System.out.println(fawryScreen.payButtonMobileService(client, orange, amount, way));
+                                    } else if (payChoiceService == 2) {
+                                        System.out.print("Enter the amount you will pay:");
+                                        double amount = menuDisplay.checkAmount();
+                                        System.out.print("Enter the way you will pay by:");
+                                        int way = menuDisplay.displayWayPayment(fawryScreen, orange);
+                                        way--;
+                                        if(way == orange.getWaysOfPayment().size()){
+                                            break;
+                                        }
+                                        System.out.println(fawryScreen.payButtonInternetService(client, orange, amount, way));
+                                    }
+                                    else {
+                                        break;
                                     }
                                 }
                                 // Monthly Receipt
-                                else if (choice == 5) {
-                                    System.out.println("1-You are currently paying for Landline Service");
-                                    Service service = new MonthlyReceipt("Landline Service");
+                                if (payChoice == 5) {
                                     System.out.print("Enter the amount you will pay:");
-                                    double amount = sc.nextDouble();
+                                    double amount = menuDisplay.checkAmount();
                                     System.out.print("Enter the way you will pay by:");
-                                    int way = sc.nextInt();
-                                    fawryScreen.payButtonLandlineService(client, service, amount, way);
+                                    int way = menuDisplay.displayWayPayment(fawryScreen, monthlyReceipt);
+                                    way--;
+                                    if(way == monthlyReceipt.getWaysOfPayment().size()){
+                                        break;
+                                    }
+                                    System.out.println(fawryScreen.payButtonLandlineService(client, monthlyReceipt, amount, way));
 
                                 }
                                 // Quarter Receipt
-                                else if (choice == 6) {
-                                    System.out.println("1-You are currently paying for Landline Service");
-                                    Service service = new QuarterReceipt("Landline Service");
+                                else if (payChoice == 6) {
                                     System.out.print("Enter the amount you will pay:");
-                                    double amount = sc.nextDouble();
+                                    double amount = menuDisplay.checkAmount();
                                     System.out.print("Enter the way you will pay by:");
-                                    int way = sc.nextInt();
-                                    fawryScreen.payButtonLandlineService(client, service, amount, way);
+                                    int way = menuDisplay.displayWayPayment(fawryScreen, quarterReceipt);
+                                    way--;
+                                    if(way == quarterReceipt.getWaysOfPayment().size()){
+                                        break;
+                                    }
+                                    System.out.println(fawryScreen.payButtonLandlineService(client, quarterReceipt, amount, way));
                                 }
                                 // NGOs
-                                else if (choice == 7) {
-                                    System.out.println("1-You are currently paying for Donation Service");
-                                    Service service = new NGO("Donation Service");
+                                else if (payChoice == 7) {
                                     System.out.print("Enter the amount you will pay:");
-                                    double amount = sc.nextDouble();
+                                    double amount = menuDisplay.checkAmount();
                                     System.out.print("Enter the way you will pay by:");
-                                    int way = sc.nextInt();
-                                    fawryScreen.payButtonDonationService(client, service, amount, way);
+                                    int way = menuDisplay.displayWayPayment(fawryScreen, ngo);
+                                    way--;
+                                    if(way == ngo.getWaysOfPayment().size()){
+                                        break;
+                                    }
+                                    System.out.println(fawryScreen.payButtonMobileService(client, ngo, amount, way));
                                 }
                                 // Cancer Hospital
-                                else if (choice == 8) {
-                                    System.out.println("1-You are currently paying for Donation Service");
-                                    Service service = new CancerHospital("Donation Service");
+                                else if (payChoice == 8) {
                                     System.out.print("Enter the amount you will pay:");
-                                    double amount = sc.nextDouble();
+                                    double amount = menuDisplay.checkAmount();
                                     System.out.print("Enter the way you will pay by:");
-                                    int way = sc.nextInt();
-                                    fawryScreen.payButtonDonationService(client, service, amount, way);
+                                    int way = menuDisplay.displayWayPayment(fawryScreen, cancerHospital);
+                                    way--;
+                                    if(way == cancerHospital.getWaysOfPayment().size()){
+                                        break;
+                                    }
+                                    System.out.println(fawryScreen.payButtonMobileService(client, cancerHospital, amount, way));
                                 }
                                 // Schools
-                                else if (choice == 9) {
-                                    System.out.println("1-You are currently paying for Donation Service");
-                                    Service service = new School("Donation Service");
+                                else if (payChoice == 9) {
                                     System.out.print("Enter the amount you will pay:");
-                                    double amount = sc.nextDouble();
+                                    double amount = menuDisplay.checkAmount();
                                     System.out.print("Enter the way you will pay by:");
-                                    int way = sc.nextInt();
-                                    fawryScreen.payButtonDonationService(client, service, amount, way);
+                                    int way = menuDisplay.displayWayPayment(fawryScreen, school);
+                                    way--;
+                                    if(way == school.getWaysOfPayment().size()){
+                                        break;
+                                    }
+                                    System.out.println(fawryScreen.payButtonMobileService(client, school, amount, way));
                                 }
                             }
+
                             // Add Credit Card
-                            else if(choice == 3){
-                                System.out.print("Enter your credit card number: ");
-                                String CardNumber= sc.next();
-                                System.out.print("Enter the amount: ");
-                                double amount= sc.nextDouble();
+                            if (clientChoice == 3){
+                                System.out.println("Enter your credit card number: ");
+                                String CardNumber= menuDisplay.checkCard();
+                                System.out.println("Enter the amount: ");
+                                double amount= menuDisplay.checkAmount();
                                 CreditCard creditCard = new CreditCard(CardNumber,amount);
-//                                fawryScreen.addCreditCard(client,creditCard);
                                 client.setCreditCard(creditCard);
                                 System.out.println(fawryScreen.addCreditCard(client,creditCard) );
-                                System.out.println( client.creditCard.getAmount() );
-
                             }
 
                             //Add Funds
-                            else if(choice == 4){
+                            else if (clientChoice == 4){
                                 System.out.print("Enter the desired amount: ");
-                                double amount= sc.nextDouble();
-//                                fawryScreen.addFunds(client,amount);
+                                double amount= menuDisplay.checkAmount();
                                 System.out.println( fawryScreen.addFunds(client,amount) );
                                 System.out.println( "Wallet : " + client.getWallet() );
-                                System.out.println("Amount in cc : " + client.creditCard.getAmount());
+                                System.out.println("Amount in Credit Card : " + client.creditCard.getAmount());
 
                             }
 
                             //Send Refund Request
-                            else if(choice == 5){
-                                Transaction transaction;
-                                Service service = null;
-                                System.out.println("1-Vodafone");
-                                System.out.println("2-Etisalat");
-                                System.out.println("3-We");
-                                System.out.println("4-Orange");
-                                System.out.println("5-Monthly Receipt");
-                                System.out.println("6-Quarter Receipt");
-                                System.out.println("7-NGOs");
-                                System.out.println("8-Cancer Hospitals");
-                                System.out.println("9-Schools");
-                                choice = sc.nextInt();
-                                if (choice == 1) {
-                                    System.out.println("1-Send Refund Request for Mobile Service");
-                                    System.out.println("2-Send Refund Request for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-                                        
-                                    } else if (choice == 2) {
-                                        
+                            else if(clientChoice == 5){
+                                if(client.getTransactions().size() == 0){
+                                    System.out.println("There is no transaction");
+                                }
+                                else {
+                                    System.out.println("Choose one of your transactions");
+                                    fawryScreen.displayClientTransactions(client);
+                                    int num = menuDisplay.sendRequest(client);
+                                    num--;
+                                    if (num == client.getTransactions().size()) {
+                                        continue;
                                     }
-                                    service = new Vodafone("Vodafone");
-                                    
-                                    
-                                } else if (choice == 2) {
-                                    System.out.println("1-Send Refund Request for Mobile Service");
-                                    System.out.println("2-Send Refund Request for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-
-                                    } else if (choice == 2) {
-
-                                    }
-                                    service = new Etisalat("Etisalat");
-                                } else if (choice == 3) {
-                                    System.out.println("1-Send Refund Request for Mobile Service");
-                                    System.out.println("2-Send Refund Request for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-
-                                    } else if (choice == 2) {
-
-                                    }
-                                    service = new We("We");
-                                } else if (choice == 4) {
-                                    System.out.println("1-Send Refund Request for Mobile Service");
-                                    System.out.println("2-Send Refund Request for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-
-                                    } else if (choice == 2) {
-
-                                    }
-                                    service = new Orange("Orange");
+                                    Transaction transaction = client.getTransactions().get(num);
+                                    fawryScreen.addRefundRequest(admin, transaction);
                                 }
-                                // Monthly Receipt
-                                else if (choice == 5) {
-                                    System.out.println("1-You are currently paying for Landline Service");
-                                    service = new MonthlyReceipt("Landline Service");
-
-                                }
-                                // Quarter Receipt
-                                else if (choice == 6) {
-                                    System.out.println("1-You are currently paying for Landline Service");
-                                    service = new QuarterReceipt("Landline Service");
-                                }
-                                // NGOs
-                                else if (choice == 7) {
-                                    System.out.println("1-You are currently paying for Donation Service");
-                                    service = new NGO("Donation Service");
-                                }
-                                // Cancer Hospital
-                                else if (choice == 8) {
-                                    System.out.println("1-You are currently paying for Donation Service");
-                                    service = new CancerHospital("Donation Service");
-                                }
-                                // Schools
-                                else if (choice == 9) {
-                                    System.out.println("1-You are currently paying for Donation Service");
-                                    service = new School("Donation Service");
-                                }
-                                System.out.print("Enter the amount you will pay:");
-                                double amount = sc.nextDouble();
-                                System.out.print("Enter the way you will pay by:");
-                                int way = sc.nextInt();
-                                transaction = new Transaction(client , service , amount , way );
-                                fawryScreen.addRefundRequest(transaction);
                             }
+
 
                             //Check Discounts
-                            else if(choice == 6)
-                            {
+                            else if(clientChoice == 6) {
                                 Service service = null;
-                                System.out.println("1-Vodafone");
-                                System.out.println("2-Etisalat");
-                                System.out.println("3-We");
-                                System.out.println("4-Orange");
-                                System.out.println("5-Monthly Receipt");
-                                System.out.println("6-Quarter Receipt");
-                                System.out.println("7-NGOs");
-                                System.out.println("8-Cancer Hospitals");
-                                System.out.println("9-Schools");
-                                choice = sc.nextInt();
-                                if (choice == 1) {
-                                    System.out.println("1-Check Discounts for Mobile Service");
-                                    System.out.println("2-Check Discounts for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
+                                int serviceChoice = menuDisplay.ServiceMenu();
+                                if (serviceChoice == 1) {
+                                    service = vodafone;
+                                }
+                                else if (serviceChoice == 2) {
+                                    service = etisalat;
+                                }
 
-                                    } else if (choice == 2) {
-
-                                    }
-                                    service = new Vodafone("Vodafone");
-
-
-                                } else if (choice == 2) {
-                                    System.out.println("1-Check Discounts for Mobile Service");
-                                    System.out.println("2-Check Discounts for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-
-                                    } else if (choice == 2) {
-
-                                    }
-                                    service = new Etisalat("Etisalat");
-                                } else if (choice == 3) {
-                                    System.out.println("1-Check Discounts for Mobile Service");
-                                    System.out.println("2-Check Discounts for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-
-                                    } else if (choice == 2) {
-
-                                    }
-                                    service = new We("We");
-                                } else if (choice == 4) {
-                                    System.out.println("1-Check Discounts for Mobile Service");
-                                    System.out.println("2-Check Discounts for Internet Service");
-                                    choice = sc.nextInt();
-                                    if (choice == 1) {
-
-                                    } else if (choice == 2) {
-
-                                    }
-                                    service = new Orange("Orange");
+                                else if (serviceChoice == 3) {
+                                    service = we;
+                                }
+                                else if (serviceChoice == 4) {
+                                    service = orange;
                                 }
                                 // Monthly Receipt
-                                else if (choice == 5) {
-                                    System.out.println("1-You are checking discounts for Landline Service");
-                                    service = new MonthlyReceipt("Landline Service");
-
+                                else if (serviceChoice == 5) {
+                                    service = monthlyReceipt;
                                 }
                                 // Quarter Receipt
-                                else if (choice == 6) {
-                                    System.out.println("1-You are checking discounts for Landline Service");
-                                    service = new QuarterReceipt("Landline Service");
+                                else if (serviceChoice == 6) {
+                                    service = quarterReceipt;
                                 }
                                 // NGOs
-                                else if (choice == 7) {
-                                    System.out.println("1-You are checking discounts for Donation Service");
-                                    service = new NGO("Donation Service");
+                                else if (serviceChoice == 7) {
+                                    service = ngo;
                                 }
                                 // Cancer Hospital
-                                else if (choice == 8) {
-                                    System.out.println("1-You are checking discounts for Donation Service");
-                                    service = new CancerHospital("Donation Service");
+                                else if (serviceChoice == 8) {
+                                    service = cancerHospital;
                                 }
                                 // Schools
-                                else if (choice == 9) {
-                                    System.out.println("1-You are checking discounts for Donation Service");
-                                    service = new School("Donation Service");
+                                else if (serviceChoice == 9) {
+                                    service = school;
                                 }
-                                fawryScreen.checkDiscountAvailable(service);
+                                else{
+                                    continue;
+                                }
+                                fawryScreen.showAvailableDiscounts(service);
                             }
-
-
+                            else if(clientChoice == 7){
+                                fawryScreen.display(client);
+                            }
+                            else if(clientChoice == 8){
+                                exit = false;
+                                break;
+                            }
                         }
+                        else{
+                            int adminChoice = menuDisplay.adminMenu();
+                            while (adminChoice == 1){
+                                int addDiscountChoice = menuDisplay.discountMenu();
+                                if(addDiscountChoice == 1){
+                                    System.out.println("Which service do you want to add discount for: ");
+                                    Service service = null;
+                                    int serviceChoice = menuDisplay.ServiceMenu();
+                                    if (serviceChoice == 1) {
+                                        service = vodafone;
+                                    }
+                                    else if (serviceChoice == 2) {
+                                        service = etisalat;
+                                    }
 
+                                    else if (serviceChoice == 3) {
+                                        service = we;
+                                    }
+                                    else if (serviceChoice == 4) {
+                                        service = orange;
+                                    }
+                                    // Monthly Receipt
+                                    else if (serviceChoice == 5) {
+                                        service = monthlyReceipt;
+                                    }
+                                    // Quarter Receipt
+                                    else if (serviceChoice == 6) {
+                                        service = quarterReceipt;
+                                    }
+                                    // NGOs
+                                    else if (serviceChoice == 7) {
+                                        service = ngo;
+                                    }
+                                    // Cancer Hospital
+                                    else if (serviceChoice == 8) {
+                                        service = cancerHospital;
+                                    }
+                                    // Schools
+                                    else if (serviceChoice == 9) {
+                                        service = school;
+                                    }
+                                    else{
+                                        break;
+                                    }
+                                    System.out.println("How much percentage do you want to add: ");
+                                    double percentage = menuDisplay.checkAmount();
+                                    OverallDiscount overallDiscount = new OverallDiscount(service, percentage);
+                                    System.out.println(fawryScreen.addOverallDiscount(overallDiscount));
+                                }
+                                else if(addDiscountChoice == 2){
+                                    System.out.println("Which Category:");
+                                    int category = menuDisplay.ServiceCategoyMenu();
+                                    Service service = null;
+                                    if(category == 1 || category == 2){
+                                        System.out.println("Which service do you want to add discount for: ");
+                                        int serviceChoice = menuDisplay.MobileMenuService();
+                                        if (serviceChoice == 1) {
+                                            service = vodafone;
+                                        }
+                                        else if (serviceChoice == 2) {
+                                            service = etisalat;
+                                        }
 
+                                        else if (serviceChoice == 3) {
+                                            service = we;
+                                        }
+                                        else if (serviceChoice == 4) {
+                                            service = orange;
+                                        }
+                                        else if(serviceChoice == 5){
+                                            break;
+                                        }
+                                    }
+                                    else if(category == 3){
+                                        System.out.println("Which service do you want to add discount for: ");
+                                        int serviceChoice = menuDisplay.landlineenuService();
+                                        // Monthly Receipt
+                                        if (serviceChoice == 1) {
+                                            service = monthlyReceipt;
+                                        }
+                                        // Quarter Receipt
+                                        else if (serviceChoice == 2) {
+                                            service = quarterReceipt;
+                                        }
+                                        else if(serviceChoice == 3){
+                                            break;
+                                        }
+                                    }
+                                    else if(category == 4){
+                                        System.out.println("Which service do you want to add discount for: ");
+                                        // NGOs
+                                        int serviceChoice = menuDisplay.DonationMenuService();
+                                        if (serviceChoice == 1) {
+                                            service = ngo;
+                                        }
+                                        // Cancer Hospital
+                                        else if (serviceChoice == 2) {
+                                            service = cancerHospital;
+                                        }
+                                        // Schools
+                                        else if (serviceChoice == 3) {
+                                            service = school;
+                                        }
+                                        else if(serviceChoice == 4){
+                                            break;
+                                        }
+                                    }
+                                    else{
+                                        break;
+                                    }
+                                    System.out.println("How much percentage do you want to add: ");
+                                    double percentage = menuDisplay.checkAmount();
+                                    SpecificDiscount specificDiscount = new SpecificDiscount(service, percentage);
+                                    if(category == 1){
+                                        System.out.println(fawryScreen.addMobileServiceDiscount(specificDiscount));
+                                    }
+                                    else if(category == 2){
+                                        System.out.println(fawryScreen.addInternetServiceDiscount(specificDiscount));
+                                    }
+                                    else if(category == 3){
+                                        System.out.println(fawryScreen.addLandLineServiceDiscount(specificDiscount));
 
+                                    }
+                                    else{
+                                        System.out.println(fawryScreen.addDonationServiceDiscount(specificDiscount));
+                                    }
+                                }
+                                else{
+                                    break;
+                                }
+                            }
+                            if (adminChoice == 2){
+                                fawryScreen.listAllRefundRequest();
+                                if(database.refunds.size() == 0){
+                                    continue;
+                                }
+                                System.out.println("Do you want to approve refund request?");
+                                System.out.println("1 for YES, 0 for NO");
+                                int no = sc.nextInt();
+                                while (no > 1 || no < 0){
+                                    System.out.println("Please enter a valid number 0 or 1");
+                                    no = sc.nextInt();
+                                }
+                                if(no == 0){
+                                    continue;
+                                }
+                                System.out.println("Which index of refund request: ");
+                                int index = sc.nextInt();
+                                while (index > database.refunds.size() || index < 1){
+                                    int val = database.refunds.size();
+                                    val--;
+                                    System.out.println("Please enter a valid number between 0 to " + val);
+                                    index = sc.nextInt();
+                                }
+                                System.out.println("Do you accept this refund request: ");
+                                System.out.println("1 for YES, 0 for NO");
+                                no = sc.nextInt();
+                                while (no > 1 || no < 0){
+                                    System.out.println("Please enter a valid number 0 or 1");
+                                    no = sc.nextInt();
+                                }
+                                boolean accept = false;
+                                if(no == 1){
+                                    accept = true;
+                                }
+                                index--;
+                                fawryScreen.acceptRefundRequestButton(accept, database.refunds.get(index));
+                            }
+                            else if(adminChoice == 3){
+                                exit = false;
+                                break;
+                            }
+                        }
+                        System.out.println("\n");
                     }
-                //}
-//                 else if (choice == 2) {
-//                    System.out.print("Enter a Username: ");
-//                    String username = sc.next();
-//                    System.out.print("Enter an Email: ");
-//                    String email = sc.next();
-//                    System.out.print("Enter a Password: ");
-//                    String password = sc.next();
-//                    System.out.print("Enter a wallet balance: ");
-//                    double wallet = sc.nextDouble();
-//                    Client client = new Client(username, email, password, wallet);
-//                    Database database = new Database();
-//                    FawryScreen fawryScreen = new FawryScreen(database);
-//                    fawryScreen.signUpButton(client);
-//                    System.out.println(fawryScreen.signUpButton(client));
-//
-//                    System.out.print("Enter your Username: ");
-//                    username = sc.next();
-//                    System.out.print("Enter your Email: ");
-//                    email = sc.next();
-//                    System.out.print("Enter your Password: ");
-//                    password = sc.next();
-//                    System.out.print("Enter your current wallet balance: ");
-//                    wallet = sc.nextDouble();
-//                    //client = new Client(username, email, password, wallet);
-//                    System.out.println(fawryScreen.loginButton(client));
-//                }
+                }
+                else{
+                    System.out.println("Do you want to go Main menu ?");
+                    System.out.println("1 for YES, 0 for NO");
+                    int back = sc.nextInt();
+                    while (back > 1 || back < 0){
+                        System.out.println("Please enter a valid number 0 or 1");
+                        back = sc.nextInt();
+                    }
+                    if(back == 1){
+                        choice = -1;
+                        break;
+                    }
+                }
+            }
+            while (choice == 2){
+                System.out.print("Enter a Username: ");
+                String username = sc.next();
+                System.out.print("Enter an Email: ");
+                String email = sc.next();
+                System.out.print("Enter a Password: ");
+                String password = sc.next();
+                System.out.print("Enter a wallet balance: ");
+                double wallet = menuDisplay.checkAmount();
+                Client client = new Client(username, email, password, wallet);
+                String result = fawryScreen.signUpButton(client);
+                if(result.equals("-1")){
+                    System.out.println("Can not register with this account");
+                }
+                else{
+                    System.out.println("Added Successfully");
+                }
+                break;
+            }
+            if(choice == 3){
+                System.out.println("Thank you using our system");
+                break;
             }
         }
-
-
-//        Database database = new Database();
-//        FawryScreen fawryScreen = new FawryScreen(database);
-//        fawryScreen.displayAdminMenu();
-//        Client client = new Client("Medhat", "Medhat@gmail.com", "LoveMedhat", 13.5);
-//        System.out.println(fawryScreen.addClientAccountButton(client));
-//        CreditCard creditCard = new CreditCard("123456", 100);
-//        System.out.println(fawryScreen.addCreditCard(client, creditCard));
-//        System.out.println(fawryScreen.addFunds(client, 70));
-//        System.out.println(client.getCreditCard().getAmount());
-//        System.out.println(client.getWallet());
-//        CreditCard creditCard1 = new CreditCard("123456", 120);
-//        System.out.println(fawryScreen.addCreditCard(client, creditCard1));
-//        System.out.println(fawryScreen.addFunds(client, 70));
-//        System.out.println(client.getCreditCard().getAmount());
-//        System.out.println(client.getWallet());
-
-
-//        Database database = new Database();
-//        FawryScreen fawryScreen = new FawryScreen(database);
-//        Vodafone vodafone = new Vodafone("Vodafone");
-//        CreditCardMethod creditCardMethod = new CreditCardMethod(database);
-//        WalletMethod walletMethod = new WalletMethod(database);
-//        CashMethod cashMethod = new CashMethod(database);
-//        vodafone.addPaymentMethod(creditCardMethod);
-//        vodafone.addPaymentMethod(walletMethod);
-//        vodafone.addPaymentMethod(cashMethod);
-//        database.InternetServices.add(vodafone);
-//        database.mobileServices.add(vodafone);
-//        Admin admin = new Admin("admin", "admin@gmail.com", "admin");
-//        AccountController accountController = new AccountController(database);
-//        accountController.addAccount(admin);
-//        Client client = new Client("Medhat", "Medhat@gmail.com", "LoveMedhat", 100);
-//        CreditCard creditCard = new CreditCard("123456", 100);
-//        fawryScreen.addCreditCard(client, creditCard);
-//        fawryScreen.addClientAccountButton(client);
-//        fawryScreen.displayUserMenu();
-//        fawryScreen.displayAdminMenu();
-//        fawryScreen.searchInternetServiceButton("Vod");
-    //       System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
-//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
-//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
-//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 1));
-//        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, 20, 0));
-
-//        fawryScreen.displayUserMenu();
-////        fawryScreen.display(client);
-//        fawryScreen.addRefundRequest(client.getTransactions().get(0));
-//        RefundRequest refundRequest = database.refunds.get(0);
-//        fawryScreen.listAllRefundRequest();
-//        System.out.println(fawryScreen.acceptRefundRequestButton(true, refundRequest));
-//        fawryScreen.display(client);
-//        fawryScreen.display(vodafone);
-//        fawryScreen.display(client);
-//        SpecificDiscount discount = new SpecificDiscount(vodafone, 20);
-//        OverallDiscount discount1 = new OverallDiscount(vodafone, 10);
-//        fawryScreen.addMobileServiceDiscount(discount);
-//        database.overallDiscount = discount1;
-//        System.out.println(client.getWallet());
-//        double amount = fawryScreen.applyDiscountMobileServiceButton(vodafone, client, 100);
-//        System.out.println(amount);
-//        fawryScreen.payButtonMobileService(client, vodafone, amount, 1);
-//        System.out.println(client.getWallet());
-
-//
-//        double ans = discount.applyDiscount(100);
-//        OverallDiscount discount1 = new OverallDiscount(vodafone);
-//        System.out.println(ans);
-//        double ans1 = discount1.applyDiscount(ans, 10);
-//        System.out.println(ans1);
-
     }
 }

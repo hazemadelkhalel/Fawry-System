@@ -26,14 +26,14 @@ public class FawryScreen {
             }
         }
     }
-    String loginButton(Client client) {
+    Account loginButton(String usernameOrEmail, String password) {
         Authentication authentication = new Authentication(database);
-        return authentication.validateLogin(client);
+        return authentication.validateLogin(usernameOrEmail, password);
     }
 
-    String signUpButton(Client client) {
+    String signUpButton(Account account) {
         Authentication authentication = new Authentication(database);
-        return authentication.validateSignUp(client);
+        return authentication.validateSignUp(account);
     }
 
     String addAccountButton(Admin admin) {
@@ -89,6 +89,9 @@ public class FawryScreen {
         System.out.println("Username: " + client.getUsername());
         System.out.println("Email: " + client.getEmail());
         System.out.println("Wallet: " + client.getWallet());
+        displayClientTransactions(client);
+    }
+    void displayClientTransactions(Client client){
         if(client.getTransactions().size() > 0) {
             System.out.println("Transactions");
             for (int i = 0; i < client.getTransactions().size(); i++) {
@@ -98,8 +101,8 @@ public class FawryScreen {
                 System.out.println("Amount: " + client.getTransactions().get(i).getAmount());
                 System.out.println("Way of Payment: " + client.getTransactions().get(i).getService().getWaysOfPayment().get(client.getTransactions().get(i).getWayIndex()).getMethodName());
             }
+            System.out.println("-------------------------------------");
         }
-        System.out.println("-------------------------------------");
     }
     String payButtonMobileService(Client client, Service service, double amount, int wayIndex) {
         PaymentController paymentController = new PaymentController(database);
@@ -156,44 +159,69 @@ public class FawryScreen {
     }
 
     void listAllRefundRequest() {
-        System.out.println("Refund Requests");
-        for (int i = 0; i < database.refunds.size(); i++){
-            System.out.println("-------------------------------------");
-            System.out.println((i + 1) + "# Refund Request");
-            System.out.println("Service Name: " + database.refunds.get(i).transaction.getService().getServiceName());
-            System.out.println("Amount: " + database.refunds.get(i).transaction.getAmount());
-            System.out.println("Username Account: " + database.refunds.get(i).transaction.getClient().getUsername());
-        }
-    }
-    void listAllTransactionButton(Client client, Service service) {
-        RefundController refundController = new RefundController(database);
-        ArrayList<Transaction> transactions = refundController.listAllTransaction(client, service);
-        System.out.println("History of Transaction of " + service.getServiceName());
-        if(transactions.size() == 0){
-            System.out.println("There is no result");
-        }
-        else {
-            for (int i = 0; i < client.getTransactions().size(); i++) {
+        if(database.refunds.size() > 0) {
+            System.out.println("Refund Requests");
+            for (int i = 0; i < database.refunds.size(); i++) {
                 System.out.println("-------------------------------------");
-                System.out.println((i + 1) + "# Transaction");
-                System.out.println("Clinet Name: " + client.getUsername());
-                System.out.println("Service Name: " + client.getTransactions().get(i).getService().getServiceName());
-                System.out.println("Amount: " + client.getTransactions().get(i).getAmount());
-                System.out.println("Way of Payment: " + client.getTransactions().get(i).getService().getWaysOfPayment().get(client.getTransactions().get(i).getWayIndex()).getMethodName());
+                System.out.println((i + 1) + "# Refund Request");
+                System.out.println("Service Name: " + database.refunds.get(i).transaction.getService().getServiceName());
+                System.out.println("Amount: " + database.refunds.get(i).transaction.getAmount());
+                System.out.println("Username Account: " + database.refunds.get(i).transaction.getClient().getUsername());
             }
             System.out.println("-------------------------------------");
+        }
+        else{
+            System.out.println("There are no refund requests");
         }
     }
     boolean acceptRefundRequestButton(boolean acceptance, RefundRequest refundRequest) {
         RefundController refundController = new RefundController(database);
         return refundController.applyApproval(acceptance, refundRequest);
     }
-    String addRefundRequest(Transaction transaction){
+    String addRefundRequest(Admin admin, Transaction transaction){
         RefundController refundController = new RefundController(database);
-        return refundController.addRefundRequest(transaction);
+        return refundController.addRefundRequest(admin, transaction);
     }
     boolean checkDiscountAvailable(Service service){
         DiscountController discountController = new DiscountController(database);
         return discountController.checkDiscountAvailable(service);
+    }
+    void showAvailableDiscounts(Service service){
+        MobileServiceController mobileServiceController = new MobileServiceController(database);
+        InternetServiceController internetServiceController = new InternetServiceController(database);
+        LandlineServiceController landlineServiceController = new LandlineServiceController(database);
+        DonationServiceController donationServiceController = new DonationServiceController(database);
+        boolean checkMobileService = mobileServiceController.checkDiscountMobileServiceExistance();
+        boolean checkInternetService = internetServiceController.checkDiscountInternetServiceExistance();
+        boolean checkLandlineService = landlineServiceController.checkDiscountLandlineServiceExistance();
+        boolean checkDonationService = donationServiceController.checkDiscountDonationServiceExistance();
+        boolean printed = false;
+        if(checkMobileService){
+            printed = true;
+            System.out.println("Mobile Service");
+            System.out.println("Service Name: " + service.getServiceName());
+            System.out.println("Discount for " + database.mobileServiceDiscount.getPercentage() + "%");
+        }
+        if(checkInternetService){
+            printed = true;
+            System.out.println("Internet Service");
+            System.out.println("Service Name: " + service.getServiceName());
+            System.out.println("Discount for " + database.internetServiceDiscount.getPercentage() + "%");
+        }
+        if(checkLandlineService){
+            printed = true;
+            System.out.println("Landline Service");
+            System.out.println("Service Name: " + service.getServiceName());
+            System.out.println("Discount for " + database.landlineServiceDiscount.getPercentage() + "%");
+        }
+        if(checkDonationService){
+            printed = true;
+            System.out.println("Donation Service");
+            System.out.println("Service Name: " + service.getServiceName());
+            System.out.println("Discount for " + database.donationServiceDiscount.getPercentage() + "%");
+        }
+        if(!printed){
+            System.out.println("There is no discount for this service");
+        }
     }
 }

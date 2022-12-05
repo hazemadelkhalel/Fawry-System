@@ -5,9 +5,10 @@ public class RefundController extends FawryController {
         this.database = database;
     }
 
-    String addRefundRequest(Transaction transaction){
+    String addRefundRequest(Admin admin, Transaction transaction){
         RefundRequest refundRequest = new RefundRequest(transaction);
         database.refunds.add(refundRequest);
+        admin.notifications.add("New Refund Request");
         return "Added Successfully";
     }
 
