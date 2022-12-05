@@ -1,12 +1,30 @@
+import java.util.ArrayList;
 
 public class RefundController extends FawryController {
-
-    // change return type boolean
-    void checkApproval(Transaction transaction) {
-        // return admin's approval for a transaction
+    RefundController(Database database){
+        this.database = database;
     }
 
-    void listAllTransaction() {
-        // print all transaction
+    String addRefundRequest(Admin admin, Transaction transaction){
+        RefundRequest refundRequest = new RefundRequest(transaction);
+        database.refunds.add(refundRequest);
+        admin.notifications.add("New Refund Request");
+        return "Added Successfully";
+    }
+
+    boolean applyApproval(boolean acceptance, RefundRequest refundRequest) {
+        database.refunds.remove(refundRequest);
+        refundRequest.notify(acceptance);
+        return acceptance;
+    }
+
+    ArrayList<Transaction> listAllTransaction(Client client, Service service) {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        for(int i = 0; i < client.getTransactions().size(); i++){
+            if(client.getTransactions().get(i).getService().getServiceName().equals(service.getServiceName())){
+                transactions.add(client.getTransactions().get(i));
+            }
+        }
+        return transactions;
     }
 }

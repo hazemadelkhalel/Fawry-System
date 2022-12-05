@@ -1,16 +1,22 @@
 import java.util.ArrayList;
 
-public class Account {
+abstract public class Account {
     String username, email, password;
-    ArrayList<Transaction> transactions;
+    ArrayList<String> notifications;
+    int AccountID;
 
     public String getEmail() {
         return email;
     }
 
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
+    public void setAccountID(int accountID) {
+        AccountID = accountID;
     }
+
+    public int getAccountID() {
+        return AccountID;
+    }
+
 
     public String getPassword() {
         return password;
@@ -30,5 +36,6 @@ public class Account {
     public void setUsername(String username) {
         this.username = username;
     }
+    abstract public void update(boolean acceptance, Transaction transaction);
 
 }

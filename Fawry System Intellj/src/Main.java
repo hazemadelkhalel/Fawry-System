@@ -80,7 +80,7 @@ public class Main {
         database.donationServices.add(ngo);
 
         Admin admin = new Admin("admin", "Admin@gmail.com", "admin");
-        Client c = new Client("a", "a@gmail.com", "a", 120);
+        Client c = new Client("client", "client@gmail.com", "client", 120);
         database.accounts.add(admin);
         database.accounts.add(c);
 

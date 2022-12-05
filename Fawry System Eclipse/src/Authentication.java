@@ -1,23 +1,29 @@
 import java.util.Map;
 
-public class Authentication {
-    Database database;
-    Authentication(){
-        database = new Database();
+public class Authentication extends FawryController{
+    Authentication(Database database){
+        this.database = database;
     }
-    void checkAccountLogin(Account client1, Client client2){
-       
+
+    Account validateLogin(String usernameOrEmail, String password) {
+        AccountController accountController = new AccountController(database);
+        for(int i = 0; i < database.accounts.size(); i++){
+            if(accountController.checkAccountLogin(database.accounts.get(i), usernameOrEmail, password)){
+                return database.accounts.get(i);
+            }
+        }
+        // -1 represent there is no user with this information in system
+        return null;
     }
-    void checkAccountSignUp(Account client1, Client client2){
-      
-    }
-    void validateLogin(Client client) {
-       
-    }
-    void validateSignUp(Client client) {
-        
-    }
-    void validateCreditCard(CreditCard creditCard) {
-        // check if it was correct or not
+    String validateSignUp(Account account) {
+        AccountController accountController = new AccountController(database);
+        for(int i = 0; i < database.accounts.size(); i++){
+            if(accountController.checkAccountSignUp(database.accounts.get(i), account)){
+                return "-1";
+            }
+        }
+        database.accounts.add(account);
+        // -1 represent there is no user with this information in system
+        return "OK";
     }
 }
