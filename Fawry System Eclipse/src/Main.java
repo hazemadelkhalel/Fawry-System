@@ -139,173 +139,75 @@ public class Main {
                                     break;
                                 }
                                 while (payChoice == 1) {
-                                    int payChoiceService = menuDisplay.payServiceMenu();
-                                    if (payChoiceService == 1) {
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = menuDisplay.checkAmount();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = menuDisplay.displayWayPayment(fawryScreen, vodafone);
-                                        way--;
-                                        if(way == vodafone.getWaysOfPayment().size()){
+                                    System.out.println("Which Category:");
+                                    int category = menuDisplay.ServiceCategoyMenu();
+                                    Service service = null;
+                                    if (category == 1 || category == 2) {
+                                        int serviceChoice = menuDisplay.MobileMenuService();
+                                        if (serviceChoice == 1) {
+                                            service = vodafone;
+                                        } else if (serviceChoice == 2) {
+                                            service = etisalat;
+                                        } else if (serviceChoice == 3) {
+                                            service = we;
+                                        } else if (serviceChoice == 4) {
+                                            service = orange;
+                                        } else if (serviceChoice == 5) {
                                             break;
                                         }
-                                        System.out.println(fawryScreen.payButtonMobileService(client, vodafone, amount, way));
-                                    } else if (payChoiceService == 2) {
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = menuDisplay.checkAmount();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = menuDisplay.displayWayPayment(fawryScreen, vodafone);
-                                        way--;
-                                        if(way == vodafone.getWaysOfPayment().size()){
+                                    } else if (category == 3) {
+                                        int serviceChoice = menuDisplay.landlineenuService();
+                                        // Monthly Receipt
+                                        if (serviceChoice == 1) {
+                                            service = monthlyReceipt;
+                                        }
+                                        // Quarter Receipt
+                                        else if (serviceChoice == 2) {
+                                            service = quarterReceipt;
+                                        } else if (serviceChoice == 3) {
                                             break;
                                         }
-                                        System.out.println(fawryScreen.payButtonInternetService(client, vodafone, amount, way));
+                                    } else if (category == 4) {
+                                        // NGOs
+                                        int serviceChoice = menuDisplay.DonationMenuService();
+                                        if (serviceChoice == 1) {
+                                            service = ngo;
+                                        }
+                                        // Cancer Hospital
+                                        else if (serviceChoice == 2) {
+                                            service = cancerHospital;
+                                        }
+                                        // Schools
+                                        else if (serviceChoice == 3) {
+                                            service = school;
+                                        } else if (serviceChoice == 4) {
+                                            break;
+                                        }
+                                    } else {
+                                        break;
+                                    }
+                                    System.out.print("Enter the amount you will pay:");
+                                    double amount = menuDisplay.checkAmount();
+                                    System.out.print("Enter the way you will pay by:");
+                                    int way = menuDisplay.displayWayPayment(fawryScreen, service);
+                                    way--;
+                                    assert service != null;
+                                    if (way == service.getWaysOfPayment().size()) {
+                                        break;
+                                    }
+                                    if(category == 1){
+                                        amount = fawryScreen.applyDiscountMobileServiceButton(service, client, amount);
+                                    }
+                                    else if(category == 2){
+                                        amount = fawryScreen.applyDiscountMobileServiceButton(service, client, amount);
+                                    }
+                                    else if(category == 3){
+                                        amount = fawryScreen.applyDiscountMobileServiceButton(service, client, amount);
                                     }
                                     else{
-                                        break;
+                                        amount = fawryScreen.applyDiscountMobileServiceButton(service, client, amount);
                                     }
-                                }
-                                while (payChoice == 2) {
-                                    int payChoiceService = menuDisplay.payServiceMenu();
-                                    if (payChoiceService == 1) {
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = menuDisplay.checkAmount();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = menuDisplay.displayWayPayment(fawryScreen, etisalat);
-                                        way--;
-                                        if(way == etisalat.getWaysOfPayment().size()){
-                                            break;
-                                        }
-                                        System.out.println(fawryScreen.payButtonMobileService(client, etisalat, amount, way));
-                                    } else if (payChoiceService == 2) {
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = menuDisplay.checkAmount();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = menuDisplay.displayWayPayment(fawryScreen, etisalat);
-                                        way--;
-                                        if(way == etisalat.getWaysOfPayment().size()){
-                                            break;
-                                        }
-                                        System.out.println(fawryScreen.payButtonInternetService(client, etisalat, amount, way));
-                                    }
-                                    else{
-                                        break;
-                                    }
-                                }
-                                while (payChoice == 3) {
-                                    int payChoiceService = menuDisplay.payServiceMenu();
-                                    if (payChoiceService == 1) {
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = menuDisplay.checkAmount();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = menuDisplay.displayWayPayment(fawryScreen, we);
-                                        way--;
-                                        if(way == we.getWaysOfPayment().size()){
-                                            break;
-                                        }
-                                        System.out.println(fawryScreen.payButtonMobileService(client, we, amount, way));
-                                    } else if (payChoiceService == 2) {
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = menuDisplay.checkAmount();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = menuDisplay.displayWayPayment(fawryScreen, we);
-                                        way--;
-                                        if(way == we.getWaysOfPayment().size()){
-                                            break;
-                                        }
-                                        System.out.println(fawryScreen.payButtonInternetService(client, we, amount, way));
-                                    }
-                                    else{
-                                        break;
-                                    }
-                                }
-                                while (payChoice == 4) {
-                                    int payChoiceService = menuDisplay.payServiceMenu();
-                                    if (payChoiceService == 1) {
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = menuDisplay.checkAmount();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = menuDisplay.displayWayPayment(fawryScreen, orange);
-                                        way--;
-                                        if(way == orange.getWaysOfPayment().size()){
-                                            break;
-                                        }
-                                        System.out.println(fawryScreen.payButtonMobileService(client, orange, amount, way));
-                                    } else if (payChoiceService == 2) {
-                                        System.out.print("Enter the amount you will pay:");
-                                        double amount = menuDisplay.checkAmount();
-                                        System.out.print("Enter the way you will pay by:");
-                                        int way = menuDisplay.displayWayPayment(fawryScreen, orange);
-                                        way--;
-                                        if(way == orange.getWaysOfPayment().size()){
-                                            break;
-                                        }
-                                        System.out.println(fawryScreen.payButtonInternetService(client, orange, amount, way));
-                                    }
-                                    else {
-                                        break;
-                                    }
-                                }
-                                // Monthly Receipt
-                                if (payChoice == 5) {
-                                    System.out.print("Enter the amount you will pay:");
-                                    double amount = menuDisplay.checkAmount();
-                                    System.out.print("Enter the way you will pay by:");
-                                    int way = menuDisplay.displayWayPayment(fawryScreen, monthlyReceipt);
-                                    way--;
-                                    if(way == monthlyReceipt.getWaysOfPayment().size()){
-                                        break;
-                                    }
-                                    System.out.println(fawryScreen.payButtonLandlineService(client, monthlyReceipt, amount, way));
-
-                                }
-                                // Quarter Receipt
-                                else if (payChoice == 6) {
-                                    System.out.print("Enter the amount you will pay:");
-                                    double amount = menuDisplay.checkAmount();
-                                    System.out.print("Enter the way you will pay by:");
-                                    int way = menuDisplay.displayWayPayment(fawryScreen, quarterReceipt);
-                                    way--;
-                                    if(way == quarterReceipt.getWaysOfPayment().size()){
-                                        break;
-                                    }
-                                    System.out.println(fawryScreen.payButtonLandlineService(client, quarterReceipt, amount, way));
-                                }
-                                // NGOs
-                                else if (payChoice == 7) {
-                                    System.out.print("Enter the amount you will pay:");
-                                    double amount = menuDisplay.checkAmount();
-                                    System.out.print("Enter the way you will pay by:");
-                                    int way = menuDisplay.displayWayPayment(fawryScreen, ngo);
-                                    way--;
-                                    if(way == ngo.getWaysOfPayment().size()){
-                                        break;
-                                    }
-                                    System.out.println(fawryScreen.payButtonMobileService(client, ngo, amount, way));
-                                }
-                                // Cancer Hospital
-                                else if (payChoice == 8) {
-                                    System.out.print("Enter the amount you will pay:");
-                                    double amount = menuDisplay.checkAmount();
-                                    System.out.print("Enter the way you will pay by:");
-                                    int way = menuDisplay.displayWayPayment(fawryScreen, cancerHospital);
-                                    way--;
-                                    if(way == cancerHospital.getWaysOfPayment().size()){
-                                        break;
-                                    }
-                                    System.out.println(fawryScreen.payButtonMobileService(client, cancerHospital, amount, way));
-                                }
-                                // Schools
-                                else if (payChoice == 9) {
-                                    System.out.print("Enter the amount you will pay:");
-                                    double amount = menuDisplay.checkAmount();
-                                    System.out.print("Enter the way you will pay by:");
-                                    int way = menuDisplay.displayWayPayment(fawryScreen, school);
-                                    way--;
-                                    if(way == school.getWaysOfPayment().size()){
-                                        break;
-                                    }
-                                    System.out.println(fawryScreen.payButtonMobileService(client, school, amount, way));
+                                    System.out.println(fawryScreen.payButtonMobileService(client, service, amount, way));
                                 }
                             }
 
