@@ -197,17 +197,20 @@ public class Main {
                                     }
                                     if(category == 1){
                                         amount = fawryScreen.applyDiscountMobileServiceButton(service, client, amount);
+                                        System.out.println(fawryScreen.payButtonMobileService(client, service, amount, way));
                                     }
                                     else if(category == 2){
-                                        amount = fawryScreen.applyDiscountMobileServiceButton(service, client, amount);
+                                        amount = fawryScreen.applyDiscountInternetServiceButton(service, client, amount);
+                                        System.out.println(fawryScreen.payButtonInternetService(client, service, amount, way));
                                     }
                                     else if(category == 3){
-                                        amount = fawryScreen.applyDiscountMobileServiceButton(service, client, amount);
+                                        amount = fawryScreen.applyDiscountLandlineServiceButton(service, client, amount);
+                                        System.out.println(fawryScreen.payButtonLandlineService(client, service, amount, way));
                                     }
                                     else{
-                                        amount = fawryScreen.applyDiscountMobileServiceButton(service, client, amount);
+                                        amount = fawryScreen.applyDiscountDonationServiceButton(service, client, amount);
+                                        System.out.println(fawryScreen.payButtonDonationService(client, service, amount, way));
                                     }
-                                    System.out.println(fawryScreen.payButtonMobileService(client, service, amount, way));
                                 }
                             }
 
