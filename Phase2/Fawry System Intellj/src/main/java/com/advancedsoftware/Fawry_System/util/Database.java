@@ -1,0 +1,71 @@
+package com.advancedsoftware.Fawry_System.util;
+
+import java.util.ArrayList;
+import com.advancedsoftware.Fawry_System.model.*;
+import com.advancedsoftware.Fawry_System.service.Service;
+import com.advancedsoftware.Fawry_System.refund.*;
+import com.advancedsoftware.Fawry_System.discount.*;
+public class Database {
+    public Account account;
+    public ArrayList<Account> accounts;
+    public ArrayList<Transaction> addWalletTransaction;
+    public ArrayList<Transaction> payments;
+    public ArrayList<Service> services;
+    public ArrayList<Service> mobileServices;
+    public ArrayList<Service> InternetServices;
+    public ArrayList<Service> landlineServices;
+    public ArrayList<Service> donationServices;
+    public ArrayList<RefundRequest> refunds;
+
+    public ArrayList<Discount> discounts;
+    public SpecificDiscount mobileServiceDiscount;
+    public SpecificDiscount internetServiceDiscount;
+    public SpecificDiscount landlineServiceDiscount;
+    public SpecificDiscount donationServiceDiscount;
+    public OverallDiscount overallDiscount;
+
+    public ArrayList<CreditCard> creditCards;
+    public Database() {
+        accounts = new ArrayList<>();
+        services = new ArrayList<>();
+        discounts = new ArrayList<>();
+        creditCards = new ArrayList<>();
+        mobileServices = new ArrayList<>();
+        landlineServices = new ArrayList<>();
+        InternetServices = new ArrayList<>();
+        donationServices = new ArrayList<>();
+        addWalletTransaction = new ArrayList<>();
+        refunds = new ArrayList<>();
+        mobileServiceDiscount = null;
+        internetServiceDiscount = null;
+        landlineServiceDiscount = null;
+        donationServiceDiscount = null;
+        overallDiscount = null;
+    }
+
+    public static class Pair<F, S> {
+        private F first;
+        private S second;
+
+        Pair(F first, S second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        public F getFirst() {
+            return this.first;
+        }
+
+        public S getSecond() {
+            return this.second;
+        }
+
+        public void setFirst(F first) {
+            this.first = first;
+        }
+
+        public void setSecond(S second) {
+            this.second = second;
+        }
+    }
+}
