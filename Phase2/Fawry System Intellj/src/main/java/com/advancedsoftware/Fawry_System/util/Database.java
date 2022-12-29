@@ -1,11 +1,12 @@
 package com.advancedsoftware.Fawry_System.util;
 
 import java.util.ArrayList;
-import com.advancedsoftware.Fawry_System.model.*;
-import com.advancedsoftware.Fawry_System.service.Service;
-import com.advancedsoftware.Fawry_System.refund.*;
-import com.advancedsoftware.Fawry_System.discount.*;
+import com.advancedsoftware.Fawry_System.Models.*;
+import com.advancedsoftware.Fawry_System.Services.Service;
+import com.advancedsoftware.Fawry_System.Refunds.*;
+import com.advancedsoftware.Fawry_System.Discounts.*;
 public class Database {
+    private static Database database;
     public Account account;
     public ArrayList<Account> accounts;
     public ArrayList<Transaction> addWalletTransaction;
@@ -25,7 +26,7 @@ public class Database {
     public OverallDiscount overallDiscount;
 
     public ArrayList<CreditCard> creditCards;
-    public Database() {
+    private Database() {
         accounts = new ArrayList<>();
         services = new ArrayList<>();
         discounts = new ArrayList<>();
@@ -41,6 +42,12 @@ public class Database {
         landlineServiceDiscount = null;
         donationServiceDiscount = null;
         overallDiscount = null;
+    }
+    public static Database getDatabase() {
+        if (database == null) {
+            database = new Database();
+        }
+        return database;
     }
 
     public static class Pair<F, S> {

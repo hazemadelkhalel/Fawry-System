@@ -54,8 +54,7 @@
 //
 //        database.services.add(we);
 //        database.mobileServices.add(we);
-//        database.InternetServices.add(we)
-//        ;
+//        database.InternetServices.add(we);
 //        database.services.add(orange);
 //        database.mobileServices.add(orange);
 //        database.InternetServices.add(orange);
