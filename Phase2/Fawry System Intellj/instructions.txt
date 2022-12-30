@@ -1,0 +1,19 @@
+{
+    "username" : "hazem",
+    "email" : "hazem@gmail.com",
+    "password": "123456",
+    "wallet" : 120
+}
+
+{
+    "cardNumber" : "12343412431",
+    "amount": 220
+}
+
+http://localhost:8080/admin/addDiscount/mobile/vodafone
+http://localhost:8080/client/pay/mobile/vodafone/2
+http://localhost:8080/admin/addDiscount/overall
+http://localhost:8080/client/mobile/vodafone/discounts
+http://localhost:8080/admin/refunds/1
+http://localhost:8080/client/refundrequest/1
+http://localhost:8080/profile/client
