@@ -2,18 +2,26 @@ package com.advancedsoftware.Fawry_System.APIs;
 
 import com.advancedsoftware.Fawry_System.Controllers.AccountController;
 import com.advancedsoftware.Fawry_System.Controllers.AuthenticationController;
-import com.advancedsoftware.Fawry_System.Models.Account;
-import com.advancedsoftware.Fawry_System.Models.Client;
-import com.advancedsoftware.Fawry_System.Models.CreditCard;
-import com.advancedsoftware.Fawry_System.Models.Response;
+import com.advancedsoftware.Fawry_System.Models.*;
 import com.advancedsoftware.Fawry_System.Payments.PaymentController;
+import com.advancedsoftware.Fawry_System.Refunds.RefundRequestManager;
 import com.advancedsoftware.Fawry_System.Services.Service;
 import com.advancedsoftware.Fawry_System.util.Database;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 @RestController
 public class ClientAPI {
-
+    ArrayList<AddToWalletTransaction> getAllAddToAllTransactions(){
+        ArrayList<AddToWalletTransaction> addToWalletTransactions = new ArrayList<>();
+        for(Map.Entry<Client, ArrayList<AddToWalletTransaction>> entry: Database.getDatabase().addToWalletTransactions.entrySet()){
+            ArrayList<AddToWalletTransaction> temp = entry.getValue();
+            addToWalletTransactions.addAll(temp);
+        }
+        return addToWalletTransactions;
+    }
     String addClientAccountButton(Client client) {
         AccountController accountController = AccountController.getAccountController();
         return accountController.addAccount(client);
@@ -81,6 +89,44 @@ public class ClientAPI {
         }
         return response;
     }
+
+
+    @RequestMapping(value = "/client/check")
+    Response<Client> checkClient(@RequestBody Client client) {
+        Response<Client> response = new Response<>();
+        String existAccountMessage = AuthenticationController.getAuthenticationController().validateLogin(client);
+        response.setMessage(existAccountMessage);
+        if(existAccountMessage.equals("There is no such an account")){
+            response.setStatus(false);
+        }
+        else{
+            if(existAccountMessage.equals("Login Successfully")){
+                response.setStatus(true);
+                if(client.getUsername() == null){
+                    response.setObject(getClient(client.getEmail()));
+                }
+                else{
+                    response.setObject(getClient(client.getUsername()));
+                }
+            }
+        }
+        return response;
+    }
+
+    @GetMapping(value = "/{username}/transactions/addToWallet")
+    Response<ArrayList<AddToWalletTransaction>> listAllPayments(@PathVariable("username") String usernameClient){
+        Account account = AdminAPI.getAdmin(usernameClient);
+        Response<ArrayList<AddToWalletTransaction>> response = new Response<>();
+        if(account == null){
+            response.setMessage("There is no such an admin");
+            response.setStatus(false);
+        }
+        response.setStatus(true);
+        response.setObject(getAllAddToAllTransactions());
+        response.setMessage("Add To Wallet transactions: " + response.getObject().size());
+        return response;
+    }
+
 
 
 }

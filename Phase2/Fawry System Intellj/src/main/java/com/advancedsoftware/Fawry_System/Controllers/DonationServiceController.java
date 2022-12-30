@@ -21,13 +21,13 @@ public class DonationServiceController{
     public ArrayList<Service> searchDonationService(String context){
         return SearchController.getSearchController().searchDonationService(context);
     }
-    public boolean checkDiscountDonationService(Service service){
-        for(int i = 0; i < Database.getDatabase().donationServices.size(); i++){
-            if(Database.getDatabase().donationServices.get(i).getServiceName().equals(service.getServiceName())){
-                return true;
-            }
+    public double applyDonationDiscount(double amount){
+        if(Database.getDatabase().donationServiceDiscount == null){
+            return amount;
         }
-        return false;
+        else{
+            return Database.getDatabase().donationServiceDiscount.applyDiscount(amount);
+        }
     }
     public boolean checkDiscountDonationServiceExistance(){
         if(Database.getDatabase().donationServiceDiscount != null){

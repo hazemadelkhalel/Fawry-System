@@ -5,7 +5,6 @@ import com.advancedsoftware.Fawry_System.Models.*;
 import com.advancedsoftware.Fawry_System.Payments.*;
 
 public class Discount implements Service{
-    String discountName;
     double percentage;
     Service wrappee;
     Discount(Service wrappee){
@@ -16,9 +15,14 @@ public class Discount implements Service{
         return wrappee.applyDiscount(amount);
     }
 
-    public void setDiscountName(String discountName) {
-        this.discountName = discountName;
+    @Override
+    public String toString() {
+        return "Discount{" +
+                ", percentage=" + percentage +
+                ", wrappee=" + wrappee +
+                '}';
     }
+
 
     public void setPercentage(int percentage) {
         this.percentage = percentage;
@@ -26,10 +30,6 @@ public class Discount implements Service{
 
     public double getPercentage() {
         return percentage;
-    }
-
-    public String getDiscountName() {
-        return discountName;
     }
 
     @Override
@@ -70,5 +70,17 @@ public class Discount implements Service{
     @Override
     public void setServiceName(String serviceName) {
 
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
+
+    public void setWrappee(Service wrappee) {
+        this.wrappee = wrappee;
+    }
+
+    public Service getWrappee() {
+        return wrappee;
     }
 }

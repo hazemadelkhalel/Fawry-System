@@ -3,6 +3,8 @@ import com.advancedsoftware.Fawry_System.Models.*;
 import com.advancedsoftware.Fawry_System.Payments.*;
 import com.advancedsoftware.Fawry_System.util.*;
 
+import java.util.ArrayList;
+
 
 public class AccountController{
     private static AccountController accountController;
@@ -22,6 +24,9 @@ public class AccountController{
     public String addAccount(Client client) {
         client.setAccountID(Database.getDatabase().accounts.size());
         Database.getDatabase().accounts.add(client);
+        Database.getDatabase().paymentTransactions.put(client, new ArrayList<>());
+        Database.getDatabase().addToWalletTransactions.put(client, new ArrayList<>());
+        Database.getDatabase().notifications.put(client, new ArrayList<>());
         return "Account added successfully";
     }
     public String addCreditCard(Client client, CreditCard creditCard){
@@ -39,9 +44,10 @@ public class AccountController{
         }
         return "Credit Card added successfully";
     }
-    String checkAccountLogin(Account account1, String usernameOrEmail, String password){
-        if(account1.getUsername().equals(usernameOrEmail) || account1.getEmail().equals(usernameOrEmail)){
-            if(account1.getPassword().equals(password)){
+    String checkAccountLogin(Account account, Account account2){
+        if((account2.getUsername() != null && account.getUsername().equals(account2.getUsername())) ||
+                (account2.getEmail() != null && account.getEmail().equals(account2.getEmail()))){
+            if(account2.getPassword() != null && account.getPassword().equals(account2.getPassword())){
                 return "Login Successfully";
             }
             else{

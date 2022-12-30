@@ -38,8 +38,8 @@ public class CreditCardMethod extends PaymentMethod{
         CreditCardController creditCardController = CreditCardController.getCreditCardController();
         if(creditCardController.checkValidCreditCard(client.creditCard)){
             if(creditCardController.checkCanPayCreditCard(creditCard, amount)){
-                Transaction transaction = new Transaction(client, null, amount, -1);
-                Database.getDatabase().addWalletTransaction.add(transaction);
+                AddToWalletTransaction addToWalletTransaction = new AddToWalletTransaction(client, client.creditCard, amount);
+                Database.getDatabase().addToWalletTransactions.get(client).add(addToWalletTransaction);
                 creditCard.setAmount(creditCard.getAmount() - amount);
                 client.setWallet(client.getWallet() + amount);
                 client.setCreditCard(creditCard);

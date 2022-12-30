@@ -16,7 +16,7 @@ public class AuthenticationController {
     public String validateLogin(Account account) {
         AccountController accountController = AccountController.getAccountController();
         for(int i = 0; i < Database.getDatabase().accounts.size(); i++){
-            String response = accountController.checkAccountLogin(Database.getDatabase().accounts.get(i), account.getUsername(), account.getPassword());
+            String response = accountController.checkAccountLogin(Database.getDatabase().accounts.get(i), account);
             Account tempAccount = FawryScreenAPI.getAccount(Database.getDatabase().accounts.get(i).getUsername());
             boolean ok1 = (account instanceof Client && tempAccount instanceof Client);
             boolean ok2 = (account instanceof Admin && tempAccount instanceof Admin);

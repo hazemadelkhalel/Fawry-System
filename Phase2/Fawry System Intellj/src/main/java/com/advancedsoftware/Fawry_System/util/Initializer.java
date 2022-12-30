@@ -1,5 +1,7 @@
 package com.advancedsoftware.Fawry_System.util;
 
+import com.advancedsoftware.Fawry_System.Discounts.OverallDiscount;
+import com.advancedsoftware.Fawry_System.Discounts.SpecificDiscount;
 import com.advancedsoftware.Fawry_System.Models.Admin;
 import com.advancedsoftware.Fawry_System.Models.Client;
 import com.advancedsoftware.Fawry_System.Payments.CashMethod;
@@ -8,6 +10,8 @@ import com.advancedsoftware.Fawry_System.Payments.WalletMethod;
 import com.advancedsoftware.Fawry_System.Services.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 
 @RestController
 public class Initializer {
@@ -78,9 +82,16 @@ public class Initializer {
         Database.getDatabase().services.add(ngo);
         Database.getDatabase().donationServices.add(ngo);
 
+        Database.getDatabase().mobileServiceDiscount = new SpecificDiscount(vodafone, 20);
+        Database.getDatabase().overallDiscount = new OverallDiscount(new Vodafone("Overall"), 50);
+
         Admin admin = new Admin("admin", "Admin@gmail.com", "admin");
         Client client = new Client("client", "client@gmail.com", "client", 120);
         Database.getDatabase().accounts.add(admin);
         Database.getDatabase().accounts.add(client);
+        Database.getDatabase().paymentTransactions.put(client, new ArrayList<>());
+        Database.getDatabase().notifications.put(client, new ArrayList<>());
+        Database.getDatabase().notifications.put(admin, new ArrayList<>());
+        Database.getDatabase().addToWalletTransactions.put(client, new ArrayList<>());
     }
 }
