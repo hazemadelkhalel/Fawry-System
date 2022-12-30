@@ -1,6 +1,8 @@
 package com.advancedsoftware.Fawry_System.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.advancedsoftware.Fawry_System.Models.*;
 import com.advancedsoftware.Fawry_System.Services.Service;
 import com.advancedsoftware.Fawry_System.Refunds.*;
@@ -9,8 +11,9 @@ public class Database {
     private static Database database;
     public Account account;
     public ArrayList<Account> accounts;
-    public ArrayList<Transaction> addWalletTransaction;
-    public ArrayList<Transaction> payments;
+    public HashMap<Client, ArrayList<PaymentTransaction>> paymentTransactions;
+    public HashMap<Client, ArrayList<AddToWalletTransaction>> addToWalletTransactions;
+
     public ArrayList<Service> services;
     public ArrayList<Service> mobileServices;
     public ArrayList<Service> InternetServices;
@@ -35,8 +38,9 @@ public class Database {
         landlineServices = new ArrayList<>();
         InternetServices = new ArrayList<>();
         donationServices = new ArrayList<>();
-        addWalletTransaction = new ArrayList<>();
         refunds = new ArrayList<>();
+        addToWalletTransactions = new HashMap<>();
+        paymentTransactions = new HashMap<>();
         mobileServiceDiscount = null;
         internetServiceDiscount = null;
         landlineServiceDiscount = null;

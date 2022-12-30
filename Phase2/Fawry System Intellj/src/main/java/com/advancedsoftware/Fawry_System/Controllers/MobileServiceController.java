@@ -19,13 +19,13 @@ public class MobileServiceController{
     public ArrayList<Service> searchMobileService(String context){
         return SearchController.getSearchController().searchMobileService(context);
     }
-    public boolean checkDiscountMobileService(Service service){
-        for(int i = 0; i < Database.getDatabase().mobileServices.size(); i++){
-            if(service != null &&Database.getDatabase().mobileServices.get(i).getServiceName().equals(service.getServiceName())){
-                return true;
-            }
+    public double applyMobileDiscount(double amount){
+        if(Database.getDatabase().mobileServiceDiscount == null){
+            return amount;
         }
-        return false;
+        else{
+            return Database.getDatabase().mobileServiceDiscount.applyDiscount(amount);
+        }
     }
     public boolean checkDiscountMobileServiceExistance(){
         if(Database.getDatabase().mobileServiceDiscount != null)return true;

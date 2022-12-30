@@ -3,6 +3,8 @@ import com.advancedsoftware.Fawry_System.Models.*;
 import com.advancedsoftware.Fawry_System.Payments.*;
 import com.advancedsoftware.Fawry_System.util.*;
 
+import java.util.ArrayList;
+
 
 public class AccountController{
     private static AccountController accountController;
@@ -22,6 +24,8 @@ public class AccountController{
     public String addAccount(Client client) {
         client.setAccountID(Database.getDatabase().accounts.size());
         Database.getDatabase().accounts.add(client);
+        Database.getDatabase().paymentTransactions.put(client, new ArrayList<>());
+        Database.getDatabase().addToWalletTransactions.put(client, new ArrayList<>());
         return "Account added successfully";
     }
     public String addCreditCard(Client client, CreditCard creditCard){

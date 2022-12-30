@@ -11,7 +11,7 @@ public class Admin extends Account{
     }
 
     @Override
-    public void update(boolean acceptance, Transaction transaction, boolean notify) {
+    public void update(boolean acceptance, PaymentTransaction paymentTransaction, boolean notify) {
 
     }
 }

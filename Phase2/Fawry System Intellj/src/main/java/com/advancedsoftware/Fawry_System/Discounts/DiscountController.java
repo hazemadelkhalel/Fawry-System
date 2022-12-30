@@ -41,7 +41,7 @@ public class DiscountController {
     }
 
     double applyOverAllDiscount(Client client, double amount){
-        if(client.getTransactions().size() > 0 || Database.getDatabase().overallDiscount == null){
+        if(Database.getDatabase().paymentTransactions.get(client).size() > 0 || Database.getDatabase().overallDiscount == null){
             return amount;
         }
         else{
@@ -49,51 +49,27 @@ public class DiscountController {
         }
     }
     public double applyDiscountMobileService(Service service, Client client, double amount){
-        double extra = amount - applyOverAllDiscount(client, amount);
         MobileServiceController mobileServiceController = MobileServiceController.getMobileServiceController();
-        if(mobileServiceController.checkDiscountMobileService(service) && Database.getDatabase().mobileServiceDiscount != null){
-            return Math.max(Database.getDatabase().mobileServiceDiscount.applyDiscount(amount) - extra, 0);
-        }
-        else{
-            return amount;
-        }
+        double extra1 = amount - applyOverAllDiscount(client, amount);
+        double extra2 = amount - mobileServiceController.applyMobileDiscount(amount);
+        return Math.max(amount - extra1 - extra2, 0);
     }
     public double applyDiscountInternetService(Service service, Client client, double amount){
-        double extra = amount - applyOverAllDiscount(client, amount);
         InternetServiceController internetServiceController = InternetServiceController.getInternetServiceController();
-        if(internetServiceController.checkDiscountInternetService(service) && Database.getDatabase().internetServiceDiscount != null){
-            return Math.max(Database.getDatabase().internetServiceDiscount.applyDiscount(amount) - extra, 0);
-        }
-        else{
-            return amount;
-        }
+        double extra1 = amount - applyOverAllDiscount(client, amount);
+        double extra2 = amount - internetServiceController.applyInternetDiscount(amount);
+        return Math.max(amount - extra1 - extra2, 0);
     }
-    public double applyDiscountLandlineService(Service service, Client client, double amount){
-        double extra = amount - applyOverAllDiscount(client, amount);
+    public double applyDiscountLandlineService(Client client, double amount){
         LandlineServiceController landlineServiceController = LandlineServiceController.getLandlineServiceController();
-        if(landlineServiceController.checkDiscountLandlineService(service) && Database.getDatabase().landlineServiceDiscount != null){
-            return Math.max(Database.getDatabase().landlineServiceDiscount.applyDiscount(amount) - extra, 0);
-        }
-        else{
-            return amount;
-        }
+        double extra1 = amount - applyOverAllDiscount(client, amount);
+        double extra2 = amount - landlineServiceController.applyLandlineDiscount(amount);
+        return Math.max(amount - extra1 - extra2, 0);
     }
     public double applyDiscountDonationService(Service service, Client client, double amount){
-        double extra = amount - applyOverAllDiscount(client, amount);
         DonationServiceController donationServiceController = DonationServiceController.getDonationServiceController();
-        if(donationServiceController.checkDiscountDonationService(service) && Database.getDatabase().donationServiceDiscount != null){
-            return Math.max(Database.getDatabase().donationServiceDiscount.applyDiscount(amount) - extra, 0);
-        }
-        else{
-            return amount;
-        }
-    }
-    public boolean checkDiscountAvailable(Service service){
-        for(int i = 0; i < Database.getDatabase().discounts.size(); i++){
-            if(Database.getDatabase().discounts.get(i).wrappee.getServiceName().equals(service.getServiceName())){
-                return true;
-            }
-        }
-        return false;
+        double extra1 = amount - applyOverAllDiscount(client, amount);
+        double extra2 = amount - donationServiceController.applyDonationDiscount(amount);
+        return Math.max(amount - extra1 - extra2, 0);
     }
 }

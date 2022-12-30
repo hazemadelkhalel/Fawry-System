@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class DiscountAPI {
     ArrayList<Discount> getMobileDiscounts(Client client){
         ArrayList<Discount> result = new ArrayList<>();
-        if(client.getTransactions().isEmpty() && Database.getDatabase().overallDiscount != null){
+        if(Database.getDatabase().paymentTransactions.get(client).isEmpty() && Database.getDatabase().overallDiscount != null){
             result.add(Database.getDatabase().overallDiscount);
         }
         if(Database.getDatabase().mobileServiceDiscount != null){
@@ -27,7 +27,7 @@ public class DiscountAPI {
     }
     ArrayList<Discount> getInternetDiscounts(Client client){
         ArrayList<Discount> result = new ArrayList<>();
-        if(client.getTransactions().isEmpty() && Database.getDatabase().overallDiscount != null){
+        if(Database.getDatabase().paymentTransactions.get(client).isEmpty() && Database.getDatabase().overallDiscount != null){
             result.add(Database.getDatabase().overallDiscount);
         }
         if(Database.getDatabase().internetServiceDiscount != null){
@@ -37,7 +37,7 @@ public class DiscountAPI {
     }
     ArrayList<Discount> getLandlineDiscounts(Client client){
         ArrayList<Discount> result = new ArrayList<>();
-        if(client.getTransactions().isEmpty() && Database.getDatabase().overallDiscount != null){
+        if(Database.getDatabase().paymentTransactions.get(client).isEmpty() && Database.getDatabase().overallDiscount != null){
             result.add(Database.getDatabase().overallDiscount);
         }
         if(Database.getDatabase().landlineServiceDiscount != null){
@@ -47,7 +47,7 @@ public class DiscountAPI {
     }
     ArrayList<Discount> getDonationDiscounts(Client client){
         ArrayList<Discount> result = new ArrayList<>();
-        if(client.getTransactions().isEmpty() && Database.getDatabase().overallDiscount != null){
+        if(Database.getDatabase().paymentTransactions.get(client).isEmpty() && Database.getDatabase().overallDiscount != null){
             result.add(Database.getDatabase().overallDiscount);
         }
         if(Database.getDatabase().donationServiceDiscount != null){
@@ -78,7 +78,8 @@ public class DiscountAPI {
             return response;
         }
         response.setStatus(true);
-        response.setMessage("Exist " + discounts.size() + " discounts");
+        response.setMessage("Exist " + discounts.size() + " discount");
+        if(discounts.size() > 1)response.setMessage(response.getMessage() + 's');
         response.setObject(discounts);
         return response;
     }
@@ -105,6 +106,7 @@ public class DiscountAPI {
         }
         response.setStatus(true);
         response.setMessage("Exist " + discounts.size() + " discounts");
+        if(discounts.size() > 1)response.setMessage(response.getMessage() + 's');
         response.setObject(discounts);
         return response;
     }
@@ -132,6 +134,7 @@ public class DiscountAPI {
         }
         response.setStatus(true);
         response.setMessage("Exist " + discounts.size() + " discounts");
+        if(discounts.size() > 1)response.setMessage(response.getMessage() + 's');
         response.setObject(discounts);
         return response;
     }
@@ -159,6 +162,7 @@ public class DiscountAPI {
         }
         response.setStatus(true);
         response.setMessage("Exist " + discounts.size() + " discounts");
+        if(discounts.size() > 1)response.setMessage(response.getMessage() + 's');
         response.setObject(discounts);
         return response;
     }

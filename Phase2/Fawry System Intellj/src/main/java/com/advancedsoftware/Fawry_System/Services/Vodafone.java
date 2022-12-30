@@ -12,13 +12,6 @@ public class Vodafone implements Service{
 
 
     @Override
-    public String toString() {
-        return "Vodafone{" +
-                "serviceName='" + serviceName + '\'' +
-                '}';
-    }
-
-    @Override
     public String payMobileService(Client client, double amount, int wayIndex) {
         return waysOfPayment.get(wayIndex).pay(client, amount);
     }

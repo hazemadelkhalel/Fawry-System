@@ -24,13 +24,13 @@ public class InternetServiceController{
     public ArrayList<Service> searchInternetService(String context){
         return SearchController.getSearchController().searchInternetService(context);
     }
-    public boolean checkDiscountInternetService(Service service){
-        for(int i = 0; i < Database.getDatabase().InternetServices.size(); i++){
-            if(service != null && Database.getDatabase().mobileServices.get(i).getServiceName().equals(service.getServiceName())){
-                return true;
-            }
+    public double applyInternetDiscount(double amount){
+        if(Database.getDatabase().internetServiceDiscount == null){
+            return amount;
         }
-        return false;
+        else{
+            return Database.getDatabase().internetServiceDiscount.applyDiscount(amount);
+        }
     }
     public boolean checkDiscountInternetServiceExistance(){
         if(Database.getDatabase().internetServiceDiscount != null){

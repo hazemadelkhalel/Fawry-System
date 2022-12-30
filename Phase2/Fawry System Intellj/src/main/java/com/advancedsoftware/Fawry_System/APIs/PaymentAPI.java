@@ -32,6 +32,7 @@ public class PaymentAPI {
             response.setMessage("There is no such a way Index");
             return response;
         }
+        wayIndex--;
         DiscountController discountController = DiscountController.getDiscountController();
         amount = discountController.applyDiscountMobileService(service, client, amount);
         PaymentController paymentController = PaymentController.getPaymentController();
@@ -85,13 +86,13 @@ public class PaymentAPI {
             response.setMessage("There is no such a service");
             return response;
         }
-        if(wayIndex > service.getWaysOfPayment().size() || wayIndex < 0){
+        if(wayIndex > service.getWaysOfPayment().size() || wayIndex < 1){
             response.setStatus(false);
             response.setMessage("There is no such a way Index");
             return response;
         }
         DiscountController discountController = DiscountController.getDiscountController();
-        amount = discountController.applyDiscountLandlineService(service, client, amount);
+        amount = discountController.applyDiscountLandlineService(client, amount);
         PaymentController paymentController = PaymentController.getPaymentController();
         response.setStatus(true);
         response.setObject(client);

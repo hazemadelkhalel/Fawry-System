@@ -19,13 +19,13 @@ public class LandlineServiceController{
     public ArrayList<Service> searchLandlineService(String context){
         return SearchController.getSearchController().searchLandlineService(context);
     }
-    public boolean checkDiscountLandlineService(Service service){
-        for(int i = 0; i < Database.getDatabase().landlineServices.size(); i++){
-            if(service != null && Database.getDatabase().landlineServices.get(i).getServiceName().equals(service.getServiceName())){
-                return true;
-            }
+    public double applyLandlineDiscount(double amount){
+        if(Database.getDatabase().landlineServiceDiscount == null){
+            return amount;
         }
-        return false;
+        else{
+            return Database.getDatabase().landlineServiceDiscount.applyDiscount(amount);
+        }
     }
     public boolean checkDiscountLandlineServiceExistance(){
         if(Database.getDatabase().landlineServiceDiscount != null){

@@ -3,12 +3,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.advancedsoftware.Fawry_System.Models.*;
+import com.advancedsoftware.Fawry_System.util.Database;
 
 public class RefundRequest implements Subject{
-    public Transaction transaction;
+    public PaymentTransaction paymentTransaction;
     List<Account> accounts;
-    RefundRequest(Transaction transaction){
-        this.transaction = transaction;
+    RefundRequest(PaymentTransaction paymentTransaction){
+        this.paymentTransaction = paymentTransaction;
         accounts = new ArrayList<>();
     }
     @Override
@@ -16,13 +17,14 @@ public class RefundRequest implements Subject{
         boolean isSubscribed = false;
         for(int i = 0; i < accounts.size(); i++){
             if(accounts.get(i) == client){
-                client.update(acceptance, transaction, true);
+                client.update(acceptance, paymentTransaction, true);
                 isSubscribed = true;
                 break;
             }
         }
         if(!isSubscribed){
-            client.update(acceptance, transaction, false);
+            Database.getDatabase().paymentTransactions.get(client).remove(paymentTransaction);
+            client.update(acceptance, paymentTransaction, false);
         }
     }
 

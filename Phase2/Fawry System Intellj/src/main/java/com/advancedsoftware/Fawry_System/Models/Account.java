@@ -57,6 +57,6 @@ abstract public class Account {
     public void setUsername(String username) {
         this.username = username;
     }
-    abstract public void update(boolean acceptance, Transaction transaction, boolean notify);
+    abstract public void update(boolean acceptance, PaymentTransaction paymentTransaction, boolean notify);
 
 }

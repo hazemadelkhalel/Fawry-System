@@ -1,17 +1,18 @@
 package com.advancedsoftware.Fawry_System.Models;
+import com.advancedsoftware.Fawry_System.util.Database;
+
 import java.util.ArrayList;
 
 public class Client extends Account{
     public CreditCard creditCard;
     double wallet = 0;
-    public ArrayList<Transaction> transactions;
+
     public Client(String username, String email, String password, double wallet){
         this.username = username;
         this.email = email;
         this.password = password;
         this.creditCard = null;
         this.wallet = wallet;
-        transactions = new ArrayList<>();
         notifications = new ArrayList<>();
     }
     public void setWallet(double wallet) {
@@ -29,16 +30,11 @@ public class Client extends Account{
     public CreditCard getCreditCard() {
         return creditCard;
     }
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
-
     @Override
     public String toString() {
         return "Client{" +
                 "creditCard=" + creditCard +
                 ", wallet=" + wallet +
-                ", transactions=" + transactions +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
@@ -47,12 +43,12 @@ public class Client extends Account{
                 '}';
     }
 
-    public void update(boolean acceptance, Transaction transaction, boolean notify){
-        transactions.remove(transaction);
+    public void update(boolean acceptance, PaymentTransaction paymentTransaction, boolean notify){
         if(acceptance){
-            transaction.getClient().setWallet(transaction.getClient().getWallet() + transaction.getAmount());
+            paymentTransaction.getClient().setWallet(paymentTransaction.getClient().getWallet() + paymentTransaction.getAmount());
+//            notify = true;
+            notifications.add("Accepted Refund Request of " + paymentTransaction.getService().getServiceName());
             if(notify) {
-                notifications.add("Accepted Refund Request of " + transaction.getService().getServiceName());
             }
         }
         else{

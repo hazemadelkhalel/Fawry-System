@@ -16,30 +16,26 @@ public class PaymentController{
     }
     public String payMobileService(Client client, Service service, double amount, int wayIndex) {
         String result = MobileServiceController.getMobileServiceController().pay(client, service, amount, wayIndex);
-        Transaction transaction = new Transaction(client, service, amount, wayIndex);
-        Database.getDatabase().payments.add(transaction);
-        client.transactions.add(transaction);
+        PaymentTransaction paymentTransaction = new PaymentTransaction(client, service, amount, wayIndex);
+        Database.getDatabase().paymentTransactions.get(client).add(paymentTransaction);
         return result;
     }
     public String payInternetService(Client client, Service service, double amount, int wayIndex) {
         String result = InternetServiceController.getInternetServiceController().pay(client, service, amount, wayIndex);
-        Transaction transaction = new Transaction(client, service, amount, wayIndex);
-        Database.getDatabase().payments.add(transaction);
-        client.transactions.add(transaction);
+        PaymentTransaction paymentTransaction = new PaymentTransaction(client, service, amount, wayIndex);
+        Database.getDatabase().paymentTransactions.get(client).add(paymentTransaction);
         return result;
     }
     public String payLandlineService(Client client, Service service, double amount, int wayIndex) {
         String result = LandlineServiceController.getLandlineServiceController().pay(client, service, amount, wayIndex);
-        Transaction transaction = new Transaction(client, service, amount, wayIndex);
-        Database.getDatabase().payments.add(transaction);
-        client.transactions.add(transaction);
+        PaymentTransaction paymentTransaction = new PaymentTransaction(client, service, amount, wayIndex);
+        Database.getDatabase().paymentTransactions.get(client).add(paymentTransaction);
         return result;
     }
     public String payDonationService(Client client, Service service, double amount, int wayIndex) {
         String result = DonationServiceController.getDonationServiceController().pay(client, service, amount, wayIndex);
-        Transaction transaction = new Transaction(client, service, amount, wayIndex);
-        Database.getDatabase().payments.add(transaction);
-        client.transactions.add(transaction);
+        PaymentTransaction paymentTransaction = new PaymentTransaction(client, service, amount, wayIndex);
+        Database.getDatabase().paymentTransactions.get(client).add(paymentTransaction);
         return result;
     }
 }

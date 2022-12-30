@@ -16,26 +16,44 @@ public class RefundController {
         return refundController;
     }
 
-    public String addRefundRequest(Admin admin, Transaction transaction){
-        RefundRequest refundRequest = new RefundRequest(transaction);
+    public String addRefundRequest(PaymentTransaction paymentTransaction){
+        RefundRequest refundRequest = new RefundRequest(paymentTransaction);
         Database.getDatabase().refunds.add(refundRequest);
-        admin.notifications.add("New Refund Request");
+        for(int i = 0; i < Database.getDatabase().accounts.size(); i++){
+            if(Database.getDatabase().accounts.get(i) instanceof Admin){
+                Database.getDatabase().accounts.get(i).notifications.add("New Refund Request");
+            }
+        }
         return "Added Successfully";
     }
 
-    public boolean applyApproval(Client client, boolean acceptance, RefundRequest refundRequest) {
+    public String applyApproval(Client client, boolean acceptance, RefundRequest refundRequest) {
         Database.getDatabase().refunds.remove(refundRequest);
         refundRequest.notify(client, acceptance);
-        return acceptance;
-    }
-
-    ArrayList<Transaction> listAllTransaction(Client client, Service service) {
-        ArrayList<Transaction> transactions = new ArrayList<>();
-        for(int i = 0; i < client.getTransactions().size(); i++){
-            if(client.getTransactions().get(i).getService().getServiceName().equals(service.getServiceName())){
-                transactions.add(client.getTransactions().get(i));
+        for(int i = 0; i < Database.getDatabase().accounts.size(); i++){
+            if(Database.getDatabase().accounts.get(i) instanceof Admin){
+                Database.getDatabase().accounts.get(i).notifications.remove(0);
             }
         }
-        return transactions;
+        String result = "The refund request has been ";
+        if(acceptance){
+            result += "accepted";
+        }
+        else{
+            result += "refused";
+        }
+        return result;
     }
+
+//    ArrayList<PaymentTransaction> listAllTransaction(Client client, Service service) {
+//        ArrayList<PaymentTransaction> paymentTransactions = new ArrayList<>();
+//        ArrayList<Transaction> transactions = Database.getDatabase().transaction.get(client);
+//        for(int i = 0; i < transactions.size(); i++){
+//            if(transactions)
+//            if(transactions.get(i).getService().getServiceName().equals(service.getServiceName())){
+//                paymentTransactions.add(client.getTransactions().get(i));
+//            }
+//        }
+//        return paymentTransactions;
+//    }
 }
