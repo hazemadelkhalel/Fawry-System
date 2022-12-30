@@ -5,6 +5,7 @@
     "wallet" : 120
 }
 
+http://localhost:8080/client/addCreditCard
 {
     "cardNumber" : "12343412431",
     "amount": 220
@@ -16,7 +17,7 @@
     "email" : "client@gmail.com",
     "password": "client"
 }
-
+http://localhost:8080/client/addfunds
 http://localhost:8080/admin/addDiscount/mobile/vodafone
 http://localhost:8080/client/pay/mobile/vodafone/2
 http://localhost:8080/admin/addDiscount/overall
@@ -33,3 +34,7 @@ http://localhost:8080/client/notifications/unsubscribe
 http://localhost:8080/admin/notifications/subscribe
 http://localhost:8080/admin/notifications/insubscribe
 http://localhost:8080/client/mobile/vodafone/discounts
+http://localhost:8080/admin/transactions/refunds
+http://localhost:8080/admin/transactions/payments
+http://localhost:8080/admin/transactions/addToWallet
+http://localhost:8080/client/addCreditCard
