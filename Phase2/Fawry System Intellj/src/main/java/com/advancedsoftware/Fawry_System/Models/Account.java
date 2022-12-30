@@ -12,7 +12,6 @@ import java.util.ArrayList;
 })
 abstract public class Account {
     String username, email, password;
-    public ArrayList<String> notifications;
     int AccountID;
 
     @Override
@@ -21,7 +20,6 @@ abstract public class Account {
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", notifications=" + notifications +
                 ", AccountID=" + AccountID +
                 '}';
     }
@@ -57,6 +55,6 @@ abstract public class Account {
     public void setUsername(String username) {
         this.username = username;
     }
-    abstract public void update(boolean acceptance, PaymentTransaction paymentTransaction, boolean notify);
+    abstract public void update(boolean acceptance, PaymentTransaction paymentTransaction);
 
 }

@@ -7,6 +7,8 @@ import com.advancedsoftware.Fawry_System.Services.*;
 import com.advancedsoftware.Fawry_System.util.Database;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 public class FawryScreenAPI {
     public static Account getAccount(String usernameOrEmail){
@@ -37,7 +39,7 @@ public class FawryScreenAPI {
         return response;
     }
     @GetMapping(value = "/profile/{username}")
-    Response<Account> displayClient(@PathVariable("username") String usernameClient) {
+    Response<Account> displayProfile(@PathVariable("username") String usernameClient) {
         Account account = getAccount(usernameClient);
         Response<Account> response = new Response<>();
         if(account == null){
@@ -52,29 +54,25 @@ public class FawryScreenAPI {
         }
         return response;
     }
-    @GetMapping(value = "/{username}")
-    Response<Account> displayProfile(@PathVariable("username") String usernameOrEmail){
-        Account account = null;
-        for(int i = 0; i < Database.getDatabase().accounts.size(); i++){
-            if(Database.getDatabase().accounts.get(i) instanceof Client){
-                if(usernameOrEmail.equals(Database.getDatabase().accounts.get(i).getUsername()) || usernameOrEmail.equals(Database.getDatabase().accounts.get(i).getEmail())){
-                    account = Database.getDatabase().accounts.get(i);
-                    break;
-                }
-            }
-        }
-        Response<Account> response = new Response<>();
+
+    @GetMapping(value = "/{username}/notifications")
+    Response<ArrayList<String>> showNotifications(@PathVariable("username") String usernameClient){
+        Account account = getAccount(usernameClient);
+        Response<ArrayList<String>> response = new Response<>();
         if(account == null){
-            response.setMessage("There is no such a user");
+            response.setMessage("There is no such a client");
             response.setStatus(false);
         }
         else{
             response.setStatus(true);
-            response.setObject(account);
-            response.setMessage("Exist");
+            response.setMessage("Exist Account");
+            response.setObject(Database.getDatabase().notifications.get(account));
         }
         return response;
     }
+
+
+
 
 
 }

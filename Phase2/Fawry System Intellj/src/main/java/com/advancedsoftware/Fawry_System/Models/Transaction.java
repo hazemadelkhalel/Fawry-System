@@ -11,11 +11,6 @@ abstract public class Transaction {
                 ", amount=" + amount +
                 '}';
     }
-
-    public Client getClient() {
-        return client;
-    }
-
     public double getAmount() {
         return amount;
     }

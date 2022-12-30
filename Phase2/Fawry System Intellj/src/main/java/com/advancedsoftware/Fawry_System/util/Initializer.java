@@ -83,12 +83,15 @@ public class Initializer {
         Database.getDatabase().donationServices.add(ngo);
 
         Database.getDatabase().mobileServiceDiscount = new SpecificDiscount(vodafone, 20);
-//        Database.getDatabase().overallDiscount = new OverallDiscount(new Vodafone("Overall"), 50);
+        Database.getDatabase().overallDiscount = new OverallDiscount(new Vodafone("Overall"), 50);
 
         Admin admin = new Admin("admin", "Admin@gmail.com", "admin");
         Client client = new Client("client", "client@gmail.com", "client", 120);
         Database.getDatabase().accounts.add(admin);
         Database.getDatabase().accounts.add(client);
         Database.getDatabase().paymentTransactions.put(client, new ArrayList<>());
+        Database.getDatabase().notifications.put(client, new ArrayList<>());
+        Database.getDatabase().notifications.put(admin, new ArrayList<>());
+        Database.getDatabase().addToWalletTransactions.put(client, new ArrayList<>());
     }
 }

@@ -7,11 +7,10 @@ public class Admin extends Account{
         this.username = username;
         this.email = email;
         this.password = password;
-        notifications = new ArrayList<>();
     }
 
     @Override
-    public void update(boolean acceptance, PaymentTransaction paymentTransaction, boolean notify) {
+    public void update(boolean acceptance, PaymentTransaction paymentTransaction) {
 
     }
 }

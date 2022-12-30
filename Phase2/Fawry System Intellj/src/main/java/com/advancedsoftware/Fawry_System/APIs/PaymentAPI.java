@@ -1,17 +1,25 @@
 package com.advancedsoftware.Fawry_System.APIs;
 
 import com.advancedsoftware.Fawry_System.Discounts.DiscountController;
-import com.advancedsoftware.Fawry_System.Models.Client;
-import com.advancedsoftware.Fawry_System.Models.Response;
+import com.advancedsoftware.Fawry_System.Models.*;
 import com.advancedsoftware.Fawry_System.Payments.PaymentController;
 import com.advancedsoftware.Fawry_System.Services.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.advancedsoftware.Fawry_System.util.Database;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 public class PaymentAPI {
+    ArrayList<PaymentTransaction> getAllPaymentTransactions(){
+        ArrayList<PaymentTransaction> paymentTransactions = new ArrayList<>();
+        for(Map.Entry<Client, ArrayList<PaymentTransaction>> entry: Database.getDatabase().paymentTransactions.entrySet()){
+            ArrayList<PaymentTransaction> temp = entry.getValue();
+            paymentTransactions.addAll(temp);
+        }
+        return paymentTransactions;
+    }
     @PutMapping(value = "/{username}/pay/mobile/{service}/{wayIndex}")
     Response<Client> payButtonMobileService(@PathVariable("username") String usernameClient, @PathVariable("service") String serviceName, @RequestBody double amount, @PathVariable("wayIndex") int wayIndex) {
         Client client = ClientAPI.getClient(usernameClient);
@@ -125,6 +133,19 @@ public class PaymentAPI {
         response.setStatus(true);
         response.setObject(client);
         response.setMessage(paymentController.payDonationService(client, service, amount, wayIndex));
+        return response;
+    }
+    @GetMapping(value = "/{username}/transactions/payments")
+    Response<ArrayList<PaymentTransaction>> listAllPayments(@PathVariable("username") String usernameClient){
+        Account account = AdminAPI.getAdmin(usernameClient);
+        Response<ArrayList<PaymentTransaction>> response = new Response<>();
+        if(account == null){
+            response.setMessage("There is no such an admin");
+            response.setStatus(false);
+        }
+        response.setStatus(true);
+        response.setObject(getAllPaymentTransactions());
+        response.setMessage("Payment transactions: " + response.getObject().size());
         return response;
     }
 }

@@ -10,6 +10,13 @@
     "amount": 220
 }
 
+{
+    "type": "client",
+    "username": "client",
+    "email" : "client@gmail.com",
+    "password": "client"
+}
+
 http://localhost:8080/admin/addDiscount/mobile/vodafone
 http://localhost:8080/client/pay/mobile/vodafone/2
 http://localhost:8080/admin/addDiscount/overall
@@ -17,3 +24,12 @@ http://localhost:8080/client/mobile/vodafone/discounts
 http://localhost:8080/admin/refunds/1
 http://localhost:8080/client/refundrequest/1
 http://localhost:8080/profile/client
+http://localhost:8080/admin/notifications
+http://localhost:8080/client/notifications
+http://localhost:8080/search/mobile/vod (for mobile)
+http://localhost:8080/search/service/vod (search all)
+http://localhost:8080/client/notifications/subscribe
+http://localhost:8080/client/notifications/unsubscribe
+http://localhost:8080/admin/notifications/subscribe
+http://localhost:8080/admin/notifications/insubscribe
+http://localhost:8080/client/mobile/vodafone/discounts

@@ -13,13 +13,14 @@ public class Database {
     public ArrayList<Account> accounts;
     public HashMap<Client, ArrayList<PaymentTransaction>> paymentTransactions;
     public HashMap<Client, ArrayList<AddToWalletTransaction>> addToWalletTransactions;
+    public HashMap<Account, ArrayList<String>> notifications;
 
     public ArrayList<Service> services;
     public ArrayList<Service> mobileServices;
     public ArrayList<Service> InternetServices;
     public ArrayList<Service> landlineServices;
     public ArrayList<Service> donationServices;
-    public ArrayList<RefundRequest> refunds;
+    public ArrayList<RefundTransaction> refunds;
 
     public ArrayList<Discount> discounts;
     public SpecificDiscount mobileServiceDiscount;
@@ -41,6 +42,7 @@ public class Database {
         refunds = new ArrayList<>();
         addToWalletTransactions = new HashMap<>();
         paymentTransactions = new HashMap<>();
+        notifications = new HashMap<>();
         mobileServiceDiscount = null;
         internetServiceDiscount = null;
         landlineServiceDiscount = null;
