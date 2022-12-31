@@ -1,9 +1,4 @@
 package com.advancedsoftware.Fawry_System.Models;
-import com.advancedsoftware.Fawry_System.util.Database;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.ArrayList;
 
 public class Client extends Account{
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

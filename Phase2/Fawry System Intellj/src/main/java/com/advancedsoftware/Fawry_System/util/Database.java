@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import com.advancedsoftware.Fawry_System.Models.*;
 import com.advancedsoftware.Fawry_System.Services.Service;
-import com.advancedsoftware.Fawry_System.Refunds.*;
 import com.advancedsoftware.Fawry_System.Discounts.*;
 public class Database {
     private static Database database;
@@ -54,31 +53,5 @@ public class Database {
             database = new Database();
         }
         return database;
-    }
-
-    public static class Pair<F, S> {
-        private F first;
-        private S second;
-
-        Pair(F first, S second) {
-            this.first = first;
-            this.second = second;
-        }
-
-        public F getFirst() {
-            return this.first;
-        }
-
-        public S getSecond() {
-            return this.second;
-        }
-
-        public void setFirst(F first) {
-            this.first = first;
-        }
-
-        public void setSecond(S second) {
-            this.second = second;
-        }
     }
 }

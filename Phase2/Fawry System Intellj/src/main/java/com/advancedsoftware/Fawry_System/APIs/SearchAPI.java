@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @RestController
 public class SearchAPI {
@@ -125,7 +124,10 @@ public class SearchAPI {
         }
         else{
             response.setStatus(true);
-            response.setMessage("Found Services");
+            response.setMessage("Found " + response.getObject().size() + " Service");
+            if(response.getObject().size() > 1){
+                response.setMessage(response.getMessage() + "s");
+            }
         }
         return response;
     }

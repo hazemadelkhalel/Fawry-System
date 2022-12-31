@@ -3,9 +3,6 @@ package com.advancedsoftware.Fawry_System.APIs;
 import com.advancedsoftware.Fawry_System.Controllers.AccountController;
 import com.advancedsoftware.Fawry_System.Controllers.AuthenticationController;
 import com.advancedsoftware.Fawry_System.Models.*;
-import com.advancedsoftware.Fawry_System.Payments.PaymentController;
-import com.advancedsoftware.Fawry_System.Refunds.RefundRequestManager;
-import com.advancedsoftware.Fawry_System.Services.Service;
 import com.advancedsoftware.Fawry_System.util.Database;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +28,9 @@ public class ClientAPI {
         AuthenticationController authenticationController = AuthenticationController.getAuthenticationController();
         String existAccount = authenticationController.validateSignUp(account);
         Response<Client> response = new Response<>();
-        if(existAccount.equals("-1")){
-            response.setMessage("This account already exists");
+        if(!existAccount.equals("OK")){
             response.setStatus(false);
+            response.setMessage(existAccount);
         }
         else{
             response.setMessage(addClientAccountButton(account));

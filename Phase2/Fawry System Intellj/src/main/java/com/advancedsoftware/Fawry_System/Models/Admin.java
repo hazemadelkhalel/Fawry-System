@@ -1,5 +1,4 @@
 package com.advancedsoftware.Fawry_System.Models;
-import java.util.ArrayList;
 
 public class Admin extends Account{
 

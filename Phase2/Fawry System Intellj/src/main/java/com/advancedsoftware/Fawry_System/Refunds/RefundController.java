@@ -1,9 +1,7 @@
 package com.advancedsoftware.Fawry_System.Refunds;
-import java.util.ArrayList;
 
 import com.advancedsoftware.Fawry_System.util.*;
 import com.advancedsoftware.Fawry_System.Models.*;
-import com.advancedsoftware.Fawry_System.Services.*;
 
 public class RefundController {
     private static RefundController refundController;
@@ -50,15 +48,4 @@ public class RefundController {
         return result;
     }
 
-//    ArrayList<PaymentTransaction> listAllTransaction(Client client, Service service) {
-//        ArrayList<PaymentTransaction> paymentTransactions = new ArrayList<>();
-//        ArrayList<Transaction> transactions = Database.getDatabase().transaction.get(client);
-//        for(int i = 0; i < transactions.size(); i++){
-//            if(transactions)
-//            if(transactions.get(i).getService().getServiceName().equals(service.getServiceName())){
-//                paymentTransactions.add(client.getTransactions().get(i));
-//            }
-//        }
-//        return paymentTransactions;
-//    }
 }

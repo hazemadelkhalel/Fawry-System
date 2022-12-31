@@ -28,10 +28,13 @@ public class AuthenticationController {
         return "There is no such an account";
     }
     public String validateSignUp(Account account) {
+        if(account.getUsername() == null || account.getPassword() == null || account.getEmail() == null){
+            return "Invalid information";
+        }
         AccountController accountController = AccountController.getAccountController();
         for(int i = 0; i < Database.getDatabase().accounts.size(); i++){
             if(accountController.checkAccountSignUp(Database.getDatabase().accounts.get(i), account)){
-                return "-1";
+                return "This account already exists";
             }
         }
         Database.getDatabase().accounts.add(account);

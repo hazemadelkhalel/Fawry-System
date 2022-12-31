@@ -1,11 +1,7 @@
 package com.advancedsoftware.Fawry_System.APIs;
 
-import com.advancedsoftware.Fawry_System.Models.Account;
-import com.advancedsoftware.Fawry_System.Models.Response;
 import com.advancedsoftware.Fawry_System.Services.Service;
 import com.advancedsoftware.Fawry_System.util.Database;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

@@ -7,6 +7,7 @@ import com.advancedsoftware.Fawry_System.Models.Client;
 import com.advancedsoftware.Fawry_System.Payments.CashMethod;
 import com.advancedsoftware.Fawry_System.Payments.CreditCardMethod;
 import com.advancedsoftware.Fawry_System.Payments.WalletMethod;
+import com.advancedsoftware.Fawry_System.Refunds.RefundRequestManager;
 import com.advancedsoftware.Fawry_System.Services.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.RestController;
@@ -92,6 +93,7 @@ public class Initializer {
         Database.getDatabase().paymentTransactions.put(client, new ArrayList<>());
         Database.getDatabase().notifications.put(client, new ArrayList<>());
         Database.getDatabase().notifications.put(admin, new ArrayList<>());
+        RefundRequestManager.getRefundRequestManager().subscribe(client);
         Database.getDatabase().addToWalletTransactions.put(client, new ArrayList<>());
     }
 }

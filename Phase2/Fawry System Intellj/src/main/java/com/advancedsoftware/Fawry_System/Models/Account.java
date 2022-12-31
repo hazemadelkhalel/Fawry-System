@@ -2,7 +2,6 @@ package com.advancedsoftware.Fawry_System.Models;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.*;
-import java.util.ArrayList;
 
 
 @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "type")

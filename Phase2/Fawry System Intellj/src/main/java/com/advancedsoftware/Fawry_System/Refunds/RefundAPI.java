@@ -3,7 +3,6 @@ package com.advancedsoftware.Fawry_System.Refunds;
 import com.advancedsoftware.Fawry_System.APIs.AdminAPI;
 import com.advancedsoftware.Fawry_System.APIs.ClientAPI;
 import com.advancedsoftware.Fawry_System.APIs.FawryScreenAPI;
-import com.advancedsoftware.Fawry_System.Controllers.AccountController;
 import com.advancedsoftware.Fawry_System.Models.*;
 import com.advancedsoftware.Fawry_System.util.Database;
 import org.springframework.web.bind.annotation.*;
@@ -92,41 +91,43 @@ public class RefundAPI {
 
     @PutMapping(value = "/{username}/notifications/subscribe")
     Response<String> subscribeRefundRequests(@PathVariable("username") String usernameClient){
-        Account account = FawryScreenAPI.getAccount(usernameClient);
+        Client client = ClientAPI.getClient(usernameClient);
         Response<String> response = new Response<>();
-        if(account == null){
-            response.setMessage("There is no such a account");
+        if(client == null){
+            response.setMessage("There is no such a client");
             response.setStatus(false);
+            return response;
         }
-        boolean check = checkSubscription(account);
+        boolean check = checkSubscription(client);
         if(check){
             response.setStatus(false);
-            response.setMessage("This account already subscribed");
+            response.setMessage("This clinet already subscribed");
             return response;
         }
         response.setStatus(true);
         RefundRequestManager refundRequestManager = RefundRequestManager.getRefundRequestManager();
-        response.setMessage(refundRequestManager.subscribe(account));
+        response.setMessage(refundRequestManager.subscribe(client));
         return response;
     }
 
     @PutMapping(value = "/{username}/notifications/unsubscribe")
     Response<String> unsubscribeRefundRequests(@PathVariable("username") String usernameClient){
-        Account account = FawryScreenAPI.getAccount(usernameClient);
+        Client client = ClientAPI.getClient(usernameClient);
         Response<String> response = new Response<>();
-        if(account == null){
-            response.setMessage("There is no such a account");
+        if(client == null){
+            response.setMessage("There is no such a client");
             response.setStatus(false);
+            return response;
         }
-        boolean check = checkSubscription(account);
+        boolean check = checkSubscription(client);
         if(!check){
             response.setStatus(false);
-            response.setMessage("This account already unsubscribed");
+            response.setMessage("This client already unsubscribed");
             return response;
         }
         response.setStatus(true);
         RefundRequestManager refundRequestManager = RefundRequestManager.getRefundRequestManager();
-        response.setMessage(refundRequestManager.unsubscribe(account));
+        response.setMessage(refundRequestManager.unsubscribe(client));
         return response;
     }
 
