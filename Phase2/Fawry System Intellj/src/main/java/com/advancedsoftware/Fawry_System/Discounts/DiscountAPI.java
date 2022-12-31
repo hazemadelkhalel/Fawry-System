@@ -167,7 +167,7 @@ public class DiscountAPI {
         return response;
     }
 
-    @PutMapping(value = "/{username}/addDiscount/mobile/{service}")
+    @RequestMapping(value = "/{username}/addDiscount/mobile/{service}")
     Response<SpecificDiscount> addMobileServiceDiscount(@PathVariable("username") String usernameAdmin, @PathVariable("service") String serviceName, @RequestBody double percentage){
         Admin admin = AdminAPI.getAdmin(usernameAdmin);
         Response<SpecificDiscount> response = new Response<>();
@@ -192,7 +192,7 @@ public class DiscountAPI {
     }
 
 
-    @PutMapping(value = "/{username}/addDiscount/internet/{service}")
+    @RequestMapping(value = "/{username}/addDiscount/internet/{service}")
     Response<SpecificDiscount> addInternetServiceDiscount(@PathVariable("username") String usernameAdmin, @PathVariable("service") String serviceName, @RequestBody double percentage){
         Admin admin = AdminAPI.getAdmin(usernameAdmin);
         Response<SpecificDiscount> response = new Response<>();
@@ -216,7 +216,7 @@ public class DiscountAPI {
         return response;
     }
 
-    @PutMapping(value = "/{username}/addDiscount/landline/{service}")
+    @RequestMapping(value = "/{username}/addDiscount/landline/{service}")
     Response<SpecificDiscount> addLandLineServiceDiscount(@PathVariable("username") String usernameAdmin, @PathVariable("service") String serviceName, @RequestBody double percentage){
         Admin admin = AdminAPI.getAdmin(usernameAdmin);
         Response<SpecificDiscount> response = new Response<>();
@@ -239,7 +239,7 @@ public class DiscountAPI {
         response.setObject(specificDiscount);
         return response;
     }
-    @PutMapping(value = "/{username}/addDiscount/donation/{service}")
+    @RequestMapping(value = "/{username}/addDiscount/donation/{service}")
     Response<SpecificDiscount> addDonationServiceDiscount(@PathVariable("username") String usernameAdmin, @PathVariable("service") String serviceName, @RequestBody double percentage){
         Admin admin = AdminAPI.getAdmin(usernameAdmin);
         Response<SpecificDiscount> response = new Response<>();
@@ -263,7 +263,7 @@ public class DiscountAPI {
         return response;
     }
 
-    @PutMapping(value = "/{username}/addDiscount/overall")
+    @RequestMapping(value = "/{username}/addDiscount/overall")
     Response<OverallDiscount> addOverallDiscount(@PathVariable("username") String usernameAdmin, @RequestBody double percentage){
         Admin admin = AdminAPI.getAdmin(usernameAdmin);
         Response<OverallDiscount> response = new Response<>();

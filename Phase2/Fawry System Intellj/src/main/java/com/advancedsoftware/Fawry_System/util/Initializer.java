@@ -25,9 +25,9 @@ public class Initializer {
         We we = new We("We");
         Orange orange = new Orange("Orange");
         Etisalat etisalat = new Etisalat("Etisalat");
-        MonthlyReceipt monthlyReceipt = new MonthlyReceipt("Monthly Receipt");
-        QuarterReceipt quarterReceipt = new QuarterReceipt("Quarter Receipt");
-        CancerHospital cancerHospital = new CancerHospital("Cancer Hospital");
+        MonthlyReceipt monthlyReceipt = new MonthlyReceipt("MonthlyReceipt");
+        QuarterReceipt quarterReceipt = new QuarterReceipt("QuarterReceipt");
+        CancerHospital cancerHospital = new CancerHospital("CancerHospital");
         School school = new School("School");
         NGO ngo = new NGO("NGO");
         vodafone.addPaymentMethod(creditCardMethod);

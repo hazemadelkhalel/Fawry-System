@@ -66,7 +66,7 @@ public class RefundAPI {
         return response;
     }
 
-    @PutMapping(value = "/{username}/refundrequest/{index}")
+    @RequestMapping(value = "/{username}/refundrequest/{index}")
     Response<Client> addRefundRequest(@PathVariable("username") String usernameClient, @PathVariable("index") int index){
         Client client = ClientAPI.getClient(usernameClient);
         Response<Client> response = new Response<>();
@@ -89,7 +89,7 @@ public class RefundAPI {
         return response;
     }
 
-    @PutMapping(value = "/{username}/notifications/subscribe")
+    @RequestMapping(value = "/{username}/notifications/subscribe")
     Response<String> subscribeRefundRequests(@PathVariable("username") String usernameClient){
         Client client = ClientAPI.getClient(usernameClient);
         Response<String> response = new Response<>();
@@ -110,7 +110,7 @@ public class RefundAPI {
         return response;
     }
 
-    @PutMapping(value = "/{username}/notifications/unsubscribe")
+    @DeleteMapping(value = "/{username}/notifications/unsubscribe")
     Response<String> unsubscribeRefundRequests(@PathVariable("username") String usernameClient){
         Client client = ClientAPI.getClient(usernameClient);
         Response<String> response = new Response<>();
@@ -144,21 +144,4 @@ public class RefundAPI {
         response.setObject(Database.getDatabase().refunds);
         return response;
     }
-
-//    void listAllRefundRequest() {
-//        if(Database.getDatabase().refunds.size() > 0) {
-//            System.out.println("Refund Requests");
-//            for (int i = 0; i < Database.getDatabase().refunds.size(); i++) {
-//                System.out.println("-------------------------------------");
-//                System.out.println((i + 1) + "# Refund Request");
-//                System.out.println("Service Name: " + Database.getDatabase().refunds.get(i).paymentTransaction.getService().getServiceName());
-//                System.out.println("Amount: " + Database.getDatabase().refunds.get(i).paymentTransaction.getAmount());
-//                System.out.println("Username Account: " + Database.getDatabase().refunds.get(i).paymentTransaction.getClient().getUsername());
-//            }
-//            System.out.println("-------------------------------------");
-//        }
-//        else{
-//            System.out.println("There are no refund requests");
-//        }
-//    }
 }

@@ -88,7 +88,7 @@ public class ClientAPI {
     }
 
 
-    @RequestMapping(value = "/client/check")
+    @GetMapping(value = "/client/check")
     Response<Client> checkClient(@RequestBody Client client) {
         Response<Client> response = new Response<>();
         String existAccountMessage = AuthenticationController.getAuthenticationController().validateLogin(client);
