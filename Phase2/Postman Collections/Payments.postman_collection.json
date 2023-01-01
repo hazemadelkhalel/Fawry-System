@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "18264011-9387-431c-b33f-526486747e0d",
+		"name": "Payments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24464980"
+	},
+	"item": [
+		{
+			"name": "Pay Mobile Service",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "100",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/client/pay/mobile/vodafone/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"pay",
+						"mobile",
+						"vodafone",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay Internet Service",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "100",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/client/pay/internet/vodafone/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"pay",
+						"internet",
+						"vodafone",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay Landline Service",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "20",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/client/pay/landline/QuarterReceipt/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"pay",
+						"landline",
+						"QuarterReceipt",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pay Donation Service",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "100",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/client/pay/donation/school/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"pay",
+						"donation",
+						"school",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

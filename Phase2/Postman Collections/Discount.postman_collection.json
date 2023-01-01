@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "fdf77d49-7bf9-4104-8638-9b19809c58d1",
+		"name": "Discount",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24464980"
+	},
+	"item": [
+		{
+			"name": "Check Mobile Service discount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/client/mobile/vodafone/discounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"mobile",
+						"vodafone",
+						"discounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Internet Service discount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/client/internet/vodafone/discounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"internet",
+						"vodafone",
+						"discounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Landline Service discount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/client/landline/QuarterReceipt/discounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"landline",
+						"QuarterReceipt",
+						"discounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Donation Service discount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/client/donation/school/discounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"donation",
+						"school",
+						"discounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Mobile Service Discount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "30",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/addDiscount/mobile/vodafone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"addDiscount",
+						"mobile",
+						"vodafone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Internet Service Discount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "20",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/addDiscount/internet/vodafone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"addDiscount",
+						"internet",
+						"vodafone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Landline Service Discount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "25",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/addDiscount/landline/QuarterReceipt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"addDiscount",
+						"landline",
+						"QuarterReceipt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Donation Service Discount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "12",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/addDiscount/donation/school",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"addDiscount",
+						"donation",
+						"school"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Overall Discount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "50",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/addDiscount/overall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"addDiscount",
+						"overall"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

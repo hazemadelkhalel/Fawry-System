@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "eaefdddb-a12e-4aaf-9870-37066927c917",
+		"name": "Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24464980"
+	},
+	"item": [
+		{
+			"name": "Search Mobile Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/search/mobile/vod",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search",
+						"mobile",
+						"vod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Internet Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/search/internet/et",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search",
+						"internet",
+						"et"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Landline Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/search/landline/qua",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search",
+						"landline",
+						"qua"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Donation Service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/search/donation/school",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search",
+						"donation",
+						"school"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search All Services",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/search/service/vod",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"search",
+						"service",
+						"vod"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -98,6 +98,7 @@ public class ClientAPI {
         }
         else{
             if(existAccountMessage.equals("Login Successfully")){
+                response.setMessage("Found a clinet");
                 response.setStatus(true);
                 if(client.getUsername() == null){
                     response.setObject(getClient(client.getEmail()));

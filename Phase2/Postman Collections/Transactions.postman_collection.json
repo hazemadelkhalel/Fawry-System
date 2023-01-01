@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "ae342abc-b370-4a53-be0f-c64bd69fdec9",
+		"name": "Transactions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24464980"
+	},
+	"item": [
+		{
+			"name": "Get All Payment Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/transactions/payments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"transactions",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Add to Wallet transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/transactions/addToWallet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"transactions",
+						"addToWallet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All refund requests transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/transactions/refunds",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"transactions",
+						"refunds"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
